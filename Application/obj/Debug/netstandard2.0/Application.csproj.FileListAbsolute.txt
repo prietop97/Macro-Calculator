@@ -1,0 +1,14 @@
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Application.deps.json
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Application.dll
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Application.pdb
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Domain.dll
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Persistence.dll
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Domain.pdb
+/Users/pedroprieto/Desktop/MacroCalculator/Application/bin/Debug/netstandard2.0/Persistence.pdb
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.csprojAssemblyReference.cache
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.AssemblyInfoInputs.cache
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.AssemblyInfo.cs
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.csproj.CoreCompileInputs.cache
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.csproj.CopyComplete
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.dll
+/Users/pedroprieto/Desktop/MacroCalculator/Application/obj/Debug/netstandard2.0/Application.pdb

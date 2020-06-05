@@ -1,0 +1,43 @@
+﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Persistence/Migrations/20200605045732_maybe2.cs">
+    <Files>
+      <File FileName="Persistence/Seed.cs" Line="13" Column="14" />
+      <File FileName="Persistence/DataContext.cs" Line="23" Column="24" />
+      <File FileName="Domain/Gender.cs" Line="11" Column="29" />
+      <File FileName="Domain/ActivityFactor.cs" Line="15" Column="6" />
+      <File FileName="Domain/Goal.cs" Line="16" Column="2" />
+      <File FileName="API/Program.cs" Line="35" Column="36" />
+      <File FileName="API/Startup.cs" Line="1" Column="1" />
+      <File FileName="Persistence/Migrations/20200605043805_maybe.cs" Line="54" Column="1" />
+      <File FileName="Persistence/Migrations/20200605043805_maybe.Designer.cs" Line="1" Column="1" />
+      <File FileName="Persistence/Migrations/20200605045732_maybe2.cs" Line="21" Column="34" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MacroCalculator" expanded="True">
+            <Node name="API" expanded="True" />
+            <Node name="Domain" expanded="True" />
+            <Node name="Persistence" expanded="True">
+              <Node name="Migrations" expanded="True">
+                <Node name="20200605045732_maybe2.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/MacroCalculator/API/Startup.cs" relfile="API/Startup.cs" line="13" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

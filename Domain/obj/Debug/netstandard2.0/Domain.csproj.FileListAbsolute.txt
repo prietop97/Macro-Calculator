@@ -1,0 +1,9 @@
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/bin/Debug/netstandard2.0/Domain.deps.json
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/bin/Debug/netstandard2.0/Domain.dll
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/bin/Debug/netstandard2.0/Domain.pdb
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/obj/Debug/netstandard2.0/Domain.csprojAssemblyReference.cache
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfoInputs.cache
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfo.cs
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/obj/Debug/netstandard2.0/Domain.csproj.CoreCompileInputs.cache
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/obj/Debug/netstandard2.0/Domain.dll
+/Users/pedroprieto/Desktop/MacroCalculator/Domain/obj/Debug/netstandard2.0/Domain.pdb
