@@ -255,7 +255,6 @@ paket-files/
 
 # JetBrains Rider
 .idea/
-*.sln.iml
 
 # CodeRush
 .cr/
@@ -268,5 +267,5 @@ __pycache__/
 # tools/
 
 API/appsettings.json
-**/bin/**
-**/obj/**
+**/bin/
+**/obj/
