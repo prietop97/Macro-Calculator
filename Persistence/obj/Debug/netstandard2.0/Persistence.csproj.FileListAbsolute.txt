@@ -10,3 +10,15 @@
 /Users/pedroprieto/Desktop/MacroCalculator/Persistence/obj/Debug/netstandard2.0/Persistence.csproj.CopyComplete
 /Users/pedroprieto/Desktop/MacroCalculator/Persistence/obj/Debug/netstandard2.0/Persistence.dll
 /Users/pedroprieto/Desktop/MacroCalculator/Persistence/obj/Debug/netstandard2.0/Persistence.pdb
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/bin/Debug/netstandard2.0/Persistence.deps.json
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/bin/Debug/netstandard2.0/Persistence.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/bin/Debug/netstandard2.0/Persistence.pdb
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/bin/Debug/netstandard2.0/Domain.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/bin/Debug/netstandard2.0/Domain.pdb
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.csprojAssemblyReference.cache
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.AssemblyInfoInputs.cache
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.AssemblyInfo.cs
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.csproj.CoreCompileInputs.cache
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.csproj.CopyComplete
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/Debug/netstandard2.0/Persistence.pdb

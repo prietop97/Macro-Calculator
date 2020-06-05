@@ -28,7 +28,6 @@ namespace API
                     var context = services.GetRequiredService<DataContext>();
 
                     context.Database.Migrate();
-                    Console.WriteLine(context.Genders.Count());
                     Seed.SeedData(context);
                 } 
                 catch(Exception ex)

@@ -1,0 +1,14 @@
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Application.deps.json
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Application.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Application.pdb
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Domain.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Persistence.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Domain.pdb
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/bin/Debug/netstandard2.1/Persistence.pdb
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.csprojAssemblyReference.cache
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.AssemblyInfoInputs.cache
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.AssemblyInfo.cs
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.csproj.CoreCompileInputs.cache
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.csproj.CopyComplete
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.dll
+/Users/pedroprieto/Desktop/Macro-Calculator-BE/Application/obj/Debug/netstandard2.1/Application.pdb
