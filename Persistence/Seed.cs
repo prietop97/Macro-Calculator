@@ -5,13 +5,12 @@ using Domain;
 
 namespace Persistence
 {
-    public class Seed
+    public static class Seed
     {
         public static void SeedData(DataContext context)
         {
             if (!context.Genders.Any())
             {
-                Console.WriteLine("HEY");
                 var genders = new List<Gender>
                     {
                         new Gender("M", "Male",5),

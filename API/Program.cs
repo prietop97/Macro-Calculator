@@ -16,36 +16,34 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            CreateWebHostBuilder(args).Build().Run();
 
-            // Using the DbContext temporarily to create the database if there isn't one at start up
-            using(var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
+            //// Using the DbContext temporarily to create the database if there isn't one at start up
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
 
-                try
-                { 
-                    var context = services.GetRequiredService<DataContext>();
+            //    try
+            //    {
+            //        var context = services.GetRequiredService<DataContext>();
 
-                    context.Database.Migrate();
-                    Seed.SeedData(context);
-                } 
-                catch(Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occured during migration");
-                }
-            }
+            //        context.Database.Migrate();
 
-            host.Run();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        var logger = services.GetRequiredService<ILogger<Program>>();
+            //        logger.LogError(ex, "An error occured during migration");
+            //    }
+            //}
 
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

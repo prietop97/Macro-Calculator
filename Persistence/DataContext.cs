@@ -1,31 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Persistence
 {
-    public class DataContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<AppUser>
+    public class DataContext : IdentityDbContext
     {
-        public DataContext(DbContextOptions options) : base(options)
+
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
+            DbContextOptions<DataContext> context = options; 
         }
 
-        //public DbSet<Value> Values { get; set; }
+
         public DbSet<Gender> Genders { get; set; }
         public DbSet<ActivityFactor> ActivitiesFactor { get; set; }
         public DbSet<Goal> Goals { get; set; }
 
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //builder.Entity<Value>().HasData(
-            //    new Value { Id = 1, Name = "Value 101" },
-            //    new Value { Id = 2, Name = "Value 102" },
-            //    new Value { Id = 3, Name = "Value 103" }
-            //    );
+            //Seed.SeedData(this);
         }
+
+
+
 
     }
 }

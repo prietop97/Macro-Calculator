@@ -1,23 +1,35 @@
-﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Application/Application.csproj">
+﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmptyTextFile.txt">
     <Files>
-      <File FileName="API/Program.cs" Line="31" Column="1" />
-      <File FileName="API/Startup.cs" />
-      <File FileName="Domain/AppUser.cs" />
-      <File FileName="Persistence/Seed.cs" />
-      <File FileName="Persistence/DataContext.cs" />
-      <File FileName="API/API.csproj" />
-      <File FileName="Persistence/Persistence.csproj" />
-      <File FileName="Domain/Domain.csproj" />
-      <File FileName="Application/Application.csproj" Line="8" Column="48" />
+      <File FileName="Persistence/Migrations/20200605160130_firstMigration.Designer.cs" Line="1" Column="1" />
+      <File FileName="Persistence/Migrations/20200605160130_firstMigration.cs" Line="1" Column="1" />
+      <File FileName="API/Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="API/appsettings.json" Line="14" Column="1" />
+      <File FileName="API/macro.db" Line="1" Column="1" />
+      <File FileName="API/Program.cs" Line="37" Column="20" />
+      <File FileName="API/Startup.cs" Line="31" Column="51" />
+      <File FileName="EmptyTextFile.txt" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MacroCalculator" expanded="True">
+            <Node name="API" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="13" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="15" column="1" />
+      <FunctionBreakpoint enabled="false" hitAction="PrintExpression" traceExpression="Starting Off" line="18" column="9" function="System.Object.ToString" language="C#" params="" />
+      <FunctionBreakpoint enabled="false" line="19" column="13" function="IHostBuilder" language="C#" />
+      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="47" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="33" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
