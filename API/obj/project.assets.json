@@ -6835,7 +6835,7 @@
       "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pedro/.nuget/NuGet/NuGet.Config"
+        "/Users/pedro/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

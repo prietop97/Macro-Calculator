@@ -1,15 +1,16 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/GoalsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/UsersController.cs">
     <Files>
       <File FileName="Persistence/DataContext.cs" Line="29" Column="36" />
-      <File FileName="API/appsettings.json" Line="1" Column="1" />
-      <File FileName="Persistence/Seed.cs" Line="19" Column="1" />
-      <File FileName="API/Program.cs" Line="1" Column="1" />
+      <File FileName="API/appsettings.json" />
+      <File FileName="Persistence/Seed.cs" />
+      <File FileName="API/Program.cs" />
       <File FileName="API/Startup.cs" Line="36" Column="1" />
-      <File FileName="Domain/ActivityFactor.cs" Line="7" Column="34" />
-      <File FileName="Domain/Goal.cs" Line="8" Column="30" />
-      <File FileName="Domain/AppUser.cs" Line="10" Column="8" />
-      <File FileName="API/Controllers/GoalsController.cs" Line="1" Column="1" />
+      <File FileName="Domain/ActivityFactor.cs" />
+      <File FileName="Domain/Goal.cs" />
+      <File FileName="Domain/AppUser.cs" />
+      <File FileName="API/Controllers/GoalsController.cs" Line="11" Column="5" />
+      <File FileName="API/Controllers/UsersController.cs" Line="11" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,7 +18,7 @@
           <Node name="MacroCalculator" expanded="True">
             <Node name="API" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="GoalsController.cs" selected="True" />
+                <Node name="UsersController.cs" selected="True" />
               </Node>
             </Node>
             <Node name="Domain" expanded="True" />
