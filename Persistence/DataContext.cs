@@ -13,7 +13,7 @@ namespace Persistence
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            DbContextOptions<DataContext> context = options; 
+            DbContextOptions<DataContext> context = options;
         }
 
 
@@ -26,7 +26,7 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //Seed.SeedData(this);
+            Seed.SeedData(builder);
         }
 
 

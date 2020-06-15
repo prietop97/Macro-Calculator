@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200615183858_firstMigration")]
+    partial class firstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,38 +30,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ActivitiesFactor");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Little",
-                            Multiplier = 1.2f
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Mild",
-                            Multiplier = 1.375f
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Moderate",
-                            Multiplier = 1.55f
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "High",
-                            Multiplier = 1.725f
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Extreme",
-                            Multiplier = 1.9f
-                        });
                 });
 
             modelBuilder.Entity("Domain.Gender", b =>
@@ -76,22 +46,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            LongDescription = "Male",
-                            Multiplier = 5,
-                            ShortDescription = "M"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            LongDescription = "Female",
-                            Multiplier = -161,
-                            ShortDescription = "F"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Goal", b =>
@@ -106,26 +60,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Goals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Loose",
-                            Multiplier = -350
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Maintain",
-                            Multiplier = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Gain",
-                            Multiplier = 350
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

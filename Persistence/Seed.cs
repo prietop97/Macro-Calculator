@@ -2,45 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
     public static class Seed
     {
-        public static void SeedData(DataContext context)
+        public static void SeedData(ModelBuilder builder)
         {
-            if (!context.Genders.Any())
-            {
-                var genders = new List<Gender>
-                    {
-                        new Gender("M", "Male",5),
-                        new Gender("F", "Female",-161)
-                    };
-                context.Genders.AddRange(genders);
-            }
-            if (!context.ActivitiesFactor.Any())
-            {
-                var activities = new List<ActivityFactor>
-                    {
-                        new ActivityFactor("Little", 1.2f),
-                        new ActivityFactor("Mild", 1.375f),
-                        new ActivityFactor("Moderate", 1.55f),
-                        new ActivityFactor("High", 1.725f),
-                        new ActivityFactor("Extreme", 1.9f)
-                    };
-                context.ActivitiesFactor.AddRange(activities);
-            }
-            if (!context.Goals.Any())
-            {
-                var goals = new List<Goal>
-                    {
-                        new Goal("Loose", -350),
-                        new Goal("Maintain", 0),
-                        new Goal("Gain", 350)
-                    };
-                context.Goals.AddRange(goals);
-            }
-            context.SaveChanges();
+            builder.Entity<Gender>().HasData(
+
+                        new { Id = 1, ShortDescription = "M", LongDescription = "Male", Multiplier = 5 },
+                        new { Id = 2, ShortDescription = "F", LongDescription = "Female", Multiplier = -161 }
+
+            );
+            builder.Entity<ActivityFactor>().HasData(
+                        new { Id = 1, Description = "Little", Multiplier = 1.2f },
+                        new { Id = 2, Description = "Mild", Multiplier = 1.375f },
+                        new { Id = 3, Description = "Moderate", Multiplier = 1.55f },
+                        new { Id = 4, Description = "High", Multiplier = 1.725f },
+                        new { Id = 5, Description = "Extreme", Multiplier = 1.9f }
+                    );
+
+            
+            builder.Entity<Goal>().HasData(
+                new { Id = 1, Description = "Loose", Multiplier = -350 },
+                new { Id = 2, Description = "Maintain", Multiplier = 0 },
+                new { Id = 3, Description = "Gain", Multiplier = 350 }
+                      
+                  );
         }
     }
 }

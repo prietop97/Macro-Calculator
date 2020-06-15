@@ -34,7 +34,7 @@ namespace API
             services.AddDbContext<DataContext>(opt =>
             {
 
-                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DataContext>();
             services.AddControllers();

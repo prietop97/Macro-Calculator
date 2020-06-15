@@ -1,20 +1,27 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="EmptyTextFile.txt">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/GoalsController.cs">
     <Files>
-      <File FileName="Persistence/Migrations/20200605160130_firstMigration.Designer.cs" Line="1" Column="1" />
-      <File FileName="Persistence/Migrations/20200605160130_firstMigration.cs" Line="1" Column="1" />
-      <File FileName="API/Properties/launchSettings.json" Line="1" Column="1" />
-      <File FileName="API/appsettings.json" Line="14" Column="1" />
-      <File FileName="API/macro.db" Line="1" Column="1" />
-      <File FileName="API/Program.cs" Line="37" Column="20" />
-      <File FileName="API/Startup.cs" Line="31" Column="51" />
-      <File FileName="EmptyTextFile.txt" Line="1" Column="1" />
+      <File FileName="Persistence/DataContext.cs" Line="29" Column="36" />
+      <File FileName="API/appsettings.json" Line="1" Column="1" />
+      <File FileName="Persistence/Seed.cs" Line="19" Column="1" />
+      <File FileName="API/Program.cs" Line="1" Column="1" />
+      <File FileName="API/Startup.cs" Line="36" Column="1" />
+      <File FileName="Domain/ActivityFactor.cs" Line="7" Column="34" />
+      <File FileName="Domain/Goal.cs" Line="8" Column="30" />
+      <File FileName="Domain/AppUser.cs" Line="10" Column="8" />
+      <File FileName="API/Controllers/GoalsController.cs" Line="1" Column="1" />
     </Files>
-    <Pads> 
+    <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MacroCalculator" expanded="True">
-            <Node name="API" expanded="True" />
+            <Node name="API" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="GoalsController.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="Domain" expanded="True" />
+            <Node name="Persistence" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -25,11 +32,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="15" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="15" column="1" />
       <FunctionBreakpoint enabled="false" hitAction="PrintExpression" traceExpression="Starting Off" line="18" column="9" function="System.Object.ToString" language="C#" params="" />
       <FunctionBreakpoint enabled="false" line="19" column="13" function="IHostBuilder" language="C#" />
-      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="47" column="1" />
-      <Breakpoint enabled="false" file="/Users/pedroprieto/Desktop/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="33" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="47" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="33" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

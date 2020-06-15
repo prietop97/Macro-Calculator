@@ -3508,19 +3508,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/pedroprieto/.nuget/packages/": {}
+    "/Users/pedro/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj",
+      "projectUniqueName": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj",
-      "packagesPath": "/Users/pedroprieto/.nuget/packages/",
-      "outputPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/obj/",
+      "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj",
+      "packagesPath": "/Users/pedro/.nuget/packages/",
+      "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pedroprieto/.nuget/NuGet/NuGet.Config"
+        "/Users/pedro/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
@@ -3562,7 +3562,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
       }
     }
   }
