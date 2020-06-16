@@ -14,7 +14,7 @@
         "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/pedro/.config/NuGet/NuGet.Config"
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -94,7 +94,7 @@
         "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/pedro/.config/NuGet/NuGet.Config"
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -122,6 +122,16 @@
       },
       "frameworks": {
         "netstandard2.1": {
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[8.6.2, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -151,7 +161,7 @@
         "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/pedro/.config/NuGet/NuGet.Config"
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -207,7 +217,7 @@
         "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/pedro/.config/NuGet/NuGet.Config"
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"

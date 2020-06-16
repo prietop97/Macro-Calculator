@@ -1,9 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "3k9F7cP9FTopgh0PJYr9CItVB1yAly4WJ2nGvt1rJkUeMhWZ8kbIPvgVXD3x5hNhh+xGS5JHyeJkl4zqU60j9g==",
+  "dgSpecHash": "sZVXmbBPTXSaBIAV+i9OWzGCf9bymL9zyvp/gnU3qecuzjHQ0pfHsh79rK2ZGtgabr6vonLN8eXUiBsGATea3w==",
   "success": true,
   "projectFilePath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/API.csproj",
   "expectedPackageFiles": [
+    "/Users/pedro/.nuget/packages/fluentvalidation/8.6.2/fluentvalidation.8.6.2.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/fluentvalidation.aspnetcore/8.6.2/fluentvalidation.aspnetcore.8.6.2.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/fluentvalidation.dependencyinjectionextensions/8.6.2/fluentvalidation.dependencyinjectionextensions.8.6.2.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/mediatr/8.0.0/mediatr.8.0.0.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/8.0.0/mediatr.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.2.0/microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",

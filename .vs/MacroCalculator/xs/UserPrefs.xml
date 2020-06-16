@@ -1,28 +1,23 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/UsersController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Middleware/ErrorHandlingMiddleware.cs">
     <Files>
-      <File FileName="Persistence/DataContext.cs" Line="29" Column="36" />
-      <File FileName="API/appsettings.json" />
-      <File FileName="Persistence/Seed.cs" />
-      <File FileName="API/Program.cs" />
-      <File FileName="API/Startup.cs" Line="36" Column="1" />
-      <File FileName="Domain/ActivityFactor.cs" />
-      <File FileName="Domain/Goal.cs" />
-      <File FileName="Domain/AppUser.cs" />
-      <File FileName="API/Controllers/GoalsController.cs" Line="11" Column="5" />
-      <File FileName="API/Controllers/UsersController.cs" Line="11" Column="25" />
+      <File FileName="Application/Errors.cs" Line="7" Column="6" />
+      <File FileName="API/Startup.cs" Line="77" Column="37" />
+      <File FileName="API/Middleware/ErrorHandlingMiddleware.cs" Line="6" Column="49" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MacroCalculator" expanded="True">
             <Node name="API" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="UsersController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Middleware" expanded="True">
+                <Node name="ErrorHandlingMiddleware.cs" selected="True" />
               </Node>
             </Node>
-            <Node name="Domain" expanded="True" />
-            <Node name="Persistence" expanded="True" />
+            <Node name="Application" expanded="True">
+              <Node name="Errors" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -33,11 +28,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="15" column="1" />
-      <FunctionBreakpoint enabled="false" hitAction="PrintExpression" traceExpression="Starting Off" line="18" column="9" function="System.Object.ToString" language="C#" params="" />
-      <FunctionBreakpoint enabled="false" line="19" column="13" function="IHostBuilder" language="C#" />
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="47" column="1" />
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="33" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="18" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="51" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="36" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
