@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Goals;
+using Application.ActivitiesFactor;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,22 +13,22 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GoalsController : ControllerBase
+    public class ActivitiesFactorController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public GoalsController(IMediator mediator)
+        public ActivitiesFactorController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         // GET: api/goals
         [HttpGet]
-        public async Task<ActionResult<List<Goal>>> List()
+        public async Task<ActionResult<List<ActivityFactor>>> List()
         {
             return await _mediator.Send(new List.Query());
         }
 
-
+  
     }
 }

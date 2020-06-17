@@ -1,23 +1,24 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="API/Middleware/ErrorHandlingMiddleware.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/GendersController.cs">
     <Files>
-      <File FileName="Application/Errors.cs" Line="7" Column="6" />
-      <File FileName="API/Startup.cs" Line="77" Column="37" />
-      <File FileName="API/Middleware/ErrorHandlingMiddleware.cs" Line="6" Column="49" />
+      <File FileName="API/Controllers/ActivitiesFactorController.cs" Line="1" Column="1" />
+      <File FileName="API/Startup.cs" Line="65" Column="31" />
+      <File FileName="API/Controllers/GendersController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MacroCalculator" expanded="True">
             <Node name="API" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Middleware" expanded="True">
-                <Node name="ErrorHandlingMiddleware.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="GendersController.cs" selected="True" />
               </Node>
+              <Node name="Middleware" expanded="True" />
             </Node>
             <Node name="Application" expanded="True">
-              <Node name="Errors" expanded="True" />
+              <Node name="ActivitiesFactor" expanded="True" />
             </Node>
+            <Node name="Domain" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -28,9 +29,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="18" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="19" column="1" />
       <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="51" column="1" />
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="36" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="37" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
