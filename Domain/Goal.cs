@@ -7,10 +7,6 @@ namespace Domain
         public string Description { get; set; }
         public int Multiplier { get; set; }
 
-        public Goal(string description, int multiplier)
-        {
-            Description = description;
-            Multiplier = multiplier;
-        }
+      
     }
 }

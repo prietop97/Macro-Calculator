@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/Persistence.csproj": {}
+    "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj": {}
   },
   "projects": {
-    "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj": {
+    "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj",
+        "projectUniqueName": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj",
-        "packagesPath": "/Users/pedroprieto/.nuget/packages/",
-        "outputPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/obj/",
+        "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj",
+        "packagesPath": "/Users/pedro/.nuget/packages/",
+        "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/pedroprieto/.nuget/NuGet/NuGet.Config"
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -56,21 +56,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/Persistence.csproj": {
+    "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/Persistence.csproj",
+        "projectUniqueName": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/Persistence.csproj",
-        "packagesPath": "/Users/pedroprieto/.nuget/packages/",
-        "outputPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Persistence/obj/",
+        "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj",
+        "packagesPath": "/Users/pedro/.nuget/packages/",
+        "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/pedroprieto/.nuget/NuGet/NuGet.Config"
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -81,8 +81,8 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj": {
-                "projectPath": "/Users/pedroprieto/Desktop/Macro-Calculator-BE/Domain/Domain.csproj"
+              "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj": {
+                "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj"
               }
             }
           }
@@ -96,15 +96,15 @@
       "frameworks": {
         "netstandard2.1": {
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[2.2.0, )"
             }
@@ -124,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
         }
       }
     }

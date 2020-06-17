@@ -1,8 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
         <ProjectReference Include="..\Domain\Domain.csproj" />
         <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+      <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Goals\" />
+      <Folder Include="Errors\" />
+      <Folder Include="ActivitiesFactor\" />
+      <Folder Include="Reference\" />
+      <Folder Include="Genders\" />
+      <Folder Include="Users\" />
+      <Folder Include="Interfaces\" />
+      <Folder Include="Validation\" />
     </ItemGroup>
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
