@@ -28,6 +28,9 @@
               "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/Application.csproj": {
                 "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/Application.csproj"
               },
+              "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj": {
+                "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj"
+              },
               "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj": {
                 "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj"
               }
@@ -186,6 +189,69 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj",
+        "packagesPath": "/Users/pedro/.nuget/packages/",
+        "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pedro/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/Application.csproj": {
+                "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/Application.csproj"
+              },
+              "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj": {
+                "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.6.0, )"
             }
           },
           "imports": [

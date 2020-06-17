@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Middleware;
 using Application.Goals;
+using Application.Interfaces;
+using Application.Users;
 using Domain;
 using FluentValidation.AspNetCore;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -55,10 +58,11 @@ namespace API
             identityBuilder.AddEntityFrameworkStores<DataContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
             services.AddAuthentication();
-            //services.AddControllers().AddFluentValidation(cfg =>
-            //{
-            //    cfg.RegisterValidatorsFromAssemblyContaining<Create>();
-            //});
+            services.AddControllers().AddFluentValidation(cfg =>
+            {
+                cfg.RegisterValidatorsFromAssemblyContaining<Register>();
+            });
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
         }
 
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sZVXmbBPTXSaBIAV+i9OWzGCf9bymL9zyvp/gnU3qecuzjHQ0pfHsh79rK2ZGtgabr6vonLN8eXUiBsGATea3w==",
+  "dgSpecHash": "jq2qMaa7VBPT0Sx4M7oxl56HEsamc5s0Ee7ATugRSq16QQFvyQoAfYebMU25omJqbYsw8ucKtYHFmUCRToIdZg==",
   "success": true,
   "projectFilePath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/API.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,9 @@
     "/Users/pedro/.nuget/packages/microsoft.extensions.options/2.2.0/microsoft.extensions.options.2.2.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.extensions.primitives/2.2.0/microsoft.extensions.primitives.2.2.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.extensions.webencoders/2.2.0/microsoft.extensions.webencoders.2.2.0.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.6.0/microsoft.identitymodel.jsonwebtokens.6.6.0.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/microsoft.identitymodel.logging/6.6.0/microsoft.identitymodel.logging.6.6.0.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/microsoft.identitymodel.tokens/6.6.0/microsoft.identitymodel.tokens.6.6.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.netcore.platforms/2.0.0/microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/microsoft.netcore.targets/1.0.1/microsoft.netcore.targets.1.0.1.nupkg.sha512",
@@ -89,6 +92,7 @@
     "/Users/pedro/.nuget/packages/system.globalization/4.0.11/system.globalization.4.0.11.nupkg.sha512",
     "/Users/pedro/.nuget/packages/system.globalization.calendars/4.0.1/system.globalization.calendars.4.0.1.nupkg.sha512",
     "/Users/pedro/.nuget/packages/system.globalization.extensions/4.0.1/system.globalization.extensions.4.0.1.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/system.identitymodel.tokens.jwt/6.6.0/system.identitymodel.tokens.jwt.6.6.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/system.interactive.async/3.2.0/system.interactive.async.3.2.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/system.io/4.1.0/system.io.4.1.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/system.io.compression/4.1.0/system.io.compression.4.1.0.nupkg.sha512",
