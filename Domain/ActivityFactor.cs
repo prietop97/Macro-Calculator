@@ -7,10 +7,6 @@ namespace Domain
         public string Description { get; set; }
         public float Multiplier { get; set; }
 
-        public ActivityFactor(string description, float multiplier)
-        {
-            Description = description;
-            Multiplier = multiplier;
-        }
+      
     }
 }

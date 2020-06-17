@@ -6641,7 +6641,7 @@
       "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pedro/.config/NuGet/NuGet.Config"
+        "/Users/pedro/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"

@@ -8,11 +8,6 @@ namespace Domain
         public string LongDescription { get; set; }
         public int Multiplier { get; set; }
 
-        public Gender(string shortDescription, string longDescription, int multiplier)
-        {
-            ShortDescription = shortDescription;
-            LongDescription = longDescription;
-            Multiplier = multiplier;
-        }
+       
     }
 }

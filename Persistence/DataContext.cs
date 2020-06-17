@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Persistence
 {
-    public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<AppUser>
     {
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
@@ -26,7 +26,7 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            Seed.SeedData(builder);
+            //Seed.SeedData(builder);
         }
 
 
@@ -34,3 +34,4 @@ namespace Persistence
 
     }
 }
+ 
