@@ -11,22 +11,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class GoalsController : ControllerBase
+    
+    public class GoalsController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public GoalsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+  
 
         // GET: api/goals
         [HttpGet]
         public async Task<ActionResult<List<Goal>>> List()
         {
-            return await _mediator.Send(new List.Query());
+            return await Mediator.Send(new List.Query());
         }
 
 

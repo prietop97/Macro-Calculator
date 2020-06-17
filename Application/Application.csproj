@@ -14,6 +14,7 @@
       <Folder Include="ActivitiesFactor\" />
       <Folder Include="Reference\" />
       <Folder Include="Genders\" />
+      <Folder Include="Users\" />
     </ItemGroup>
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
