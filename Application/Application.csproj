@@ -15,6 +15,8 @@
       <Folder Include="Reference\" />
       <Folder Include="Genders\" />
       <Folder Include="Users\" />
+      <Folder Include="Interfaces\" />
+      <Folder Include="Validation\" />
     </ItemGroup>
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
