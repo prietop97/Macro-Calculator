@@ -1,32 +1,35 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Application/Users/Register.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Program.cs">
     <Files>
-      <File FileName="API/Startup.cs" Line="24" Column="2" />
-      <File FileName="Application/User/Login.cs" Line="49" Column="107" />
-      <File FileName="Application/Reference/Create.cs" Line="1" Column="1" />
-      <File FileName="Application/Reference/List.cs" Line="1" Column="1" />
-      <File FileName="API/Controllers/BaseController.cs" Line="13" Column="120" />
-      <File FileName="API/Controllers/GendersController.cs" Line="25" Column="6" />
-      <File FileName="API/Controllers/ActivitiesFactorController.cs" Line="19" Column="19" />
-      <File FileName="API/Controllers/GoalsController.cs" Line="28" Column="2" />
-      <File FileName="API/Controllers/UserController.cs" Line="21" Column="10" />
-      <File FileName="Application/Users/Register.cs" Line="55" Column="10" />
-      <File FileName="Persistence/Seed.cs" Line="1" Column="1" />
-      <File FileName="Persistence/DataContext.cs" Line="1" Column="1" />
+      <File FileName="Application/Interfaces/IJwtGenerator.cs" Line="11" Column="1" />
+      <File FileName="Infrastructure/Security/JwtGenerator.cs" Line="19" Column="14" />
+      <File FileName="API/Startup.cs" Line="85" Column="16" />
+      <File FileName="Application/Users/Login.cs" Line="61" Column="23" />
+      <File FileName="Application/Users/User.cs" Line="10" Column="1" />
+      <File FileName="API/Controllers/UsersController.cs" Line="21" Column="39" />
+      <File FileName="Application/Users/Register.cs" Line="40" Column="51" />
+      <File FileName="API/API.csproj" Line="1" Column="1" />
+      <File FileName="API/Controllers/GendersController.cs" Line="28" Column="1" />
+      <File FileName="Application/Validation/ValidatorExtensions.cs" Line="20" Column="2" />
+      <File FileName="Application/Interfaces/IUserAccessor.cs" Line="9" Column="1" />
+      <File FileName="Infrastructure/Security/UserAccessor.cs" Line="24" Column="6" />
+      <File FileName="Application/Users/CurrentUser.cs" Line="38" Column="60" />
+      <File FileName="API/Controllers/Reference.cs" Line="1" Column="1" />
+      <File FileName="API/Controllers/GoalsController.cs" Line="1" Column="1" />
+      <File FileName="API/Controllers/BaseController.cs" Line="1" Column="1" />
+      <File FileName="API/Controllers/ActivitiesFactorController.cs" Line="1" Column="1" />
+      <File FileName="API/Program.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MacroCalculator" expanded="True">
             <Node name="API" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
             <Node name="Application" expanded="True">
-              <Node name="Users" expanded="True">
-                <Node name="Register.cs" selected="True" />
-              </Node>
+              <Node name="Users" expanded="True" />
             </Node>
-            <Node name="Persistence" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -37,9 +40,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="19" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="26" column="1" />
       <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="51" column="1" />
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="37" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="45" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

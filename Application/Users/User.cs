@@ -3,8 +3,7 @@ namespace Application.Users
 {
     public class User
     {
-        public User()
-        {
-        }
+        public string Token { get; set; }
+        public string Username { get; set; }
     }
 }
