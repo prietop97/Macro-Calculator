@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "OMl217vKtne6oTpkYlXmfL2YeGKrKEGk2IPXZq/ZvtsdlF2kSZbYI1a3Qi0tuXlVAtQFkKpi3UQjyKabWdTSTw==",
+  "dgSpecHash": "yGH3QdFjy+ouBMSHxs1nC7kY/XvksHn1VnfrHVgyFCbcdn+SHzQAvTOWLGSrUlYPurvb8sninZuLAMqzIwszUw==",
   "success": true,
   "projectFilePath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/API.csproj",
   "expectedPackageFiles": [
+    "/Users/pedro/.nuget/packages/automapper/9.0.0/automapper.9.0.0.nupkg.sha512",
+    "/Users/pedro/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/7.0.0/automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "/Users/pedro/.nuget/packages/fluentvalidation/8.6.2/fluentvalidation.8.6.2.nupkg.sha512",
     "/Users/pedro/.nuget/packages/fluentvalidation.aspnetcore/8.6.2/fluentvalidation.aspnetcore.8.6.2.nupkg.sha512",
     "/Users/pedro/.nuget/packages/fluentvalidation.dependencyinjectionextensions/8.6.2/fluentvalidation.dependencyinjectionextensions.8.6.2.nupkg.sha512",

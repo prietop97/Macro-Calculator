@@ -7,6 +7,7 @@ using API.Middleware;
 using Application.Goals;
 using Application.Interfaces;
 using Application.Users;
+using AutoMapper;
 using Domain;
 using FluentValidation.AspNetCore;
 using Infrastructure.Security;
@@ -62,6 +63,7 @@ namespace API
                   });
               });
             services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddAutoMapper(typeof(List.Handler).Assembly);
             var builder = services.AddIdentityCore<AppUser>();
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
             identityBuilder.AddEntityFrameworkStores<DataContext>();

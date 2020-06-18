@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Goals;
+using Application.MainDTOs;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +12,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    
+
     public class GoalsController : BaseController
     {
-  
+
 
         // GET: api/goals
         [HttpGet]
-        public async Task<ActionResult<List<Goal>>> List()
+        public async Task<ActionResult<List<GoalDto>>> List()
         {
             return await Mediator.Send(new List.Query());
         }

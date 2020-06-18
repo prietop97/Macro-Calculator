@@ -9,12 +9,12 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Goals
+namespace Application.HeightUnits
 {
     public class List
     {
-        public class Query : IRequest<List<GoalDto>> { }
-        public class Handler : IRequestHandler<Query, List<GoalDto>>
+        public class Query : IRequest<List<HeightUnitDto>> { }
+        public class Handler : IRequestHandler<Query, List<HeightUnitDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -25,11 +25,11 @@ namespace Application.Goals
                 _mapper = mapper;
             }
 
-            public async Task<List<GoalDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<HeightUnitDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var goals = await _context.Goals.ToListAsync();
-                var goalsDto = _mapper.Map<List<Goal>, List<GoalDto>>(goals);
-                return goalsDto;
+                var heights = await _context.HeightUnits.ToListAsync();
+                var heightsDto = _mapper.Map<List<HeightUnit>, List<HeightUnitDto>>(heights);
+                return heightsDto;
             }
         }
     }

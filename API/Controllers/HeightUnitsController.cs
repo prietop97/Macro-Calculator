@@ -1,28 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Application.Genders;
+using Application.HeightUnits;
 using Application.MainDTOs;
 using Domain;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-
-    public class GendersController : BaseController
+    public class HeightUnitsController : BaseController
     {
-
-
-        // GET: api/goals
         [HttpGet]
-        public async Task<ActionResult<List<GenderDto>>> List()
+        public async Task<ActionResult<List<HeightUnitDto>>> List()
         {
             return await Mediator.Send(new List.Query());
         }
-
-
     }
 }

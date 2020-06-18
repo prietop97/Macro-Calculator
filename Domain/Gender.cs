@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Domain
 {
     public class Gender
@@ -7,7 +9,7 @@ namespace Domain
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public int Multiplier { get; set; }
+        public ICollection<UserStat> UserStats { get; set; }
 
-       
     }
 }
