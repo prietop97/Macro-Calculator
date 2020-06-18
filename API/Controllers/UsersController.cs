@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.MainDTOs;
 using Application.Users;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<User>> CurrentUser()
+        public async Task<ActionResult<UserInfoDto>> CurrentUser()
         {
             return await Mediator.Send(new CurrentUser.Query());
         }

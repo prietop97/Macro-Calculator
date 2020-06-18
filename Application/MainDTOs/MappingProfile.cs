@@ -12,6 +12,8 @@ namespace Application.MainDTOs
             CreateMap<Goal, GoalDto>();
             CreateMap<HeightUnit, HeightUnitDto>();
             CreateMap<Gender, GenderDto>();
+            CreateMap<AppUser, UserInfoDto>().ForMember(u => u.Username, o => o.MapFrom(s => s.UserName));
+            CreateMap<UserStat, UserStatsDto>();
         }
     }
 }

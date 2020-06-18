@@ -1,21 +1,44 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Application/MainDTOs/UserDto.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/UserStatsController.cs">
     <Files>
-      <File FileName="Application/Users/User.cs" Line="1" Column="1" />
-      <File FileName="Application/MainDTOs/UserDto.cs" Line="9" Column="6" />
+      <File FileName="Application/Users/User.cs" Line="10" Column="1" />
+      <File FileName="Application/MainDTOs/UserDto.cs" Line="10" Column="6" />
+      <File FileName="Application/Users/Register.cs" Line="1" Column="1" />
+      <File FileName="Application/Users/Login.cs" Line="1" Column="1" />
+      <File FileName="Application/Users/CurrentUser.cs" Line="39" Column="103" />
+      <File FileName="Application/MainDTOs/MappingProfile.cs" Line="20" Column="1" />
+      <File FileName="Application/MainDTOs/GoalDto.cs" Line="1" Column="1" />
+      <File FileName="API/Controllers/UsersController.cs" Line="34" Column="1" />
+      <File FileName="Infrastructure/Security/UserAccessor.cs" Line="24" Column="6" />
+      <File FileName="Application/Interfaces/IUserAccessor.cs" Line="9" Column="1" />
+      <File FileName="Application/UserStats/Detail.cs" Line="43" Column="2" />
+      <File FileName="Application/MainDTOs/UserStatsDto.cs" Line="24" Column="1" />
+      <File FileName="Domain/UserStat.cs" Line="32" Column="50" />
+      <File FileName="Domain/AppUser.cs" Line="10" Column="24" />
+      <File FileName="Application/Reference/Create.cs" Line="1" Column="1" />
+      <File FileName="Application/UserStats/Create.cs" Line="77" Column="51" />
+      <File FileName="Application/Reference/Details.cs" Line="1" Column="1" />
+      <File FileName="API/Controllers/Reference.cs" Line="46" Column="12" />
+      <File FileName="API/Controllers/UserStatsController.cs" Line="24" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MacroCalculator" expanded="True">
-            <Node name="Application" expanded="True">
-              <Node name="MainDTOs" expanded="True">
-                <Node name="UserDto.cs" selected="True" />
+            <Node name="API" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="UserStatsController.cs" selected="True" />
               </Node>
-              <Node name="Users" expanded="True" />
+            </Node>
+            <Node name="Application" expanded="True">
+              <Node name="MainDTOs" expanded="True" />
+              <Node name="Reference" expanded="True" />
+              <Node name="UserStats" expanded="True" />
             </Node>
             <Node name="Domain" expanded="True" />
-            <Node name="Persistence" expanded="True" />
+            <Node name="Infrastructure" expanded="True">
+              <Node name="Security" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
