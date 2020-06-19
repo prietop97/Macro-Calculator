@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Application.MainDTOs;
 using Application.UserStats;
 using Domain;
 using MediatR;
@@ -10,7 +11,7 @@ namespace API.Controllers
     public class UserStats : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<UserStat>> Detail()
+        public async Task<ActionResult<UserStatsDto>> Detail()
         {
             return await Mediator.Send(new Detail.Query());
         }

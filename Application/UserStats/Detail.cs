@@ -9,33 +9,37 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace Application.UserStats
 {
     public class Detail
     {
-        public class Query : IRequest<UserStat>
+        public class Query : IRequest<UserStatsDto>
         {
         }
 
-        public class Handler : IRequestHandler<Query, UserStat>
+        public class Handler : IRequestHandler<Query, UserStatsDto>
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
+            private readonly IMapper _mapper;
 
-
-            public Handler(DataContext context, IUserAccessor userAccessor)
+            public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
             {
                 _context = context;
                 _userAccessor = userAccessor;
+                _mapper = mapper;
             }
 
-            public async Task<UserStat> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<UserStatsDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var Id = _userAccessor.GetCurrentId();
                 Console.WriteLine(Id);
-                var userStat = await _context.UserStats.Include(x => x.Gender).FirstOrDefaultAsync(u => u.AppUserId == Id);
-                return userStat;
+                var userStat = await _context.UserStats.Include(x => x.Goal).Include(x => x.Gender).Include(x => x.ActivityFactor).Include(x => x.HeightUnit).FirstOrDefaultAsync(u => u.AppUserId == Id);
+                var userStatDto = _mapper.Map<UserStat, UserStatsDto>(userStat);
+                return userStatDto;
 
             }
         }
