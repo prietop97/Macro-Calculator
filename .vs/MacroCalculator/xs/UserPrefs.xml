@@ -1,9 +1,13 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Application/UserStats/Detail.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Application/UserStats/Edit.cs">
     <Files>
-      <File FileName="Application/UserStats/Detail.cs" Line="23" Column="66" />
+      <File FileName="Application/UserStats/Detail.cs" Line="45" Column="1" />
       <File FileName="API/Controllers/UserStatsController.cs" Line="24" Column="6" />
-      <File FileName="Domain/UserStat.cs" Line="1" Column="1" />
+      <File FileName="Domain/UserStat.cs" Line="34" Column="1" />
+      <File FileName="Application/UserStats/Edit.cs" Line="19" Column="1" />
+      <File FileName="Application/Reference/Edit.cs" Line="1" Column="1" />
+      <File FileName="Application/Reference/List.cs" Line="1" Column="1" />
+      <File FileName="Application/UserStats/Create.cs" Line="26" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,10 +21,9 @@
               <Node name="MainDTOs" expanded="True" />
               <Node name="Reference" expanded="True" />
               <Node name="UserStats" expanded="True">
-                <Node name="Detail.cs" selected="True" />
+                <Node name="Edit.cs" selected="True" />
               </Node>
             </Node>
-            <Node name="Domain" expanded="True" />
             <Node name="Infrastructure" expanded="True" />
             <Node name="Persistence" expanded="True" />
           </Node>
