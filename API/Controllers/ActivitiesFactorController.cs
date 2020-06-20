@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.ActivitiesFactor;
+using Application.MainDTOs;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace API.Controllers
 
         // GET: api/goals
         [HttpGet]
-        public async Task<ActionResult<List<ActivityFactor>>> List()
+        public async Task<ActionResult<List<ActivityFactorDto>>> List()
         {
             return await Mediator.Send(new List.Query());
         }

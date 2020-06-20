@@ -110,6 +110,52 @@ namespace Persistence.Migrations
                     b.ToTable("Goals");
                 });
 
+            modelBuilder.Entity("Domain.HeightUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HeightUnits");
+                });
+
+            modelBuilder.Entity("Domain.UserStat", b =>
+                {
+                    b.Property<string>("AppUserId");
+
+                    b.Property<int>("GoalId");
+
+                    b.Property<int>("GenderId");
+
+                    b.Property<int>("ActivityFactorId");
+
+                    b.Property<int>("HeightUnitId");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<int>("Height");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("AppUserId", "GoalId", "GenderId", "ActivityFactorId", "HeightUnitId");
+
+                    b.HasIndex("ActivityFactorId");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("GoalId");
+
+                    b.HasIndex("HeightUnitId");
+
+                    b.ToTable("UserStats");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -215,6 +261,34 @@ namespace Persistence.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.UserStat", b =>
+                {
+                    b.HasOne("Domain.ActivityFactor", "ActivityFactor")
+                        .WithMany("UserStats")
+                        .HasForeignKey("ActivityFactorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithOne("UserStat")
+                        .HasForeignKey("Domain.UserStat", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Gender", "Gender")
+                        .WithMany("UserStats")
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Goal", "Goal")
+                        .WithMany("UserStats")
+                        .HasForeignKey("GoalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.HeightUnit", "HeightUnit")
+                        .WithMany("UserStats")
+                        .HasForeignKey("HeightUnitId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

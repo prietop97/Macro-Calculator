@@ -24,11 +24,11 @@ namespace Infrastructure.Security
             // Claims to be sent in the token
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId,user.UserName)
+                new Claim(JwtRegisteredClaimNames.NameId,user.Id)
             };
 
-            
-           
+
+
             // Encription
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 

@@ -169,3 +169,5 @@
 /Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.dll
 /Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/bin/Debug/netcoreapp3.1/AutoMapper.dll
+/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/bin/Debug/netcoreapp3.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
