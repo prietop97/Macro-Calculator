@@ -36,8 +36,10 @@ namespace Application.UserStats
             public async Task<UserStatsDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var Id = _userAccessor.GetCurrentId();
-                Console.WriteLine(Id);
+
                 var userStat = await _context.UserStats.Include(x => x.Goal).Include(x => x.Gender).Include(x => x.ActivityFactor).Include(x => x.HeightUnit).FirstOrDefaultAsync(u => u.AppUserId == Id);
+                if (userStat == null)
+                    throw new RestException(System.Net.HttpStatusCode.BadRequest, new { stats = "User has no stats" });
                 var userStatDto = _mapper.Map<UserStat, UserStatsDto>(userStat);
                 return userStatDto;
 
