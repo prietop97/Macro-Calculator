@@ -5,7 +5,7 @@ namespace Application.MainDTOs
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public UserStatsDto UserStat { get; set; }
+        public bool RegistrationCompleted { get; set; }
 
     }
 }

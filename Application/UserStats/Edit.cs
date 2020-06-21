@@ -19,6 +19,7 @@ namespace Application.UserStats
             public int GoalId { get; set; }
             public int GenderId { get; set; }
             public int HeightUnitId { get; set; }
+            public int WeightUnitId { get; set; }
             public int? Height { get; set; }
             public int ActivityFactorId { get; set; }
             public DateTime? DateOfBirth { get; set; }
@@ -34,6 +35,7 @@ namespace Application.UserStats
                 RuleFor(x => x.ActivityFactorId).NotEmpty();
                 RuleFor(x => x.DateOfBirth).NotEmpty();
                 RuleFor(x => x.HeightUnitId).NotEmpty();
+                RuleFor(x => x.WeightUnitId).NotEmpty();
             }
         }
 
@@ -63,6 +65,7 @@ namespace Application.UserStats
                 var gender = await _context.Genders.FindAsync(request.GenderId);
                 var activityFactor = await _context.ActivitiesFactor.FindAsync(request.ActivityFactorId);
                 var heightUnit = await _context.HeightUnits.FindAsync(request.HeightUnitId);
+                var weightUnit = await _context.WeightUnits.FindAsync(request.WeightUnitId);
 
                 if (goal != null)
                 {
@@ -84,6 +87,12 @@ namespace Application.UserStats
                     userStat.HeightUnit = heightUnit;
                     userStat.HeightUnitId = request.HeightUnitId;
                 }
+                if (weightUnit != null)
+                {
+                    userStat.WeightUnit = weightUnit;
+                    userStat.WeightUnitId = request.WeightUnitId;
+                }
+
 
                 userStat.Height = request.Height ?? userStat.Height;
                 userStat.DateOfBirth = request.DateOfBirth ?? userStat.DateOfBirth;

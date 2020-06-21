@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Folder Include="Security\" />
+    <Folder Include="Calculator\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.6.0" />

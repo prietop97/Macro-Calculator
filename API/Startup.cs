@@ -10,6 +10,7 @@ using Application.Users;
 using AutoMapper;
 using Domain;
 using FluentValidation.AspNetCore;
+using Infrastructure.Calculator;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -87,6 +88,7 @@ namespace API
             });
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IMacroCalculator, MacroCalculator>();
         }
 
 

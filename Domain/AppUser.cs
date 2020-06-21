@@ -8,6 +8,7 @@ namespace Domain
     public class AppUser : IdentityUser
     {
         public UserStat UserStat { get; set; }
+        public UserMacros UserMacros { get; set; }
 
     }
 }

@@ -1,13 +1,16 @@
 ﻿<Properties StartupConfiguration="{264AC67D-0905-437B-9859-800EAF8C5BDA}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Application/UserStats/Edit.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Application/Interfaces/IMacroCalculator.cs">
     <Files>
-      <File FileName="Application/UserStats/Detail.cs" Line="45" Column="1" />
-      <File FileName="API/Controllers/UserStatsController.cs" Line="24" Column="6" />
-      <File FileName="Domain/UserStat.cs" Line="34" Column="1" />
-      <File FileName="Application/UserStats/Edit.cs" Line="19" Column="1" />
-      <File FileName="Application/Reference/Edit.cs" Line="1" Column="1" />
-      <File FileName="Application/Reference/List.cs" Line="1" Column="1" />
-      <File FileName="Application/UserStats/Create.cs" Line="26" Column="1" />
+      <File FileName="Application/UserMacros/Details.cs" Line="46" Column="14" />
+      <File FileName="Application/UserStats/Detail.cs" Line="1" Column="1" />
+      <File FileName="Application/MainDTOs/UserMacrosDto.cs" Line="9" Column="1" />
+      <File FileName="Application/MainDTOs/UserStatsDto.cs" Line="1" Column="1" />
+      <File FileName="Application/MainDTOs/MappingProfile.cs" Line="22" Column="1" />
+      <File FileName="API/Controllers/UserMacrosController.cs" Line="17" Column="1" />
+      <File FileName="API/Controllers/UserStatsController.cs" Line="17" Column="10" />
+      <File FileName="Infrastructure/Calculator/MacroCalculator.cs" Line="22" Column="34" />
+      <File FileName="Application/UserStats/Create.cs" Line="112" Column="48" />
+      <File FileName="Application/Interfaces/IMacroCalculator.cs" Line="10" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,15 +20,15 @@
               <Node name="Controllers" expanded="True" />
             </Node>
             <Node name="Application" expanded="True">
-              <Node name="HeightUnits" expanded="True" />
-              <Node name="MainDTOs" expanded="True" />
-              <Node name="Reference" expanded="True" />
-              <Node name="UserStats" expanded="True">
-                <Node name="Edit.cs" selected="True" />
+              <Node name="Interfaces" expanded="True">
+                <Node name="IMacroCalculator.cs" selected="True" />
               </Node>
             </Node>
-            <Node name="Infrastructure" expanded="True" />
-            <Node name="Persistence" expanded="True" />
+            <Node name="Domain" expanded="True" />
+            <Node name="Infrastructure" expanded="True">
+              <Node name="Calculator" expanded="True" />
+              <Node name="Security" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -36,9 +39,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="27" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="28" column="1" />
       <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Program.cs" relfile="API/Program.cs" line="51" column="1" />
-      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="46" column="1" />
+      <Breakpoint enabled="false" file="/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/Startup.cs" relfile="API/Startup.cs" line="47" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

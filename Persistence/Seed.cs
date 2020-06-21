@@ -61,6 +61,17 @@ namespace Persistence
                 context.HeightUnits.AddRange(heights);
             }
 
+            if (!context.WeightUnits.Any())
+            {
+                var weights = new List<WeightUnit> {
+
+                    new WeightUnit{ Id = 1, Description = "US" },
+                    new WeightUnit{ Id = 2, Description = "Metric" },
+
+                };
+                context.WeightUnits.AddRange(weights);
+            }
+
             if (!context.Users.Any())
             {
                 var users = new List<AppUser>

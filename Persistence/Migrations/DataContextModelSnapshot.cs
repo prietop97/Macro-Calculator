@@ -122,6 +122,23 @@ namespace Persistence.Migrations
                     b.ToTable("HeightUnits");
                 });
 
+            modelBuilder.Entity("Domain.UserMacros", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AppUserId");
+
+                    b.Property<int>("TotalMacros");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("UsersMacros");
+                });
+
             modelBuilder.Entity("Domain.UserStat", b =>
                 {
                     b.Property<string>("AppUserId");
@@ -134,13 +151,17 @@ namespace Persistence.Migrations
 
                     b.Property<int>("HeightUnitId");
 
+                    b.Property<int>("WeightUnitId");
+
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<int>("Height");
+                    b.Property<double>("Height");
 
                     b.Property<int>("Id");
 
-                    b.HasKey("AppUserId", "GoalId", "GenderId", "ActivityFactorId", "HeightUnitId");
+                    b.Property<double>("Weight");
+
+                    b.HasKey("AppUserId", "GoalId", "GenderId", "ActivityFactorId", "HeightUnitId", "WeightUnitId");
 
                     b.HasIndex("ActivityFactorId");
 
@@ -153,7 +174,21 @@ namespace Persistence.Migrations
 
                     b.HasIndex("HeightUnitId");
 
+                    b.HasIndex("WeightUnitId");
+
                     b.ToTable("UserStats");
+                });
+
+            modelBuilder.Entity("Domain.WeightUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WeightUnits");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -263,6 +298,13 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.UserMacros", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithOne("UserMacros")
+                        .HasForeignKey("Domain.UserMacros", "AppUserId");
+                });
+
             modelBuilder.Entity("Domain.UserStat", b =>
                 {
                     b.HasOne("Domain.ActivityFactor", "ActivityFactor")
@@ -288,6 +330,11 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.HeightUnit", "HeightUnit")
                         .WithMany("UserStats")
                         .HasForeignKey("HeightUnitId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.WeightUnit", "WeightUnit")
+                        .WithMany("UserStats")
+                        .HasForeignKey("WeightUnitId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

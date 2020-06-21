@@ -16,7 +16,12 @@ namespace Application.MainDTOs
 
         // Height
         public HeightUnitDto HeightUnit { get; set; }
-        public int Height { get; set; }
+        public double Height { get; set; }
+
+        // Weight
+        public WeightUnitDto WeightUnit { get; set; }
+        public double Weight { get; set; }
+
         // Rest
         public DateTime DateOfBirth { get; set; }
     }

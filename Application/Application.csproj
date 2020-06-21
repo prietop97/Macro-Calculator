@@ -21,6 +21,8 @@
       <Folder Include="HeightUnits\" />
       <Folder Include="MainDTOs\" />
       <Folder Include="UserStats\" />
+      <Folder Include="WeightUnits\" />
+      <Folder Include="UsersMacros\" />
     </ItemGroup>
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>

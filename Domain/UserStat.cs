@@ -26,7 +26,12 @@ namespace Domain
         // Height
         public int HeightUnitId { get; set; }
         public HeightUnit HeightUnit { get; set; }
-        public int Height { get; set; }
+        public double Height { get; set; }
+
+        // Weight
+        public int WeightUnitId { get; set; }
+        public WeightUnit WeightUnit { get; set; }
+        public double Weight { get; set; }
 
         // Rest
         public DateTime DateOfBirth { get; set; }

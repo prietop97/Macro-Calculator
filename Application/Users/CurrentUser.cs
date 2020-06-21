@@ -36,10 +36,16 @@ namespace Application.Users
 
             public async Task<UserInfoDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _userManager.Users.Include(x => x.UserStat).SingleAsync(x => x.Id == _userAccessor.GetCurrentId());
-                var userDto = _mapper.Map<AppUser, UserInfoDto>(user);
-                return userDto;
+                var user = await _userManager.Users.SingleAsync(x => x.Id == _userAccessor.GetCurrentId());
+                var userStats = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
 
+                var userDto = _mapper.Map<AppUser, UserInfoDto>(user);
+                if (userStats == null)
+                {
+                    userDto.RegistrationCompleted = false;
+                }
+                userDto.RegistrationCompleted = true;
+                return userDto;
             }
         }
     }
