@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain
+namespace Domain.User
 {
-    public class ActivityFactor
+    public class HeightUnit
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public float Multiplier { get; set; }
         public ICollection<UserStat> UserStats { get; set; }
-
     }
 }

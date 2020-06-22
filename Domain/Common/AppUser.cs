@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Domain;
+﻿using Domain.User;
 using Microsoft.AspNetCore.Identity;
 
-namespace Domain
+namespace Domain.Common
 {
     public class AppUser : IdentityUser
     {
         public UserStat UserStat { get; set; }
         public UserMacros UserMacros { get; set; }
-
     }
 }
 

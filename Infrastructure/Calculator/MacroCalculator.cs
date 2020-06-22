@@ -25,11 +25,13 @@ namespace Infrastructure.Calculator
             var age = GetAge();
             var genderAddition = _userStat.Gender.Multiplier;
             var activityMultiplier = _userStat.ActivityFactor.Multiplier;
+            var goalAddition = _userStat.Goal.Multiplier;
 
             var REE = (weight * WEIGHTMULTIPLIER) + (height * HEIGHTMULTIPLIER) - (AGEMULTIPLIER * age) + genderAddition;
 
             var macros = (int)Math.Round((REE * activityMultiplier) / 10.0) * 10;
-            return macros;
+
+            return macros + goalAddition;
         }
 
         private double GetWeight()

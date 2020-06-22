@@ -1,6 +1,7 @@
 ﻿using System;
+using Domain.Common;
 
-namespace Domain
+namespace Domain.User
 {
     public class UserStat
     {
