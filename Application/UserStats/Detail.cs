@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using AutoMapper;
 using System.Collections.Generic;
+using Domain.User;
 
 namespace Application.UserStats
 {

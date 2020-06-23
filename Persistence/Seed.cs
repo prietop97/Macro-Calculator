@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Domain;
+using Domain.Common;
+using Domain.Meals;
+using Domain.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -61,6 +65,18 @@ namespace Persistence
                 context.HeightUnits.AddRange(heights);
             }
 
+            if (!context.MealTypes.Any())
+            {
+                var mealTypes = new List<MealType> {
+
+                    new MealType{ Id = 1, Description = "Breakfast" },
+                    new MealType{ Id = 2, Description = "Snack" },
+                    new MealType{ Id = 3, Description = "Dinner" }
+
+                };
+                context.MealTypes.AddRange(mealTypes);
+            }
+
             if (!context.WeightUnits.Any())
             {
                 var weights = new List<WeightUnit> {
@@ -81,60 +97,192 @@ namespace Persistence
                     Id = "a",
                     UserName = "user100",
                     Email = "user100@gmail.com",
-                    //UserStat = new UserStat
-                    //{
-                    //    HeightUnitId = 1,
-                    //    GoalId = 1,
-                    //    GenderId = 1,
-                    //    ActivityFactorId = 1,
-                    //    Height = 150,
-                    //    DateOfBirth = new DateTime(1997,9,5)
-                    //}
+                    UserStat = new UserStat
+                    {
+                        AppUserId = "a",
+                        HeightUnitId = 1,
+                        WeightUnitId = 1,
+                        Weight = 150,
+                        GoalId = 1,
+                        GenderId = 1,
+                        ActivityFactorId = 1,
+                        Height = 150,
+                        DateOfBirth = new DateTime(1997,9,5)
+                    },
+                    UserMacros = new UserMacros
+                    {
+                        AppUserId = "a",
+                        RecommendedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        },
+                                                EditedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        }
+                    }
                 },
                 new AppUser
                 {
                     Id = "b",
                     UserName = "user101",
                     Email = "user101@gmail.com",
-                    //UserStat = new UserStat
-                    //{
-                    //    HeightUnitId = 1,
-                    //    GoalId = 1,
-                    //    GenderId = 1,
-                    //    ActivityFactorId = 1,
-                    //    Height = 150,
-                    //    DateOfBirth = new DateTime(1997,9,5)
-                    //}
+                    UserStat = new UserStat
+                    {
+                        AppUserId = "b",
+                        HeightUnitId = 1,
+                        GoalId = 1,
+                        WeightUnitId = 1,
+                        Weight = 150,
+                        GenderId = 1,
+                        ActivityFactorId = 1,
+                        Height = 150,
+                        DateOfBirth = new DateTime(1997,9,5)
+                    },
+                    UserMacros = new UserMacros
+                    {
+                        AppUserId = "b",
+                        RecommendedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        },
+                                                EditedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        }
+                    }
                 },
                 new AppUser
                 {
                     Id = "c",
                     UserName = "user102",
                     Email = "user102@gmail.com",
-                    //UserStat = new UserStat
-                    //{
-                    //    HeightUnitId = 1,
-                    //    GoalId = 1,
-                    //    GenderId = 1,
-                    //    ActivityFactorId = 1,
-                    //    Height = 150,
-                    //    DateOfBirth = new DateTime(1997,9,5)
-                    //}
+                    UserStat = new UserStat
+                    {
+                        AppUserId = "c",
+                        HeightUnitId = 1,
+                        GoalId = 1,
+                        WeightUnitId = 1,
+                        Weight = 150,
+                        GenderId = 1,
+                        ActivityFactorId = 1,
+                        Height = 150,
+                        DateOfBirth = new DateTime(1997,9,5)
+                    },
+                    UserMacros = new UserMacros
+                    {
+                        AppUserId = "c",
+                        RecommendedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        },
+                                                EditedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        }
+                    }
                 },
                 new AppUser
                 {
                     Id = "d",
                     UserName = "user103",
                     Email = "user103@gmail.com",
-                    //UserStat = new UserStat
-                    //{
-                    //    HeightUnitId = 1,
-                    //    GoalId = 1,
-                    //    GenderId = 1,
-                    //    ActivityFactorId = 1,
-                    //    Height = 150,
-                    //    DateOfBirth = new DateTime(1997,9,5)
-                    //}
+                    UserStat = new UserStat
+                    {
+                        AppUserId = "d",
+                        HeightUnitId = 1,
+                        GoalId = 1,
+                        GenderId = 1,
+                        WeightUnitId = 1,
+                        Weight = 150,
+                        ActivityFactorId = 1,
+                        Height = 150,
+                        DateOfBirth = new DateTime(1997,9,5)
+                    },
+                    UserMacros = new UserMacros
+                    {
+                        AppUserId = "d",
+                        RecommendedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        },
+                        EditedMacros = new Macros
+                        {
+                            Calories = 2000,
+                            ProteinAmount = 125,
+                            ProteinPercentage = 25,
+                            ProteinCalories = 500,
+                            FatAmount = 44,
+                            FatPercentage = 20,
+                            FatCalories = 400,
+                            CarbsAmount = 275,
+                            CarbsPercentage = 55,
+                            CarbsCalories = 1100,
+                        }
+                    }
                 },
             };
 

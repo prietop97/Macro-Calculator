@@ -1,6 +1,8 @@
 ﻿using System;
 using Domain;
 using AutoMapper;
+using Domain.User;
+using Domain.Common;
 
 namespace Application.MainDTOs
 {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Application.Interfaces;
 using Application.Validation;
 using Domain;
+using Domain.Common;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.MainDTOs;
 using AutoMapper;
 using Domain;
+using Domain.User;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;

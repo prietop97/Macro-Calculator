@@ -9,6 +9,7 @@ using Application.Interfaces;
 using Application.Users;
 using AutoMapper;
 using Domain;
+using Domain.Common;
 using FluentValidation.AspNetCore;
 using Infrastructure.Calculator;
 using Infrastructure.Security;

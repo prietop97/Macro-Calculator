@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain;
+using Domain.User;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 

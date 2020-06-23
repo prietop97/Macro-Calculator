@@ -8084,37 +8084,39 @@
     ]
   },
   "packageFolders": {
-    "/Users/pedro/.nuget/packages/": {}
+    "C:\\Users\\pedro\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/API.csproj",
+      "projectUniqueName": "E:\\Dev\\Macro-Calculator-BE\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/API.csproj",
-      "packagesPath": "/Users/pedro/.nuget/packages/",
-      "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/API/obj/",
+      "projectPath": "E:\\Dev\\Macro-Calculator-BE\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
+      "outputPath": "E:\\Dev\\Macro-Calculator-BE\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pedro/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/Application.csproj": {
-              "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Application/Application.csproj"
+            "E:\\Dev\\Macro-Calculator-BE\\Application\\Application.csproj": {
+              "projectPath": "E:\\Dev\\Macro-Calculator-BE\\Application\\Application.csproj"
             },
-            "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj": {
-              "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Infrastructure/Infrastructure.csproj"
+            "E:\\Dev\\Macro-Calculator-BE\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "E:\\Dev\\Macro-Calculator-BE\\Infrastructure\\Infrastructure.csproj"
             },
-            "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj": {
-              "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Persistence/Persistence.csproj"
+            "E:\\Dev\\Macro-Calculator-BE\\Persistence\\Persistence.csproj": {
+              "projectPath": "E:\\Dev\\Macro-Calculator-BE\\Persistence\\Persistence.csproj"
             }
           }
         }
@@ -8169,7 +8171,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

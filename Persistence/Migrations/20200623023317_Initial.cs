@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,6 +100,41 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HeightUnits", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Macros",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Calories = table.Column<int>(nullable: false),
+                    FatAmount = table.Column<int>(nullable: false),
+                    FatPercentage = table.Column<int>(nullable: false),
+                    FatCalories = table.Column<int>(nullable: false),
+                    ProteinAmount = table.Column<int>(nullable: false),
+                    ProteinPercentage = table.Column<int>(nullable: false),
+                    ProteinCalories = table.Column<int>(nullable: false),
+                    CarbsAmount = table.Column<int>(nullable: false),
+                    CarbsPercentage = table.Column<int>(nullable: false),
+                    CarbsCalories = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Macros", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,23 +257,96 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersMacros",
+                name: "MealPlans",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    AppUserId = table.Column<string>(nullable: true),
-                    TotalMacros = table.Column<int>(nullable: false)
+                    CreatorId = table.Column<string>(nullable: false),
+                    MacrosId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersMacros", x => x.Id);
+                    table.PrimaryKey("PK_MealPlans", x => new { x.CreatorId, x.MacrosId });
+                    table.UniqueConstraint("AK_MealPlans_Id", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MealPlans_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealPlans_Macros_MacrosId",
+                        column: x => x.MacrosId,
+                        principalTable: "Macros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersMacros",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    RecommendedMacrosId = table.Column<int>(nullable: false),
+                    EditedMacrosId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersMacros", x => new { x.RecommendedMacrosId, x.EditedMacrosId, x.AppUserId });
                     table.ForeignKey(
                         name: "FK_UsersMacros_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersMacros_Macros_EditedMacrosId",
+                        column: x => x.EditedMacrosId,
+                        principalTable: "Macros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersMacros_Macros_RecommendedMacrosId",
+                        column: x => x.RecommendedMacrosId,
+                        principalTable: "Macros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Meals",
+                columns: table => new
+                {
+                    CreatorId = table.Column<string>(nullable: false),
+                    MealTypeId = table.Column<int>(nullable: false),
+                    MacrosId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Meals", x => new { x.CreatorId, x.MacrosId, x.MealTypeId });
+                    table.UniqueConstraint("AK_Meals_Id", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Meals_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Meals_Macros_MacrosId",
+                        column: x => x.MacrosId,
+                        principalTable: "Macros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Meals_MealTypes_MealTypeId",
+                        column: x => x.MealTypeId,
+                        principalTable: "MealTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,6 +405,82 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UsersMealPlans",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    MealPlanId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    DifferenceFromTarget = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersMealPlans", x => new { x.MealPlanId, x.AppUserId });
+                    table.ForeignKey(
+                        name: "FK_UsersMealPlans_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersMealPlans_MealPlans_MealPlanId",
+                        column: x => x.MealPlanId,
+                        principalTable: "MealPlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealPlanMeals",
+                columns: table => new
+                {
+                    MealId = table.Column<int>(nullable: false),
+                    MealPlanId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealPlanMeals", x => new { x.MealId, x.MealPlanId });
+                    table.ForeignKey(
+                        name: "FK_MealPlanMeals_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealPlanMeals_MealPlans_MealPlanId",
+                        column: x => x.MealPlanId,
+                        principalTable: "MealPlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersMeals",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    MealId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersMeals", x => new { x.MealId, x.AppUserId });
+                    table.ForeignKey(
+                        name: "FK_UsersMeals_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersMeals_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -335,10 +519,54 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_MealPlanMeals_MealPlanId",
+                table: "MealPlanMeals",
+                column: "MealPlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealPlans_MacrosId",
+                table: "MealPlans",
+                column: "MacrosId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meals_MacrosId",
+                table: "Meals",
+                column: "MacrosId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meals_MealTypeId",
+                table: "Meals",
+                column: "MealTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UsersMacros_AppUserId",
                 table: "UsersMacros",
                 column: "AppUserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersMacros_EditedMacrosId",
+                table: "UsersMacros",
+                column: "EditedMacrosId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersMacros_RecommendedMacrosId",
+                table: "UsersMacros",
+                column: "RecommendedMacrosId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersMealPlans_AppUserId",
+                table: "UsersMealPlans",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersMeals_AppUserId",
+                table: "UsersMeals",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserStats_ActivityFactorId",
@@ -390,7 +618,16 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "MealPlanMeals");
+
+            migrationBuilder.DropTable(
                 name: "UsersMacros");
+
+            migrationBuilder.DropTable(
+                name: "UsersMealPlans");
+
+            migrationBuilder.DropTable(
+                name: "UsersMeals");
 
             migrationBuilder.DropTable(
                 name: "UserStats");
@@ -399,10 +636,13 @@ namespace Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "ActivitiesFactor");
+                name: "MealPlans");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Meals");
+
+            migrationBuilder.DropTable(
+                name: "ActivitiesFactor");
 
             migrationBuilder.DropTable(
                 name: "Genders");
@@ -415,6 +655,15 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "WeightUnits");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Macros");
+
+            migrationBuilder.DropTable(
+                name: "MealTypes");
         }
     }
 }
