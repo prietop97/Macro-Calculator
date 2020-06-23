@@ -26,7 +26,7 @@ namespace Domain.Common
         public UserMacros RecommendedUserMacros { get; set; }
         public UserMacros EditedUserMacros { get; set; }
         public Meal Meal { get; set; }
-        public MealPlan MealPlan {get; set;}
+        public MealPlan MealPlan { get; set; }
 
     }
 }

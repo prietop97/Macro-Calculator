@@ -36,7 +36,7 @@ namespace Application.Users
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
             private readonly IJwtGenerator _jwtGenerator;
- 
+
             public Handler(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IJwtGenerator jwtGenerator)
             {
                 _userManager = userManager;
@@ -60,7 +60,7 @@ namespace Application.Users
                         Username = user.UserName,
                         Token = _jwtGenerator.CreateToken(user)
                     };
-                        
+
                 }
 
                 throw new RestException(HttpStatusCode.Unauthorized);
