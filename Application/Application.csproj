@@ -19,7 +19,6 @@
       <Folder Include="Interfaces\" />
       <Folder Include="Validation\" />
       <Folder Include="HeightUnits\" />
-      <Folder Include="MainDTOs\" />
       <Folder Include="UserStats\" />
       <Folder Include="WeightUnits\" />
       <Folder Include="UsersMacros\" />
