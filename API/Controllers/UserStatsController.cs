@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Application.MainDTOs;
 using Application.UserStats;
+using Application.UserStats.DTOs;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +14,12 @@ namespace API.Controllers
         public async Task<ActionResult<UserStatsDto>> Detail()
         {
             return await Mediator.Send(new Detail.Query());
+        }
+
+        [HttpGet("dropdowns")]
+        public async Task<ActionResult<DropdownsDto>> Dropdowns()
+        {
+            return await Mediator.Send(new Dropdowns.Query());
         }
 
         [HttpPost]

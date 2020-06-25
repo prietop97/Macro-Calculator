@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Application.MainDTOs
+namespace Application.UserStats.DTOs
 {
     public class GenderDto
     {

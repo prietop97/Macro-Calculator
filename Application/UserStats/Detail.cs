@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.MainDTOs;
 using Application.Interfaces;
 using Domain;
 using FluentValidation;
@@ -12,6 +11,7 @@ using Persistence;
 using AutoMapper;
 using System.Collections.Generic;
 using Domain.User;
+using Application.UserStats.DTOs;
 
 namespace Application.UserStats
 {

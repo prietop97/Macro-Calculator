@@ -7,18 +7,16 @@ using Application.UserStats.DTOs;
 
 namespace Application.MainDTOs
 {
-    public class ActivityFactorMappingProfile : Profile
+    public class UserStatsMappingProfile : Profile
     {
-        public ActivityFactorMappingProfile()
+        public UserStatsMappingProfile()
         {
             CreateMap<ActivityFactor, ActivityFactorDto>();
             CreateMap<Goal, GoalDto>();
             CreateMap<HeightUnit, HeightUnitDto>();
             CreateMap<WeightUnit, WeightUnitDto>();
             CreateMap<Gender, GenderDto>();
-            CreateMap<AppUser, UserInfoDto>().ForMember(u => u.Username, o => o.MapFrom(s => s.UserName));
             CreateMap<UserStat, UserStatsDto>();
-            CreateMap<UserMacros, UserMacrosDto>();
         }
     }
 }
