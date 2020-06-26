@@ -3508,24 +3508,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/pedro/.nuget/packages/": {}
+    "C:\\Users\\pedro\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj",
+      "projectUniqueName": "E:\\Dev\\Macro-Calculator-BE\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/Domain.csproj",
-      "packagesPath": "/Users/pedro/.nuget/packages/",
-      "outputPath": "/Users/pedro/Dev/personal_projects/macroapp/Macro-Calculator-BE/Domain/obj/",
+      "projectPath": "E:\\Dev\\Macro-Calculator-BE\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
+      "outputPath": "E:\\Dev\\Macro-Calculator-BE\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pedro/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3562,7 +3564,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

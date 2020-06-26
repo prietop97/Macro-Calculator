@@ -13,19 +13,19 @@ namespace API.Middleware
         private readonly RequestDelegate _next;
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
 
-        public ErrorHandlingMiddleware(RequestDelegate next,ILogger<ErrorHandlingMiddleware> logger)
+        public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
         {
             _next = next;
             _logger = logger;
         }
-            
+
         public async Task Invoke(HttpContext context)
         {
             try
             {
                 await _next(context);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex, _logger);
             }
@@ -50,7 +50,7 @@ namespace API.Middleware
             }
 
             context.Response.ContentType = "application/json";
-            if(errors != null)
+            if (errors != null)
             {
                 var result = JsonSerializer.Serialize(new
                 {
@@ -59,6 +59,6 @@ namespace API.Middleware
 
                 await context.Response.WriteAsync(result);
             }
-        }   
+        }
     }
 }

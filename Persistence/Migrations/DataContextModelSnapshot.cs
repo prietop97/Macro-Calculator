@@ -16,21 +16,7 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
-            modelBuilder.Entity("Domain.ActivityFactor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<float>("Multiplier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ActivitiesFactor");
-                });
-
-            modelBuilder.Entity("Domain.AppUser", b =>
+            modelBuilder.Entity("Domain.Common.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -80,7 +66,150 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Domain.Gender", b =>
+            modelBuilder.Entity("Domain.Common.Macros", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Calories");
+
+                    b.Property<int>("CarbsAmount");
+
+                    b.Property<int>("CarbsCalories");
+
+                    b.Property<int>("CarbsPercentage");
+
+                    b.Property<int>("FatAmount");
+
+                    b.Property<int>("FatCalories");
+
+                    b.Property<int>("FatPercentage");
+
+                    b.Property<int>("ProteinAmount");
+
+                    b.Property<int>("ProteinCalories");
+
+                    b.Property<int>("ProteinPercentage");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Macros");
+                });
+
+            modelBuilder.Entity("Domain.Meals.Meal", b =>
+                {
+                    b.Property<string>("CreatorId");
+
+                    b.Property<int>("MacrosId");
+
+                    b.Property<int>("MealTypeId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("CreatorId", "MacrosId", "MealTypeId");
+
+                    b.HasIndex("MacrosId")
+                        .IsUnique();
+
+                    b.HasIndex("MealTypeId");
+
+                    b.ToTable("Meals");
+                });
+
+            modelBuilder.Entity("Domain.Meals.MealPlan", b =>
+                {
+                    b.Property<string>("CreatorId");
+
+                    b.Property<int>("MacrosId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("CreatorId", "MacrosId");
+
+                    b.HasIndex("MacrosId")
+                        .IsUnique();
+
+                    b.ToTable("MealPlans");
+                });
+
+            modelBuilder.Entity("Domain.Meals.MealPlanMeals", b =>
+                {
+                    b.Property<int>("MealId");
+
+                    b.Property<int>("MealPlanId");
+
+                    b.HasKey("MealId", "MealPlanId");
+
+                    b.HasIndex("MealPlanId");
+
+                    b.ToTable("MealPlanMeals");
+                });
+
+            modelBuilder.Entity("Domain.Meals.MealType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MealTypes");
+                });
+
+            modelBuilder.Entity("Domain.Meals.UserMealPlans", b =>
+                {
+                    b.Property<int>("MealPlanId");
+
+                    b.Property<string>("AppUserId");
+
+                    b.Property<int>("DifferenceFromTarget");
+
+                    b.Property<int>("Id");
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("MealPlanId", "AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UsersMealPlans");
+                });
+
+            modelBuilder.Entity("Domain.Meals.UserMeals", b =>
+                {
+                    b.Property<int>("MealId");
+
+                    b.Property<string>("AppUserId");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("MealId", "AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UsersMeals");
+                });
+
+            modelBuilder.Entity("Domain.User.ActivityFactor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<float>("Multiplier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivitiesFactor");
+                });
+
+            modelBuilder.Entity("Domain.User.Gender", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -96,7 +225,7 @@ namespace Persistence.Migrations
                     b.ToTable("Genders");
                 });
 
-            modelBuilder.Entity("Domain.Goal", b =>
+            modelBuilder.Entity("Domain.User.Goal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -110,7 +239,7 @@ namespace Persistence.Migrations
                     b.ToTable("Goals");
                 });
 
-            modelBuilder.Entity("Domain.HeightUnit", b =>
+            modelBuilder.Entity("Domain.User.HeightUnit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -122,24 +251,31 @@ namespace Persistence.Migrations
                     b.ToTable("HeightUnits");
                 });
 
-            modelBuilder.Entity("Domain.UserMacros", b =>
+            modelBuilder.Entity("Domain.User.UserMacros", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("RecommendedMacrosId");
+
+                    b.Property<int>("EditedMacrosId");
 
                     b.Property<string>("AppUserId");
 
-                    b.Property<int>("TotalMacros");
+                    b.Property<int>("Id");
 
-                    b.HasKey("Id");
+                    b.HasKey("RecommendedMacrosId", "EditedMacrosId", "AppUserId");
 
                     b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.HasIndex("EditedMacrosId")
+                        .IsUnique();
+
+                    b.HasIndex("RecommendedMacrosId")
                         .IsUnique();
 
                     b.ToTable("UsersMacros");
                 });
 
-            modelBuilder.Entity("Domain.UserStat", b =>
+            modelBuilder.Entity("Domain.User.UserStat", b =>
                 {
                     b.Property<string>("AppUserId");
 
@@ -179,7 +315,7 @@ namespace Persistence.Migrations
                     b.ToTable("UserStats");
                 });
 
-            modelBuilder.Entity("Domain.WeightUnit", b =>
+            modelBuilder.Entity("Domain.User.WeightUnit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -298,41 +434,126 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.UserMacros", b =>
+            modelBuilder.Entity("Domain.Meals.Meal", b =>
                 {
-                    b.HasOne("Domain.AppUser", "AppUser")
-                        .WithOne("UserMacros")
-                        .HasForeignKey("Domain.UserMacros", "AppUserId");
+                    b.HasOne("Domain.Common.AppUser", "Creator")
+                        .WithMany("CreatedMeals")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Common.Macros", "Macros")
+                        .WithOne("Meal")
+                        .HasForeignKey("Domain.Meals.Meal", "MacrosId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Meals.MealType", "MealType")
+                        .WithMany("Meals")
+                        .HasForeignKey("MealTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Domain.UserStat", b =>
+            modelBuilder.Entity("Domain.Meals.MealPlan", b =>
                 {
-                    b.HasOne("Domain.ActivityFactor", "ActivityFactor")
+                    b.HasOne("Domain.Common.AppUser", "Creator")
+                        .WithMany("CreatedMealPlans")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Common.Macros", "Macros")
+                        .WithOne("MealPlan")
+                        .HasForeignKey("Domain.Meals.MealPlan", "MacrosId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Meals.MealPlanMeals", b =>
+                {
+                    b.HasOne("Domain.Meals.Meal", "Meal")
+                        .WithMany("MealPlansMeals")
+                        .HasForeignKey("MealId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Meals.MealPlan", "MealPlan")
+                        .WithMany("MealPlansMeals")
+                        .HasForeignKey("MealPlanId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Meals.UserMealPlans", b =>
+                {
+                    b.HasOne("Domain.Common.AppUser", "AppUser")
+                        .WithMany("SavedMealPlans")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Meals.MealPlan", "MealPlan")
+                        .WithMany("UserMealPlans")
+                        .HasForeignKey("MealPlanId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Meals.UserMeals", b =>
+                {
+                    b.HasOne("Domain.Common.AppUser", "AppUser")
+                        .WithMany("SavedMeals")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Meals.Meal", "Meal")
+                        .WithMany("UserMeals")
+                        .HasForeignKey("MealId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.User.UserMacros", b =>
+                {
+                    b.HasOne("Domain.Common.AppUser", "AppUser")
+                        .WithOne("UserMacros")
+                        .HasForeignKey("Domain.User.UserMacros", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Common.Macros", "EditedMacros")
+                        .WithOne("EditedUserMacros")
+                        .HasForeignKey("Domain.User.UserMacros", "EditedMacrosId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Common.Macros", "RecommendedMacros")
+                        .WithOne("RecommendedUserMacros")
+                        .HasForeignKey("Domain.User.UserMacros", "RecommendedMacrosId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.User.UserStat", b =>
+                {
+                    b.HasOne("Domain.User.ActivityFactor", "ActivityFactor")
                         .WithMany("UserStats")
                         .HasForeignKey("ActivityFactorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.AppUser", "AppUser")
+                    b.HasOne("Domain.Common.AppUser", "AppUser")
                         .WithOne("UserStat")
-                        .HasForeignKey("Domain.UserStat", "AppUserId")
+                        .HasForeignKey("Domain.User.UserStat", "AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.Gender", "Gender")
+                    b.HasOne("Domain.User.Gender", "Gender")
                         .WithMany("UserStats")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.Goal", "Goal")
+                    b.HasOne("Domain.User.Goal", "Goal")
                         .WithMany("UserStats")
                         .HasForeignKey("GoalId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.HeightUnit", "HeightUnit")
+                    b.HasOne("Domain.User.HeightUnit", "HeightUnit")
                         .WithMany("UserStats")
                         .HasForeignKey("HeightUnitId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.WeightUnit", "WeightUnit")
+                    b.HasOne("Domain.User.WeightUnit", "WeightUnit")
                         .WithMany("UserStats")
                         .HasForeignKey("WeightUnitId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -348,7 +569,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.AppUser")
+                    b.HasOne("Domain.Common.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -356,7 +577,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.AppUser")
+                    b.HasOne("Domain.Common.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -369,7 +590,7 @@ namespace Persistence.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.AppUser")
+                    b.HasOne("Domain.Common.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -377,7 +598,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.AppUser")
+                    b.HasOne("Domain.Common.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

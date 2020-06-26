@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain;
+using Domain.User;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -101,12 +102,12 @@ namespace Application.UserStats
                 var created = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
                 var macros = _macroCalculator.CalculateMacros(created);
 
-                var userMacros = new UserMacros
-                {
-                    AppUserId = _userAccessor.GetCurrentId(),
-                    TotalMacros = macros
-                };
-                _context.UsersMacros.Add(userMacros);
+                //var userMacros = new UserMacros
+                //{
+                //    AppUserId = _userAccessor.GetCurrentId(),
+                //    TotalMacros = macros
+                //};
+                //_context.UsersMacros.Add(userMacros);
                 var success2 = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
