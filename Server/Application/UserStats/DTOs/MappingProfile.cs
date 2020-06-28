@@ -2,7 +2,6 @@
 using Domain;
 using AutoMapper;
 using Domain.User;
-using Domain.Common;
 using Application.UserStats.DTOs;
 
 namespace Application.MainDTOs

@@ -24,5 +24,6 @@ namespace Application.UserStats.DTOs
 
         // Rest
         public DateTime DateOfBirth { get; set; }
+        public int Calories { get; set; }
     }
 }

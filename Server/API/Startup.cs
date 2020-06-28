@@ -9,7 +9,6 @@ using Application.Interfaces;
 using Application.Users;
 using AutoMapper;
 using Domain;
-using Domain.Common;
 using FluentValidation.AspNetCore;
 using Infrastructure.Calculator;
 using Infrastructure.Security;
@@ -29,7 +28,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
-
+using Domain.User;
 
 namespace API
 {

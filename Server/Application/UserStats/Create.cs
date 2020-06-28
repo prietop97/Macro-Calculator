@@ -95,20 +95,14 @@ namespace Application.UserStats
                 };
 
 
-                _context.UserStats.Add(userStats);
+                //_context.UserStats.Add(userStats);
 
 
+                
+                //var created = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
+                var calories = _macroCalculator.CalculateMacros(userStats);
+                userStats.Calories = calories;
                 var success = await _context.SaveChangesAsync() > 0;
-                var created = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
-                var macros = _macroCalculator.CalculateMacros(created);
-
-                //var userMacros = new UserMacros
-                //{
-                //    AppUserId = _userAccessor.GetCurrentId(),
-                //    TotalMacros = macros
-                //};
-                //_context.UsersMacros.Add(userMacros);
-                var success2 = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
 

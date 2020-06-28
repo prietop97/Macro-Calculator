@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using Domain;
-using Domain.Common;
 using Domain.Meals;
 using Domain.User;
 using Microsoft.AspNetCore.Identity;
@@ -28,10 +27,8 @@ namespace Persistence
         public DbSet<HeightUnit> HeightUnits { get; set; }
         public DbSet<WeightUnit> WeightUnits { get; set; }
         public DbSet<UserStat> UserStats { get; set; }
-        public DbSet<UserMacros> UsersMacros { get; set; }
 
         // MEALS
-        public DbSet<Macros> Macros { get; set; }
         public DbSet<MealType> MealTypes { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<UserMeals> UsersMeals { get; set; }
@@ -55,28 +52,17 @@ namespace Persistence
             builder.Entity<UserStat>().HasOne(us => us.HeightUnit).WithMany(hu => hu.UserStats).HasForeignKey(us => us.HeightUnitId);
             builder.Entity<UserStat>().HasOne(us => us.WeightUnit).WithMany(wu => wu.UserStats).HasForeignKey(us => us.WeightUnitId);
 
-
-            // USERMACROS
-            builder.Entity<UserMacros>().HasKey(um => new { um.RecommendedMacrosId, um.EditedMacrosId, um.AppUserId });
-
-            builder.Entity<UserMacros>().HasOne(um => um.AppUser).WithOne(au => au.UserMacros).HasForeignKey<UserMacros>(um => um.AppUserId);
-            builder.Entity<UserMacros>().HasOne(um => um.EditedMacros).WithOne(m => m.EditedUserMacros).HasForeignKey<UserMacros>(um => um.EditedMacrosId);
-            builder.Entity<UserMacros>().HasOne(um => um.RecommendedMacros).WithOne(m => m.RecommendedUserMacros).HasForeignKey<UserMacros>(um => um.RecommendedMacrosId);
-
-
             // MEALS
-            builder.Entity<Meal>().HasKey(m => new { m.CreatorId, m.MacrosId, m.MealTypeId });
+            builder.Entity<Meal>().HasKey(m => new { m.CreatorId, m.MealTypeId });
 
             builder.Entity<Meal>().HasOne(m => m.Creator).WithMany(au => au.CreatedMeals).HasForeignKey(m => m.CreatorId);
             builder.Entity<Meal>().HasOne(m => m.MealType).WithMany(m => m.Meals).HasForeignKey(mt => mt.MealTypeId);
-            builder.Entity<Meal>().HasOne(m => m.Macros).WithOne(m => m.Meal).HasForeignKey<Meal>(m => m.MacrosId);
 
 
             // MEALPLAN
-            builder.Entity<MealPlan>().HasKey(mp => new { mp.CreatorId, mp.MacrosId });
+            builder.Entity<MealPlan>().HasKey(mp => new { mp.CreatorId });
 
             builder.Entity<MealPlan>().HasOne(mp => mp.Creator).WithMany(au => au.CreatedMealPlans).HasForeignKey(mp => mp.CreatorId);
-            builder.Entity<MealPlan>().HasOne(mp => mp.Macros).WithOne(m => m.MealPlan).HasForeignKey<MealPlan>(mp => mp.MacrosId);
 
 
             // MEALPLANMEALS

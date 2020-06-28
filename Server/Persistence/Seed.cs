@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Domain;
-using Domain.Common;
 using Domain.Meals;
 using Domain.User;
 using Microsoft.AspNetCore.Identity;
@@ -107,38 +106,9 @@ namespace Persistence
                         GenderId = 1,
                         ActivityFactorId = 1,
                         Height = 150,
-                        DateOfBirth = new DateTime(1997,9,5)
+                        DateOfBirth = new DateTime(1997,9,5),
+                        Calories = 2000
                     },
-                    UserMacros = new UserMacros
-                    {
-                        AppUserId = "a",
-                        RecommendedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        },
-                                                EditedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        }
-                    }
                 },
                 new AppUser
                 {
@@ -155,38 +125,10 @@ namespace Persistence
                         GenderId = 1,
                         ActivityFactorId = 1,
                         Height = 150,
-                        DateOfBirth = new DateTime(1997,9,5)
+                        DateOfBirth = new DateTime(1997,9,5),
+                        Calories = 2000
                     },
-                    UserMacros = new UserMacros
-                    {
-                        AppUserId = "b",
-                        RecommendedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        },
-                                                EditedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        }
-                    }
+                    
                 },
                 new AppUser
                 {
@@ -203,38 +145,10 @@ namespace Persistence
                         GenderId = 1,
                         ActivityFactorId = 1,
                         Height = 150,
-                        DateOfBirth = new DateTime(1997,9,5)
+                        DateOfBirth = new DateTime(1997,9,5),
+                        Calories = 2000
                     },
-                    UserMacros = new UserMacros
-                    {
-                        AppUserId = "c",
-                        RecommendedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        },
-                                                EditedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        }
-                    }
+                    
                 },
                 new AppUser
                 {
@@ -251,38 +165,10 @@ namespace Persistence
                         Weight = 150,
                         ActivityFactorId = 1,
                         Height = 150,
-                        DateOfBirth = new DateTime(1997,9,5)
+                        DateOfBirth = new DateTime(1997,9,5),
+                        Calories = 2000
                     },
-                    UserMacros = new UserMacros
-                    {
-                        AppUserId = "d",
-                        RecommendedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        },
-                        EditedMacros = new Macros
-                        {
-                            Calories = 2000,
-                            ProteinAmount = 125,
-                            ProteinPercentage = 25,
-                            ProteinCalories = 500,
-                            FatAmount = 44,
-                            FatPercentage = 20,
-                            FatCalories = 400,
-                            CarbsAmount = 275,
-                            CarbsPercentage = 55,
-                            CarbsCalories = 1100,
-                        }
-                    }
+                    
                 },
             };
 

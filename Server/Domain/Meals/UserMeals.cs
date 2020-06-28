@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Common;
+using Domain.User;
 
 namespace Domain.Meals
 {

@@ -2,7 +2,6 @@
 using Domain;
 using AutoMapper;
 using Domain.User;
-using Domain.Common;
 using Application.UserStats.DTOs;
 
 namespace Application.MainDTOs
@@ -18,7 +17,6 @@ namespace Application.MainDTOs
             CreateMap<Gender, GenderDto>();
             CreateMap<AppUser, UserInfoDto>().ForMember(u => u.Username, o => o.MapFrom(s => s.UserName));
             CreateMap<UserStat, UserStatsDto>();
-            CreateMap<UserMacros, UserMacrosDto>();
         }
     }
 }

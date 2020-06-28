@@ -1,6 +1,6 @@
 ﻿using System;
 using Domain;
-using Domain.Common;
+using Domain.User;
 
 namespace Application.Interfaces
 {

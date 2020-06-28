@@ -1,5 +1,4 @@
 ﻿using System;
-using Domain.Common;
 
 namespace Domain.User
 {
@@ -36,6 +35,8 @@ namespace Domain.User
 
         // Rest
         public DateTime DateOfBirth { get; set; }
+
+        public int Calories { get; set; }
 
 
     }

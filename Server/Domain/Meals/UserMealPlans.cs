@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Common;
+using Domain.User;
 
 namespace Domain.Meals
 {
@@ -13,7 +13,5 @@ namespace Domain.Meals
         public int MealPlanId { get; set; }
         public MealPlan MealPlan { get; set; }
 
-        public bool IsActive { get; set; }
-        public int DifferenceFromTarget { get; set; }
     }
 }

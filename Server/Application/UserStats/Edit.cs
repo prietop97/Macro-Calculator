@@ -23,19 +23,20 @@ namespace Application.UserStats
             public int? Height { get; set; }
             public int ActivityFactorId { get; set; }
             public DateTime? DateOfBirth { get; set; }
+            public int? Calories { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-                RuleFor(x => x.GoalId).NotEmpty();
-                RuleFor(x => x.GenderId).NotEmpty();
-                RuleFor(x => x.Height).NotEmpty();
-                RuleFor(x => x.ActivityFactorId).NotEmpty();
-                RuleFor(x => x.DateOfBirth).NotEmpty();
-                RuleFor(x => x.HeightUnitId).NotEmpty();
-                RuleFor(x => x.WeightUnitId).NotEmpty();
+                //RuleFor(x => x.GoalId).NotEmpty();
+                //RuleFor(x => x.GenderId).NotEmpty();
+                //RuleFor(x => x.Height).NotEmpty();
+                //RuleFor(x => x.ActivityFactorId).NotEmpty();
+                //RuleFor(x => x.DateOfBirth).NotEmpty();
+                //RuleFor(x => x.HeightUnitId).NotEmpty();
+                //RuleFor(x => x.WeightUnitId).NotEmpty();
             }
         }
 
@@ -96,6 +97,7 @@ namespace Application.UserStats
 
                 userStat.Height = request.Height ?? userStat.Height;
                 userStat.DateOfBirth = request.DateOfBirth ?? userStat.DateOfBirth;
+                userStat.Calories = request.Calories ?? userStat.Calories;
 
                 _context.UserStats.Add(userStat);
                 var success2 = await _context.SaveChangesAsync() > 0;

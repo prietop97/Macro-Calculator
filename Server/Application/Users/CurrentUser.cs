@@ -5,7 +5,7 @@ using Application.Interfaces;
 using Application.MainDTOs;
 using AutoMapper;
 using Domain;
-using Domain.Common;
+using Domain.User;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
