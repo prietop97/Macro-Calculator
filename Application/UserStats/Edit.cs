@@ -18,8 +18,7 @@ namespace Application.UserStats
         {
             public int GoalId { get; set; }
             public int GenderId { get; set; }
-            public int HeightUnitId { get; set; }
-            public int WeightUnitId { get; set; }
+            public int UnitSystemId { get; set; }
             public int? Height { get; set; }
             public int ActivityFactorId { get; set; }
             public DateTime? DateOfBirth { get; set; }
@@ -65,8 +64,7 @@ namespace Application.UserStats
                 var goal = await _context.Goals.FindAsync(request.GoalId);
                 var gender = await _context.Genders.FindAsync(request.GenderId);
                 var activityFactor = await _context.ActivitiesFactor.FindAsync(request.ActivityFactorId);
-                var heightUnit = await _context.HeightUnits.FindAsync(request.HeightUnitId);
-                var weightUnit = await _context.WeightUnits.FindAsync(request.WeightUnitId);
+                var unitSystem = await _context.UnitSystems.FindAsync(request.UnitSystemId);
 
                 if (goal != null)
                 {
@@ -83,21 +81,16 @@ namespace Application.UserStats
                     userStat.ActivityFactor = activityFactor;
                     userStat.ActivityFactorId = request.ActivityFactorId;
                 }
-                if (heightUnit != null)
+                if (unitSystem != null)
                 {
-                    userStat.HeightUnit = heightUnit;
-                    userStat.HeightUnitId = request.HeightUnitId;
-                }
-                if (weightUnit != null)
-                {
-                    userStat.WeightUnit = weightUnit;
-                    userStat.WeightUnitId = request.WeightUnitId;
+                    userStat.UnitSystem = unitSystem;
+                    userStat.UnitSystemId = request.UnitSystemId;
                 }
 
 
                 userStat.Height = request.Height ?? userStat.Height;
                 userStat.DateOfBirth = request.DateOfBirth ?? userStat.DateOfBirth;
-                userStat.Calories = request.Calories ?? userStat.Calories;
+                // userStat.Calories = request.Calories ?? userStat.Calories;
 
                 _context.UserStats.Add(userStat);
                 var success2 = await _context.SaveChangesAsync() > 0;

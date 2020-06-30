@@ -16,58 +16,77 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
-            modelBuilder.Entity("Domain.Meals.Meal", b =>
+            modelBuilder.Entity("Domain.MealEntities.Ingredient", b =>
                 {
-                    b.Property<string>("CreatorId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("MealTypeId");
-
-                    b.Property<int>("Calories");
+                    b.Property<double>("CarbsGrams");
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("Id");
+                    b.Property<double>("FatGrams");
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("ProteinGrams");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("Domain.MealEntities.Meal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("CarbsGrams");
+
+                    b.Property<string>("Description");
+
+                    b.Property<double>("FatGrams");
+
+                    b.Property<string>("Instructions");
+
+                    b.Property<double>("ProteinGrams");
 
                     b.Property<string>("Title");
 
-                    b.HasKey("CreatorId", "MealTypeId");
+                    b.Property<double>("TotalServings");
 
-                    b.HasIndex("MealTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Meals");
                 });
 
-            modelBuilder.Entity("Domain.Meals.MealPlan", b =>
+            modelBuilder.Entity("Domain.MealEntities.MealPlanMeals", b =>
                 {
-                    b.Property<string>("CreatorId");
-
-                    b.Property<int>("Calories");
-
-                    b.Property<string>("Description");
-
                     b.Property<int>("Id");
 
-                    b.Property<string>("Title");
+                    b.Property<int?>("MealId");
 
-                    b.HasKey("CreatorId");
+                    b.Property<int?>("UserMealPlanId");
 
-                    b.ToTable("MealPlans");
-                });
+                    b.Property<int?>("MealTypeId");
 
-            modelBuilder.Entity("Domain.Meals.MealPlanMeals", b =>
-                {
-                    b.Property<int>("MealId");
+                    b.Property<int>("Order");
 
-                    b.Property<int>("MealPlanId");
+                    b.Property<double>("Servings");
 
-                    b.HasKey("MealId", "MealPlanId");
+                    b.HasKey("Id", "MealId", "UserMealPlanId", "MealTypeId");
 
-                    b.HasIndex("MealPlanId");
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("MealTypeId")
+                        .IsUnique();
+
+                    b.HasIndex("UserMealPlanId");
 
                     b.ToTable("MealPlanMeals");
                 });
 
-            modelBuilder.Entity("Domain.Meals.MealType", b =>
+            modelBuilder.Entity("Domain.MealEntities.MealType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -76,25 +95,58 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("MealType");
+                });
+
+            modelBuilder.Entity("Domain.MealEntities.MealTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MealId");
+
+                    b.Property<int>("MealTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("MealTypeId");
+
                     b.ToTable("MealTypes");
                 });
 
-            modelBuilder.Entity("Domain.Meals.UserMealPlans", b =>
+            modelBuilder.Entity("Domain.MealEntities.MealsIngredients", b =>
                 {
-                    b.Property<int>("MealPlanId");
+                    b.Property<int>("IngredientId");
 
-                    b.Property<string>("AppUserId");
+                    b.Property<int>("MealId");
 
                     b.Property<int>("Id");
 
-                    b.HasKey("MealPlanId", "AppUserId");
+                    b.Property<int>("Quantity");
 
-                    b.HasIndex("AppUserId");
+                    b.HasKey("IngredientId", "MealId");
 
-                    b.ToTable("UsersMealPlans");
+                    b.HasIndex("MealId");
+
+                    b.ToTable("MealsIngredients");
                 });
 
-            modelBuilder.Entity("Domain.Meals.UserMeals", b =>
+            modelBuilder.Entity("Domain.MealEntities.UserMealPlan", b =>
+                {
+                    b.Property<string>("AppUserId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("AppUserId");
+
+                    b.ToTable("UserMealPlans");
+                });
+
+            modelBuilder.Entity("Domain.MealEntities.UserMeals", b =>
                 {
                     b.Property<int>("MealId");
 
@@ -109,7 +161,7 @@ namespace Persistence.Migrations
                     b.ToTable("UsersMeals");
                 });
 
-            modelBuilder.Entity("Domain.User.ActivityFactor", b =>
+            modelBuilder.Entity("Domain.UserEntities.ActivityFactor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -123,7 +175,7 @@ namespace Persistence.Migrations
                     b.ToTable("ActivitiesFactor");
                 });
 
-            modelBuilder.Entity("Domain.User.AppUser", b =>
+            modelBuilder.Entity("Domain.UserEntities.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -137,6 +189,10 @@ namespace Persistence.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -173,7 +229,7 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Domain.User.Gender", b =>
+            modelBuilder.Entity("Domain.UserEntities.Gender", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -189,7 +245,7 @@ namespace Persistence.Migrations
                     b.ToTable("Genders");
                 });
 
-            modelBuilder.Entity("Domain.User.Goal", b =>
+            modelBuilder.Entity("Domain.UserEntities.Goal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -203,7 +259,7 @@ namespace Persistence.Migrations
                     b.ToTable("Goals");
                 });
 
-            modelBuilder.Entity("Domain.User.HeightUnit", b =>
+            modelBuilder.Entity("Domain.UserEntities.UnitSystem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -212,10 +268,10 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HeightUnits");
+                    b.ToTable("UnitSystems");
                 });
 
-            modelBuilder.Entity("Domain.User.UserStat", b =>
+            modelBuilder.Entity("Domain.UserEntities.UserStat", b =>
                 {
                     b.Property<string>("AppUserId");
 
@@ -225,21 +281,23 @@ namespace Persistence.Migrations
 
                     b.Property<int>("ActivityFactorId");
 
-                    b.Property<int>("HeightUnitId");
+                    b.Property<int>("UnitSystemId");
 
-                    b.Property<int>("WeightUnitId");
-
-                    b.Property<int>("Calories");
+                    b.Property<double>("CarbsGrams");
 
                     b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<double>("FatGrams");
 
                     b.Property<double>("Height");
 
                     b.Property<int>("Id");
 
+                    b.Property<double>("ProteinGrams");
+
                     b.Property<double>("Weight");
 
-                    b.HasKey("AppUserId", "GoalId", "GenderId", "ActivityFactorId", "HeightUnitId", "WeightUnitId");
+                    b.HasKey("AppUserId", "GoalId", "GenderId", "ActivityFactorId", "UnitSystemId");
 
                     b.HasIndex("ActivityFactorId");
 
@@ -250,23 +308,9 @@ namespace Persistence.Migrations
 
                     b.HasIndex("GoalId");
 
-                    b.HasIndex("HeightUnitId");
-
-                    b.HasIndex("WeightUnitId");
+                    b.HasIndex("UnitSystemId");
 
                     b.ToTable("UserStats");
-                });
-
-            modelBuilder.Entity("Domain.User.WeightUnit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WeightUnits");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -376,100 +420,97 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Meals.Meal", b =>
+            modelBuilder.Entity("Domain.MealEntities.MealPlanMeals", b =>
                 {
-                    b.HasOne("Domain.User.AppUser", "Creator")
-                        .WithMany("CreatedMeals")
-                        .HasForeignKey("CreatorId")
+                    b.HasOne("Domain.MealEntities.Meal", "Meal")
+                        .WithMany("MealPlansMeals")
+                        .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.Meals.MealType", "MealType")
-                        .WithMany("Meals")
+                    b.HasOne("Domain.MealEntities.MealType", "MealType")
+                        .WithOne("MealPlanMeals")
+                        .HasForeignKey("Domain.MealEntities.MealPlanMeals", "MealTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.MealEntities.UserMealPlan", "UserMealPlan")
+                        .WithMany("MealPlanMeals")
+                        .HasForeignKey("UserMealPlanId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.MealEntities.MealTypes", b =>
+                {
+                    b.HasOne("Domain.MealEntities.Meal", "Meal")
+                        .WithMany("MealTypes")
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.MealEntities.MealType", "MealType")
+                        .WithMany("MealTypes")
                         .HasForeignKey("MealTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Domain.Meals.MealPlan", b =>
+            modelBuilder.Entity("Domain.MealEntities.MealsIngredients", b =>
                 {
-                    b.HasOne("Domain.User.AppUser", "Creator")
-                        .WithMany("CreatedMealPlans")
-                        .HasForeignKey("CreatorId")
+                    b.HasOne("Domain.MealEntities.Ingredient", "Ingredient")
+                        .WithMany("MealIngredients")
+                        .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
 
-            modelBuilder.Entity("Domain.Meals.MealPlanMeals", b =>
-                {
-                    b.HasOne("Domain.Meals.Meal", "Meal")
-                        .WithMany("MealPlansMeals")
+                    b.HasOne("Domain.MealEntities.Meal", "Meal")
+                        .WithMany("MealIngredients")
                         .HasForeignKey("MealId")
-                        .HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Meals.MealPlan", "MealPlan")
-                        .WithMany("MealPlansMeals")
-                        .HasForeignKey("MealPlanId")
-                        .HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Domain.Meals.UserMealPlans", b =>
+            modelBuilder.Entity("Domain.MealEntities.UserMealPlan", b =>
                 {
-                    b.HasOne("Domain.User.AppUser", "AppUser")
-                        .WithMany("SavedMealPlans")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Meals.MealPlan", "MealPlan")
+                    b.HasOne("Domain.UserEntities.AppUser", "AppUser")
                         .WithMany("UserMealPlans")
-                        .HasForeignKey("MealPlanId")
-                        .HasPrincipalKey("Id")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Domain.Meals.UserMeals", b =>
+            modelBuilder.Entity("Domain.MealEntities.UserMeals", b =>
                 {
-                    b.HasOne("Domain.User.AppUser", "AppUser")
-                        .WithMany("SavedMeals")
+                    b.HasOne("Domain.UserEntities.AppUser", "AppUser")
+                        .WithMany("UserMeals")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.Meals.Meal", "Meal")
+                    b.HasOne("Domain.MealEntities.Meal", "Meal")
                         .WithMany("UserMeals")
                         .HasForeignKey("MealId")
-                        .HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Domain.User.UserStat", b =>
+            modelBuilder.Entity("Domain.UserEntities.UserStat", b =>
                 {
-                    b.HasOne("Domain.User.ActivityFactor", "ActivityFactor")
+                    b.HasOne("Domain.UserEntities.ActivityFactor", "ActivityFactor")
                         .WithMany("UserStats")
                         .HasForeignKey("ActivityFactorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.User.AppUser", "AppUser")
+                    b.HasOne("Domain.UserEntities.AppUser", "AppUser")
                         .WithOne("UserStat")
-                        .HasForeignKey("Domain.User.UserStat", "AppUserId")
+                        .HasForeignKey("Domain.UserEntities.UserStat", "AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.User.Gender", "Gender")
+                    b.HasOne("Domain.UserEntities.Gender", "Gender")
                         .WithMany("UserStats")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.User.Goal", "Goal")
+                    b.HasOne("Domain.UserEntities.Goal", "Goal")
                         .WithMany("UserStats")
                         .HasForeignKey("GoalId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.User.HeightUnit", "HeightUnit")
+                    b.HasOne("Domain.UserEntities.UnitSystem", "UnitSystem")
                         .WithMany("UserStats")
-                        .HasForeignKey("HeightUnitId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.User.WeightUnit", "WeightUnit")
-                        .WithMany("UserStats")
-                        .HasForeignKey("WeightUnitId")
+                        .HasForeignKey("UnitSystemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -483,7 +524,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.User.AppUser")
+                    b.HasOne("Domain.UserEntities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -491,7 +532,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.User.AppUser")
+                    b.HasOne("Domain.UserEntities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -504,7 +545,7 @@ namespace Persistence.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.User.AppUser")
+                    b.HasOne("Domain.UserEntities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -512,7 +553,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.User.AppUser")
+                    b.HasOne("Domain.UserEntities.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

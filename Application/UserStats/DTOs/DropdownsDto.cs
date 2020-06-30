@@ -9,8 +9,7 @@ namespace Application.UserStats.DTOs
         public List<ActivityFactorDto> ActivityFactors { get; set; }
         public List<GenderDto> Genders { get; set; }
         public List<GoalDto> Goals { get; set; }
-        public List<HeightUnitDto> HeightUnits { get; set; }
-        public List<WeightUnitDto> WeightUnits { get; set; }
+        public List<UnitSystemDto> UnitSystems { get; set; }
 
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain;
-using Domain.User;
+using Domain.UserEntities;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -39,7 +39,7 @@ namespace Infrastructure.Calculator
         {
             double weight;
             weight = _userStat.Weight;
-            if (_userStat.WeightUnit.Description == "US")
+            if (_userStat.UnitSystem.Description == "US")
             {
                 weight *= KILOGRAMSPERPOUND;
             }
@@ -51,7 +51,7 @@ namespace Infrastructure.Calculator
         {
             double height;
             height = _userStat.Height;
-            if (_userStat.HeightUnit.Description == "US")
+            if (_userStat.UnitSystem.Description == "US")
             {
                 height *= CENTIMITERSPERFOOT;
             }

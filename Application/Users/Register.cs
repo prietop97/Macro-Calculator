@@ -1,4 +1,5 @@
 ﻿using System;
+using Application.MainDTOs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using Application.Interfaces;
 using Application.Validation;
 using Domain;
-using Domain.User;
+using Domain.UserEntities;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -19,10 +20,11 @@ namespace Application.Users
 {
     public class Register
     {
-        public class Command : IRequest<User>
+        public class Command : IRequest<UserInfoDto>
         {
             public string Email { get; set; }
-            public string Username { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
             public string Password { get; set; }
         }
 
@@ -32,10 +34,11 @@ namespace Application.Users
             {
                 RuleFor(x => x.Email).NotEmpty().EmailAddress();
                 RuleFor(x => x.Password).Password();
-                RuleFor(x => x.Username).NotEmpty();
+                RuleFor(x => x.FirstName).NotEmpty();
+                RuleFor(x => x.LastName).NotEmpty();
             }
         }
-        public class Handler : IRequestHandler<Command, User>
+        public class Handler : IRequestHandler<Command, UserInfoDto>
         {
             private readonly UserManager<AppUser> _userManager;
             private readonly DataContext _context;
@@ -50,24 +53,23 @@ namespace Application.Users
                 _context = context;
             }
 
-            public async Task<User> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<UserInfoDto> Handle(Command request, CancellationToken cancellationToken)
             {
                 if (await _context.Users.Where(x => x.Email == request.Email).AnyAsync())
                     throw new RestException(HttpStatusCode.BadRequest, new { email = "Email already exist" });
 
-                if (await _context.Users.Where(x => x.UserName == request.Username).AnyAsync())
-                    throw new RestException(HttpStatusCode.BadRequest, new { username = "Username already exist" });
-
-                var user = new AppUser { Email = request.Email, UserName = request.Username };
+                var user = new AppUser { Email = request.Email, FirstName = request.FirstName, LastName = request.LastName };
 
                 var result = await _userManager.CreateAsync(user, request.Password);
 
                 if (result.Succeeded)
                 {
-                    return new User
+                    return new UserInfoDto
                     {
-                        Username = request.Username,
-                        Token = _jwtGenerator.CreateToken(user)
+                        Email = request.Email,
+                        Token = _jwtGenerator.CreateToken(user),
+                        FirstName = request.FirstName,
+                        LastName = request.LastName
                     };
                 }
 

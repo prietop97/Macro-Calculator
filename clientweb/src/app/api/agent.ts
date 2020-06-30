@@ -1,6 +1,13 @@
 import { useHistory } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
-import { IUser, IUserFormValues } from '../models/user';
+import {
+  IUser,
+  IUserFormValues,
+  IUserFormValuesLogin,
+  IUserStatsFormPost,
+  IUserStats,
+  IUserStatsDropDowns
+} from '../models/user';
 import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -13,7 +20,7 @@ axios.interceptors.response.use(undefined, (error) => {
     toast.error('Network error - make sure API is running!');
   }
   if (status === 404) {
-    history.push('/NotFound');
+    // history.push('/NotFound');
   }
   if (
     status === 400 &&
@@ -46,10 +53,15 @@ const requests = {
 
 const User = {
   current: (): Promise<IUser> => requests.get('/users'),
-  login: (user: IUserFormValues): Promise<IUser> =>
+  login: (user: IUserFormValuesLogin): Promise<IUser> =>
     requests.post('/users/login', user),
   register: (user: IUserFormValues): Promise<IUser> =>
-    requests.post('/users/login', user)
+    requests.post('/users/login', user),
+  saveUserStats: (userStats: IUserStatsFormPost): Promise<IUserStats> =>
+    requests.post('/userstats', userStats),
+  getUserStats: (): Promise<IUserStats> => requests.get('/userstats'),
+  dropDowns: (): Promise<IUserStatsDropDowns> =>
+    requests.get('/userstats/dropdowns')
 };
 
 export default {

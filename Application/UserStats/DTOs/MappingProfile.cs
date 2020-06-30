@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain;
 using AutoMapper;
-using Domain.User;
+using Domain.UserEntities;
 using Application.UserStats.DTOs;
 
 namespace Application.MainDTOs
@@ -12,8 +12,7 @@ namespace Application.MainDTOs
         {
             CreateMap<ActivityFactor, ActivityFactorDto>();
             CreateMap<Goal, GoalDto>();
-            CreateMap<HeightUnit, HeightUnitDto>();
-            CreateMap<WeightUnit, WeightUnitDto>();
+            CreateMap<UnitSystem, UnitSystemDto>();
             CreateMap<Gender, GenderDto>();
             CreateMap<UserStat, UserStatsDto>();
         }

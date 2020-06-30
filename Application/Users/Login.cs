@@ -5,9 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain;
-using Domain.User;
+using Domain.UserEntities;
 using FluentValidation;
 using MediatR;
+using Application.MainDTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -17,7 +18,7 @@ namespace Application.Users
 {
     public class Login
     {
-        public class Query : IRequest<User>
+        public class Query : IRequest<UserInfoDto>
         {
             public string Email { get; set; }
             public string Password { get; set; }
@@ -31,7 +32,7 @@ namespace Application.Users
                 RuleFor(x => x.Password).NotEmpty();
             }
         }
-        public class Handler : IRequestHandler<Query, User>
+        public class Handler : IRequestHandler<Query, UserInfoDto>
         {
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
@@ -44,7 +45,7 @@ namespace Application.Users
                 _jwtGenerator = jwtGenerator;
             }
 
-            public async Task<User> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<UserInfoDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
@@ -55,10 +56,13 @@ namespace Application.Users
                 if (result.Succeeded)
                 {
                     // GENERATE TOKEN
-                    return new User
+                    return new UserInfoDto
                     {
                         Username = user.UserName,
-                        Token = _jwtGenerator.CreateToken(user)
+                        Token = _jwtGenerator.CreateToken(user),
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName
                     };
 
                 }

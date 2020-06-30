@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.User
+namespace Domain.UserEntities
 {
-    public class ActivityFactor
+    public class Goal
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public float Multiplier { get; set; }
+        public int Multiplier { get; set; }
         public ICollection<UserStat> UserStats { get; set; }
 
     }

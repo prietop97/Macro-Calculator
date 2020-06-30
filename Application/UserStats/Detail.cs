@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using AutoMapper;
 using System.Collections.Generic;
-using Domain.User;
+using Domain.UserEntities;
 using Application.UserStats.DTOs;
 
 namespace Application.UserStats
@@ -38,7 +38,7 @@ namespace Application.UserStats
             {
                 var Id = _userAccessor.GetCurrentId();
 
-                var userStat = await _context.UserStats.Include(x => x.Goal).Include(x => x.Gender).Include(x => x.ActivityFactor).Include(x => x.HeightUnit).Include(x => x.WeightUnit).FirstOrDefaultAsync(u => u.AppUserId == Id);
+                var userStat = await _context.UserStats.Include(x => x.Goal).Include(x => x.Gender).Include(x => x.ActivityFactor).Include(x => x.UnitSystem).FirstOrDefaultAsync(u => u.AppUserId == Id);
                 if (userStat == null)
                     throw new RestException(System.Net.HttpStatusCode.BadRequest, new { stats = "User has no stats" });
                 var userStatDto = _mapper.Map<UserStat, UserStatsDto>(userStat);

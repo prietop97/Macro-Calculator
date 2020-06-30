@@ -15,15 +15,17 @@ namespace Application.UserStats.DTOs
         public ActivityFactorDto ActivityFactor { get; set; }
 
         // Height
-        public HeightUnitDto HeightUnit { get; set; }
         public double Height { get; set; }
 
         // Weight
-        public WeightUnitDto WeightUnit { get; set; }
+        public UnitSystemDto UnitSystem { get; set; }
         public double Weight { get; set; }
 
         // Rest
         public DateTime DateOfBirth { get; set; }
-        public int Calories { get; set; }
+        public double FatGrams { get; set; }
+        public double CarbsGrams { get; set; }
+        public double ProteinGrams { get; set; }
+
     }
 }

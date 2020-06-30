@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Application.UserStats.DTOs
 {
-    public class WeightUnitDto
+    public class UnitSystemDto
     {
         public int Id { get; set; }
         public string Description { get; set; }

@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using Application.Interfaces;
 using Domain;
-using Domain.User;
+using Domain.UserEntities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 

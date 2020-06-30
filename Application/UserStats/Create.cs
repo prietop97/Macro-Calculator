@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain;
-using Domain.User;
+using Domain.UserEntities;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +18,7 @@ namespace Application.UserStats
         {
             public int GoalId { get; set; }
             public int GenderId { get; set; }
-            public int HeightUnitId { get; set; }
-            public int WeightUnitId { get; set; }
+            public int UnitSystemId { get; set; }
             public double Height { get; set; }
             public double Weight { get; set; }
             public int ActivityFactorId { get; set; }
@@ -37,8 +36,7 @@ namespace Application.UserStats
                 RuleFor(x => x.Weight).NotEmpty();
                 RuleFor(x => x.ActivityFactorId).NotEmpty();
                 RuleFor(x => x.DateOfBirth).NotEmpty();
-                RuleFor(x => x.HeightUnitId).NotEmpty();
-                RuleFor(x => x.WeightUnitId).NotEmpty();
+                RuleFor(x => x.UnitSystemId).NotEmpty();
             }
         }
 
@@ -67,8 +65,7 @@ namespace Application.UserStats
                 var goal = await _context.Goals.FindAsync(request.GoalId);
                 var gender = await _context.Genders.FindAsync(request.GenderId);
                 var activityFactor = await _context.ActivitiesFactor.FindAsync(request.ActivityFactorId);
-                var heightUnit = await _context.HeightUnits.FindAsync(request.HeightUnitId);
-                var weightUnit = await _context.WeightUnits.FindAsync(request.WeightUnitId);
+                var unitSystem = await _context.UnitSystems.FindAsync(request.UnitSystemId);
 
                 if (goal == null)
                     throw new RestException(HttpStatusCode.BadRequest, new { goal = "Goal Id is not valid" });
@@ -76,32 +73,25 @@ namespace Application.UserStats
                     throw new RestException(HttpStatusCode.BadRequest, new { gener = "Gender Id is not valid" });
                 if (activityFactor == null)
                     throw new RestException(HttpStatusCode.BadRequest, new { activityFactor = "ActivityFactor Id is not valid" });
-                if (heightUnit == null)
-                    throw new RestException(HttpStatusCode.BadRequest, new { hightUnit = "HeightUnit Id is not valid" });
-                if (weightUnit == null)
-                    throw new RestException(HttpStatusCode.BadRequest, new { weightUnit = "WeightUnit Id is not valid" });
+                if (unitSystem == null)
+                    throw new RestException(HttpStatusCode.BadRequest, new { hightUnit = "UnitSystem Id is not valid" });
+
 
                 var userStats = new UserStat
                 {
                     Goal = goal,
                     Gender = gender,
                     ActivityFactor = activityFactor,
-                    HeightUnit = heightUnit,
-                    WeightUnit = weightUnit,
+                    UnitSystem = unitSystem,
                     Height = request.Height,
                     Weight = request.Weight,
                     DateOfBirth = request.DateOfBirth,
                     AppUserId = _userAccessor.GetCurrentId(),
                 };
 
-
-                
-
-
-                
                 //var created = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
                 var calories = _macroCalculator.CalculateMacros(userStats);
-                userStats.Calories = calories;
+                // userStats.Calories = calories;
                 _context.UserStats.Add(userStats);
                 var success = await _context.SaveChangesAsync() > 0;
 

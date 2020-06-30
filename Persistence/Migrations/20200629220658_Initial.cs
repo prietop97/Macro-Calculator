@@ -53,7 +53,9 @@ namespace Persistence.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,33 +92,43 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HeightUnits",
+                name: "Ingredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    CarbsGrams = table.Column<double>(nullable: false),
+                    ProteinGrams = table.Column<double>(nullable: false),
+                    FatGrams = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HeightUnits", x => x.Id);
+                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MealTypes",
+                name: "Meals",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Instructions = table.Column<string>(nullable: true),
+                    TotalServings = table.Column<double>(nullable: false),
+                    CarbsGrams = table.Column<double>(nullable: false),
+                    ProteinGrams = table.Column<double>(nullable: false),
+                    FatGrams = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MealTypes", x => x.Id);
+                    table.PrimaryKey("PK_Meals", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WeightUnits",
+                name: "MealType",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -125,7 +137,20 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WeightUnits", x => x.Id);
+                    table.PrimaryKey("PK_MealType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnitSystems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnitSystems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,158 +260,47 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MealPlans",
-                columns: table => new
-                {
-                    CreatorId = table.Column<string>(nullable: false),
-                    Id = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Calories = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MealPlans", x => x.CreatorId);
-                    table.UniqueConstraint("AK_MealPlans_Id", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MealPlans_AspNetUsers_CreatorId",
-                        column: x => x.CreatorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Meals",
-                columns: table => new
-                {
-                    CreatorId = table.Column<string>(nullable: false),
-                    MealTypeId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Calories = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Meals", x => new { x.CreatorId, x.MealTypeId });
-                    table.UniqueConstraint("AK_Meals_Id", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Meals_AspNetUsers_CreatorId",
-                        column: x => x.CreatorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Meals_MealTypes_MealTypeId",
-                        column: x => x.MealTypeId,
-                        principalTable: "MealTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserStats",
+                name: "UserMealPlans",
                 columns: table => new
                 {
                     AppUserId = table.Column<string>(nullable: false),
-                    GoalId = table.Column<int>(nullable: false),
-                    GenderId = table.Column<int>(nullable: false),
-                    ActivityFactorId = table.Column<int>(nullable: false),
-                    HeightUnitId = table.Column<int>(nullable: false),
-                    WeightUnitId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false),
-                    Height = table.Column<double>(nullable: false),
-                    Weight = table.Column<double>(nullable: false),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
-                    Calories = table.Column<int>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserStats", x => new { x.AppUserId, x.GoalId, x.GenderId, x.ActivityFactorId, x.HeightUnitId, x.WeightUnitId });
+                    table.PrimaryKey("PK_UserMealPlans", x => x.AppUserId);
+                    table.UniqueConstraint("AK_UserMealPlans_Id", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserStats_ActivitiesFactor_ActivityFactorId",
-                        column: x => x.ActivityFactorId,
-                        principalTable: "ActivitiesFactor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserStats_AspNetUsers_AppUserId",
+                        name: "FK_UserMealPlans_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserStats_Genders_GenderId",
-                        column: x => x.GenderId,
-                        principalTable: "Genders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserStats_Goals_GoalId",
-                        column: x => x.GoalId,
-                        principalTable: "Goals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserStats_HeightUnits_HeightUnitId",
-                        column: x => x.HeightUnitId,
-                        principalTable: "HeightUnits",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserStats_WeightUnits_WeightUnitId",
-                        column: x => x.WeightUnitId,
-                        principalTable: "WeightUnits",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersMealPlans",
+                name: "MealsIngredients",
                 columns: table => new
                 {
-                    AppUserId = table.Column<string>(nullable: false),
-                    MealPlanId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UsersMealPlans", x => new { x.MealPlanId, x.AppUserId });
-                    table.ForeignKey(
-                        name: "FK_UsersMealPlans_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UsersMealPlans_MealPlans_MealPlanId",
-                        column: x => x.MealPlanId,
-                        principalTable: "MealPlans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MealPlanMeals",
-                columns: table => new
-                {
+                    IngredientId = table.Column<int>(nullable: false),
                     MealId = table.Column<int>(nullable: false),
-                    MealPlanId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MealPlanMeals", x => new { x.MealId, x.MealPlanId });
+                    table.PrimaryKey("PK_MealsIngredients", x => new { x.IngredientId, x.MealId });
                     table.ForeignKey(
-                        name: "FK_MealPlanMeals_Meals_MealId",
+                        name: "FK_MealsIngredients_Ingredients_IngredientId",
+                        column: x => x.IngredientId,
+                        principalTable: "Ingredients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealsIngredients_Meals_MealId",
                         column: x => x.MealId,
                         principalTable: "Meals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MealPlanMeals_MealPlans_MealPlanId",
-                        column: x => x.MealPlanId,
-                        principalTable: "MealPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -412,6 +326,118 @@ namespace Persistence.Migrations
                         name: "FK_UsersMeals_Meals_MealId",
                         column: x => x.MealId,
                         principalTable: "Meals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MealTypeId = table.Column<int>(nullable: false),
+                    MealId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MealTypes_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealTypes_MealType_MealTypeId",
+                        column: x => x.MealTypeId,
+                        principalTable: "MealType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserStats",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    GoalId = table.Column<int>(nullable: false),
+                    GenderId = table.Column<int>(nullable: false),
+                    ActivityFactorId = table.Column<int>(nullable: false),
+                    UnitSystemId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Height = table.Column<double>(nullable: false),
+                    Weight = table.Column<double>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    CarbsGrams = table.Column<double>(nullable: false),
+                    ProteinGrams = table.Column<double>(nullable: false),
+                    FatGrams = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserStats", x => new { x.AppUserId, x.GoalId, x.GenderId, x.ActivityFactorId, x.UnitSystemId });
+                    table.ForeignKey(
+                        name: "FK_UserStats_ActivitiesFactor_ActivityFactorId",
+                        column: x => x.ActivityFactorId,
+                        principalTable: "ActivitiesFactor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserStats_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserStats_Genders_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "Genders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserStats_Goals_GoalId",
+                        column: x => x.GoalId,
+                        principalTable: "Goals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserStats_UnitSystems_UnitSystemId",
+                        column: x => x.UnitSystemId,
+                        principalTable: "UnitSystems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealPlanMeals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    MealId = table.Column<int>(nullable: false),
+                    UserMealPlanId = table.Column<int>(nullable: false),
+                    MealTypeId = table.Column<int>(nullable: false),
+                    Servings = table.Column<double>(nullable: false),
+                    Order = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealPlanMeals", x => new { x.Id, x.MealId, x.UserMealPlanId, x.MealTypeId });
+                    table.ForeignKey(
+                        name: "FK_MealPlanMeals_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealPlanMeals_MealType_MealTypeId",
+                        column: x => x.MealTypeId,
+                        principalTable: "MealType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealPlanMeals_UserMealPlans_UserMealPlanId",
+                        column: x => x.UserMealPlanId,
+                        principalTable: "UserMealPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -454,19 +480,35 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MealPlanMeals_MealPlanId",
+                name: "IX_MealPlanMeals_MealId",
                 table: "MealPlanMeals",
-                column: "MealPlanId");
+                column: "MealId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Meals_MealTypeId",
-                table: "Meals",
+                name: "IX_MealPlanMeals_MealTypeId",
+                table: "MealPlanMeals",
+                column: "MealTypeId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealPlanMeals_UserMealPlanId",
+                table: "MealPlanMeals",
+                column: "UserMealPlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealsIngredients_MealId",
+                table: "MealsIngredients",
+                column: "MealId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealTypes_MealId",
+                table: "MealTypes",
+                column: "MealId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealTypes_MealTypeId",
+                table: "MealTypes",
                 column: "MealTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsersMealPlans_AppUserId",
-                table: "UsersMealPlans",
-                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersMeals_AppUserId",
@@ -495,14 +537,9 @@ namespace Persistence.Migrations
                 column: "GoalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserStats_HeightUnitId",
+                name: "IX_UserStats_UnitSystemId",
                 table: "UserStats",
-                column: "HeightUnitId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserStats_WeightUnitId",
-                table: "UserStats",
-                column: "WeightUnitId");
+                column: "UnitSystemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -526,7 +563,10 @@ namespace Persistence.Migrations
                 name: "MealPlanMeals");
 
             migrationBuilder.DropTable(
-                name: "UsersMealPlans");
+                name: "MealsIngredients");
+
+            migrationBuilder.DropTable(
+                name: "MealTypes");
 
             migrationBuilder.DropTable(
                 name: "UsersMeals");
@@ -538,7 +578,13 @@ namespace Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "MealPlans");
+                name: "UserMealPlans");
+
+            migrationBuilder.DropTable(
+                name: "Ingredients");
+
+            migrationBuilder.DropTable(
+                name: "MealType");
 
             migrationBuilder.DropTable(
                 name: "Meals");
@@ -553,16 +599,10 @@ namespace Persistence.Migrations
                 name: "Goals");
 
             migrationBuilder.DropTable(
-                name: "HeightUnits");
-
-            migrationBuilder.DropTable(
-                name: "WeightUnits");
+                name: "UnitSystems");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "MealTypes");
         }
     }
 }
