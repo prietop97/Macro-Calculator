@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Domain;
-using Domain.User;
+using Domain.UserEntities;
 using Persistence;
 
 namespace Application.Interfaces

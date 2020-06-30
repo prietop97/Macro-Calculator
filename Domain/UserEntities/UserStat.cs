@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.User
+namespace Domain.UserEntities
 {
     public class UserStat
     {
@@ -22,21 +22,17 @@ namespace Domain.User
         // Activity Factor
         public int ActivityFactorId { get; set; }
         public ActivityFactor ActivityFactor { get; set; }
-
         // Height
-        public int HeightUnitId { get; set; }
-        public HeightUnit HeightUnit { get; set; }
         public double Height { get; set; }
-
         // Weight
-        public int WeightUnitId { get; set; }
-        public WeightUnit WeightUnit { get; set; }
+        public int UnitSystemId { get; set; }
+        public UnitSystem UnitSystem { get; set; }
         public double Weight { get; set; }
-
         // Rest
         public DateTime DateOfBirth { get; set; }
-
-        public int Calories { get; set; }
+        public double CarbsGrams { get; set; }
+        public double ProteinGrams { get; set; }
+        public double FatGrams { get; set; }
 
 
     }

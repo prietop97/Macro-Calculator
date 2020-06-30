@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using AutoMapper;
 using System.Collections.Generic;
-using Domain.User;
+using Domain.UserEntities;
 using Application.UserStats.DTOs;
 
 namespace Application.UserStats
@@ -43,19 +43,15 @@ namespace Application.UserStats
                 var goals = await _context.Goals.ToListAsync();
                 var goalsDto = _mapper.Map<List<Goal>, List<GoalDto>>(goals);
 
-                var heightUnits = await _context.HeightUnits.ToListAsync();
-                var heightUnitsDto = _mapper.Map<List<HeightUnit>, List<HeightUnitDto>>(heightUnits);
-
-                var weightUnits = await _context.WeightUnits.ToListAsync();
-                var weightUnitsDto = _mapper.Map<List<WeightUnit>, List<WeightUnitDto>>(weightUnits);
+                var unitSystems = await _context.UnitSystems.ToListAsync();
+                var unitSystemsDto = _mapper.Map<List<UnitSystem>, List<UnitSystemDto>>(unitSystems);
 
                 var dropDownDto = new DropdownsDto
                 {
                     ActivityFactors = activityFactorDto,
                     Genders = gendersDto,
                     Goals = goalsDto,
-                    HeightUnits = heightUnitsDto,
-                    WeightUnits = weightUnitsDto,
+                    UnitSystems = unitSystemsDto,
                 };
 
                 return dropDownDto;

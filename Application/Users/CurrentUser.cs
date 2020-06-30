@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Application.MainDTOs;
 using AutoMapper;
-using Domain;
-using Domain.User;
+using Domain.MealEntities;
+using Domain.UserEntities;
 using FluentValidation;
+using Application.UserStats.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,13 +28,15 @@ namespace Application.Users
             private readonly IUserAccessor _userAccessor;
             private readonly DataContext _context;
             private readonly IMapper _mapper;
+            private readonly IJwtGenerator _jwtGenerator;
 
-            public Handler(UserManager<AppUser> userManager, IUserAccessor userAccessor, DataContext context, IMapper mapper)
+            public Handler(UserManager<AppUser> userManager, IUserAccessor userAccessor, DataContext context, IMapper mapper, IJwtGenerator jwtGenerator)
             {
                 _userManager = userManager;
                 _userAccessor = userAccessor;
                 _context = context;
                 _mapper = mapper;
+                _jwtGenerator = jwtGenerator;
             }
 
             public async Task<UserInfoDto> Handle(Query request, CancellationToken cancellationToken)
@@ -42,6 +46,7 @@ namespace Application.Users
 
                 var userDto = _mapper.Map<AppUser, UserInfoDto>(user);
                 userDto.RegistrationCompleted = true;
+                userDto.Token = _jwtGenerator.CreateToken(user);
                 if (userStats == null)
                 {
                     userDto.RegistrationCompleted = false;

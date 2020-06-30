@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.User
+namespace Domain.UserEntities
 {
     public class Gender
     {

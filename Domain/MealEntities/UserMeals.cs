@@ -1,7 +1,7 @@
 ﻿using System;
-using Domain.User;
+using Domain.UserEntities;
 
-namespace Domain.Meals
+namespace Domain.MealEntities
 {
     public class UserMeals
     {

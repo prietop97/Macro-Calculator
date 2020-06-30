@@ -3,35 +3,36 @@ import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import HomePage from './Homepage';
 import NotFound from './NotFound';
-import TestComponent from './TestComponent';
+import LoginPage from './LoginPage';
+import RegisterPage from './RegisterPage';
 
 function App() {
-  const [loginForm] = useState({
-    email: 'user101@gmail.com',
-    password: 'Pa$$w0rd'
-  });
-  React.useEffect(() => {
-    console.log(loginForm);
-  }, []);
+  // const [loginForm] = useState({
+  //   email: 'user101@gmail.com',
+  //   password: 'Pa$$w0rd'
+  // });
+  // React.useEffect(() => {
+  //   console.log(loginForm);
+  // }, []);
 
-  const [registerForm] = useState({
-    email: 'user' + Date.now() + '@gmail.com',
-    username: 'user' + Date.now(),
-    password: 'Pa$$w0rd'
-  });
+  // const [registerForm] = useState({
+  //   email: 'user' + Date.now() + '@gmail.com',
+  //   username: 'user' + Date.now(),
+  //   password: 'Pa$$w0rd'
+  // });
 
-  const [userStat] = useState({
-    goalId: 1,
-    activityFactorId: 1,
-    heightUnitId: 1,
-    weightUnitId: 1,
-    genderId: 1,
-    weight: 140,
-    height: 68,
-    dateOfBirth: new Date(1997, 8, 5)
-  });
+  // const [userStat] = useState({
+  //   goalId: 1,
+  //   activityFactorId: 1,
+  //   heightUnitId: 1,
+  //   weightUnitId: 1,
+  //   genderId: 1,
+  //   weight: 140,
+  //   height: 68,
+  //   dateOfBirth: new Date(1997, 8, 5)
+  // });
 
-  const [response, setResponse] = useState('');
+  // const [response, setResponse] = useState('');
   // const login = (e: MouseEvent) => {
   //   e.preventDefault();
   //   axiosNoAuth()
@@ -108,7 +109,8 @@ function App() {
       <ToastContainer position="bottom-right" />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/testcomponent" component={TestComponent} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>
