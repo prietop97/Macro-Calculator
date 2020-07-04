@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
+  anotherContainer: {
+    display: 'flex'
+  },
   inputs: {
     width: '49%'
   },
@@ -32,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   papers: {
     marginBottom: '2rem',
     padding: '0 2rem'
+  },
+  birthday: {
+    width: '32%'
   }
 }));
 
@@ -197,37 +203,90 @@ export default function RegistrationForm({ activeStep }: Props): ReactElement {
               max={300}
             />
           </Paper>
-
-          <Typography component="h5" variant="button">
-            Height:
-          </Typography>
           <Grid xs={12} className={classes.names}>
-            <TextField
-              variant="outlined"
-              className={classes.inputs}
-              margin="normal"
-              required
-              id="firstName"
-              label="First Name"
-              name="firstName"
-              autoComplete="First Name"
-              autoFocus
-              onChange={handleChange}
-              value={userInfo.firstName}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              className={classes.inputs}
-              name="lastName"
-              label="Last Name"
-              type="input"
-              id="lastName"
-              autoComplete="Last Name"
-              onChange={handleChange}
-              value={userInfo.lastName}
-            />
+            <Grid xs={12}>
+              <Grid xs={6}>
+                <Typography component="h5" variant="button">
+                  Height:
+                </Typography>
+              </Grid>
+              <Grid xs={11} className={classes.names}>
+                <TextField
+                  variant="outlined"
+                  className={classes.inputs}
+                  margin="normal"
+                  required
+                  id="firstName"
+                  label="First Name"
+                  name="firstName"
+                  autoComplete="First Name"
+                  autoFocus
+                  onChange={handleChange}
+                  value={userInfo.firstName}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  className={classes.inputs}
+                  name="lastName"
+                  label="Last Name"
+                  type="input"
+                  id="lastName"
+                  autoComplete="Last Name"
+                  onChange={handleChange}
+                  value={userInfo.lastName}
+                />
+              </Grid>
+            </Grid>
+            <Grid>
+              <Grid xs={12}>
+                <Typography component="h5" variant="button">
+                  Birthday:
+                </Typography>
+              </Grid>
+              <Grid xs={12} className={classes.names}>
+                <TextField
+                  variant="outlined"
+                  className={classes.birthday}
+                  margin="normal"
+                  required
+                  id="firstName"
+                  label="First Name"
+                  name="firstName"
+                  autoComplete="First Name"
+                  autoFocus
+                  onChange={handleChange}
+                  value={userInfo.firstName}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  className={classes.birthday}
+                  name="lastName"
+                  label="Last Name"
+                  type="input"
+                  id="lastName"
+                  autoComplete="Last Name"
+                  onChange={handleChange}
+                  value={userInfo.lastName}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  className={classes.birthday}
+                  name="lastName"
+                  label="Last Name"
+                  type="input"
+                  id="lastName"
+                  autoComplete="Last Name"
+                  onChange={handleChange}
+                  value={userInfo.lastName}
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </>
       );
