@@ -1,12 +1,12 @@
 import { useHistory } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import {
-  IUser,
-  IUserFormValues,
-  IUserFormValuesLogin,
-  IUserStatsFormPost,
-  IUserStats,
-  IUserStatsDropDowns
+  UserI,
+  UserFormValues,
+  UserFormValuesLogin,
+  UserStatsFormPost,
+  UserStats,
+  UserStatsDropDowns
 } from '../models/user';
 import { toast } from 'react-toastify';
 
@@ -52,15 +52,15 @@ const requests = {
 };
 
 const User = {
-  current: (): Promise<IUser> => requests.get('/users'),
-  login: (user: IUserFormValuesLogin): Promise<IUser> =>
+  current: (): Promise<UserI> => requests.get('/users'),
+  login: (user: UserFormValuesLogin): Promise<UserI> =>
     requests.post('/users/login', user),
-  register: (user: IUserFormValues): Promise<IUser> =>
+  register: (user: UserFormValues): Promise<UserI> =>
     requests.post('/users/login', user),
-  saveUserStats: (userStats: IUserStatsFormPost): Promise<IUserStats> =>
+  saveUserStats: (userStats: UserStatsFormPost): Promise<UserStats> =>
     requests.post('/userstats', userStats),
-  getUserStats: (): Promise<IUserStats> => requests.get('/userstats'),
-  dropDowns: (): Promise<IUserStatsDropDowns> =>
+  getUserStats: (): Promise<UserStats> => requests.get('/userstats'),
+  dropDowns: (): Promise<UserStatsDropDowns> =>
     requests.get('/userstats/dropdowns')
 };
 

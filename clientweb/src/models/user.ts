@@ -1,4 +1,4 @@
-export interface IUser {
+export interface UserI {
   firstName: string;
   lastName: string;
   email: string;
@@ -6,36 +6,36 @@ export interface IUser {
   token: string;
 }
 
-export interface IUserFormValuesLogin {
+export interface UserFormValuesLogin {
   email: string;
   password: string;
 }
 
-export interface IUserFormValues {
+export interface UserFormValues {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
 }
 
-export interface IUserStatsFormPost {
+export interface UserStatsFormPost {
   goalId: number | null;
   genderId: number | null;
   activityFactorId: number | null;
   unitSystemId: number | null;
   height: number;
   weight: number;
-  dateOfBirth: Date;
+  dateOfBirth: Date | null;
 }
 
-export interface IUserStatsDropDowns {
+export interface UserStatsDropDowns {
   activitiesFactors: DropDowns[];
   genders: DropDowns[];
   goals: DropDowns[];
   unitSystems: DropDowns[];
 }
 
-export interface IUserStats {
+export interface UserStats {
   goal: DropDowns;
   gender: DropDowns;
   activityFactor: DropDowns;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactElement } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Link,
@@ -11,10 +11,11 @@ import {
 import Copyright from '../common/Copyright';
 import { RootStoreContext } from '../stores/rootStore';
 import { useHistory } from 'react-router-dom';
-import Stepper from '../../features/user/RegistrationStepper';
-import StepperButtons from '../../features/user/StepperButtons';
-import { IUserFormValues, IUserStatsFormPost } from '../models/user';
-import RegistrationForm from '../../features/user/RegistrationForm';
+import Stepper from '../components/Registration/RegistrationStepper';
+import StepperButtons from '../components/Registration/StepperButtons';
+import { UserFormValues, UserStatsFormPost } from '../models/user';
+import RegistrationForm from '../components/Registration/RegistrationForm';
+import SideComponent from '../components/AuthForms/SideComponent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,36 +53,37 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function getSteps() {
+function getSteps(): string[] {
   return ['Credentials', 'Statistics', 'Goals'];
 }
 
-export default function RegisterPage() {
+export default function RegisterPage(): ReactElement {
   const history = useHistory();
   const rootStore = useContext(RootStoreContext);
   const { register } = rootStore.userStore;
 
-  const handleSubmit = async (
-    userInfo: IUserFormValues,
-    userStats: IUserStatsFormPost
-  ) => {
-    await register(userInfo);
-    history.push('/Dashboard');
-  };
+  // const handleSubmit: Promise<void> = async (
+  //   userInfo: IUserFormValues,
+  //   userStats: IUserStatsFormPost
+  // ) => {
+  //   await register(userInfo);
+  //   history.push('/Dashboard');
+  // };
+
   const [activeStep, setActiveStep] = React.useState(1);
   const steps = getSteps();
 
-  const handleNext = () => {
+  const handleNext = (): void => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBack = () => {
+  const handleBack = (): void => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = (): void => {
+  //   setActiveStep(0);
+  // };
   const classes = useStyles();
 
   return (
@@ -123,7 +125,7 @@ export default function RegisterPage() {
           </form>
         </div>
       </Grid>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item container xs={false} sm={4} md={7} className={classes.image} />
     </Grid>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useState, FormEvent, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import HomePage from './Homepage';
-import NotFound from './NotFound';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
+import HomePage from './pages/Homepage';
+import NotFound from './pages/NotFound';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   // const [loginForm] = useState({

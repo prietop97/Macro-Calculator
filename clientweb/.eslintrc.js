@@ -6,5 +6,5 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  extends: ['plugin:@typescript-eslint/recommended']
+  extends: ['plugin:@typescript-eslint/recommended', 'plugin:react/recommended']
 };
