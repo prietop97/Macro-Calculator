@@ -1,4 +1,10 @@
-import React, { useContext, ReactElement } from 'react';
+import React, {
+  useContext,
+  ReactElement,
+  useState,
+  ChangeEvent,
+  FormEvent
+} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Link,
@@ -6,16 +12,14 @@ import {
   Box,
   Grid,
   Typography,
-  CssBaseline
+  TextField,
+  Avatar,
+  Button
 } from '@material-ui/core/';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Copyright from '../common/Copyright';
 import { RootStoreContext } from '../stores/rootStore';
 import { useHistory } from 'react-router-dom';
-import Stepper from '../components/Registration/RegistrationStepper';
-import StepperButtons from '../components/Registration/StepperButtons';
-import { UserFormValues, UserStatsFormPost } from '../models/user';
-import RegistrationForm from '../components/Registration/RegistrationForm';
-import SideComponent from '../components/AuthForms/SideComponent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,66 +51,120 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     borderRadius: '0 15px 0 15px',
     padding: '0.8rem 0'
   }
 }));
 
-function getSteps(): string[] {
-  return ['Credentials', 'Statistics', 'Goals'];
-}
-
 export default function RegisterPage(): ReactElement {
-  const history = useHistory();
   const rootStore = useContext(RootStoreContext);
   const { register } = rootStore.userStore;
+  const [formState, setFormState] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  });
+  const history = useHistory();
 
-  // const handleSubmit: Promise<void> = async (
-  //   userInfo: IUserFormValues,
-  //   userStats: IUserStatsFormPost
-  // ) => {
-  //   await register(userInfo);
-  //   history.push('/Dashboard');
-  // };
-
-  const [activeStep, setActiveStep] = React.useState(1);
-  const steps = getSteps();
-
-  const handleNext = (): void => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    await register(formState);
+    history.push('/statsregistration');
   };
 
-  const handleBack = (): void => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  // const handleReset = (): void => {
-  //   setActiveStep(0);
-  // };
   const classes = useStyles();
 
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h2">
             Macro App
           </Typography>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
           <Typography component="h1" variant="h5">
             SIGN UP
           </Typography>
-          <Stepper steps={steps} activeStep={activeStep} />
-          <form className={classes.form} noValidate>
-            <RegistrationForm activeStep={activeStep} />
-            <StepperButtons
-              steps={steps}
-              activeStep={activeStep}
-              handleBack={handleBack}
-              handleNext={handleNext}
-            />
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+            <Grid xs={12} container>
+              <Grid item container xs={12} spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    name="firstName"
+                    autoComplete="First Name"
+                    autoFocus
+                    onChange={handleChange}
+                    value={formState.firstName}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    name="lastName"
+                    fullWidth
+                    label="Last Name"
+                    type="input"
+                    id="lastName"
+                    autoComplete="Last Name"
+                    onChange={handleChange}
+                    value={formState.lastName}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid xs={12}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={handleChange}
+                value={formState.email}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="password"
+                onChange={handleChange}
+                value={formState.password}
+              />
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              SIGN UP
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -115,7 +173,7 @@ export default function RegisterPage(): ReactElement {
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Login"}
+                  {'Already have an account? Login'}
                 </Link>
               </Grid>
             </Grid>

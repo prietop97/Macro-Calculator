@@ -9,6 +9,7 @@ import {
 } from '../models/user';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
+import { history } from '../index';
 
 export default class UserStore {
   rootStore: RootStore;
@@ -16,18 +17,13 @@ export default class UserStore {
     this.rootStore = rootStore;
   }
   @observable user: UserI | null = null;
-  @observable userStats: UserStats | null = null;
-  @observable dropdowns: UserStatsDropDowns | null = null;
   @observable isLoading = false;
 
   @computed get isLoggedIn() {
     return !!this.user;
   }
-  @computed get finishedRegistration() {
-    return this.user?.registrationCompleted;
-  }
 
-  @action login = async (values: UserFormValuesLogin) => {
+  @action login = async (values: UserFormValuesLogin): Promise<void> => {
     try {
       this.isLoading = true;
       const user = await agent.User.login(values);
@@ -35,11 +31,20 @@ export default class UserStore {
         this.user = user;
         this.isLoading = false;
       });
+      this.rootStore.commonStore.setToken(user.token);
+      user.registrationCompleted
+        ? history.push('/dashboard')
+        : history.push('/getmacros');
     } catch (error) {
       throw error;
     }
   };
-  @action register = async (values: UserFormValues) => {
+  @action logout = (): void => {
+    this.rootStore.commonStore.setToken(null);
+    this.user = null;
+    history.push('/');
+  };
+  @action register = async (values: UserFormValues): Promise<void> => {
     try {
       this.isLoading = true;
       const user = await agent.User.register(values);
@@ -47,52 +52,18 @@ export default class UserStore {
         this.user = user;
         this.isLoading = false;
       });
+      this.rootStore.commonStore.setToken(user.token);
+      history.push('/getmacros');
     } catch (error) {
       throw error;
     }
   };
-  @action getUserInfo = async () => {
+  @action getUserInfo = async (): Promise<void> => {
     try {
       this.isLoading = true;
       const userInfo = await agent.User.current();
       runInAction('Get Current User Info', () => {
         this.user = userInfo;
-        this.isLoading = false;
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
-  @action getUserStats = async () => {
-    try {
-      this.isLoading = true;
-      const userStats = await agent.User.getUserStats();
-      runInAction('Get UserStats', () => {
-        this.userStats = userStats;
-        this.isLoading = false;
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
-  @action postUserStats = async (values: UserStatsFormPost) => {
-    try {
-      this.isLoading = true;
-      const userStats = await agent.User.saveUserStats(values);
-      runInAction('Save UserStats', () => {
-        this.userStats = userStats;
-        this.isLoading = false;
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
-  @action getDropDowns = async () => {
-    try {
-      this.isLoading = true;
-      const dropdowns = await agent.User.dropDowns();
-      runInAction('Get Dropdowns', () => {
-        this.dropdowns = dropdowns;
         this.isLoading = false;
       });
     } catch (error) {

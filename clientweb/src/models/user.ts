@@ -24,7 +24,7 @@ export interface UserStatsFormPost {
   activityFactorId: number | null;
   unitSystemId: number | null;
   height: number;
-  weight: number;
+  weight: number | number[];
   dateOfBirth: Date | null;
 }
 

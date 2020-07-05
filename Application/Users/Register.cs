@@ -58,7 +58,7 @@ namespace Application.Users
                 if (await _context.Users.Where(x => x.Email == request.Email).AnyAsync())
                     throw new RestException(HttpStatusCode.BadRequest, new { email = "Email already exist" });
 
-                var user = new AppUser { Email = request.Email, FirstName = request.FirstName, LastName = request.LastName };
+                var user = new AppUser { Email = request.Email, FirstName = request.FirstName, LastName = request.LastName, UserName = request.Email };
 
                 var result = await _userManager.CreateAsync(user, request.Password);
 

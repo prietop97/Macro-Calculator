@@ -9,29 +9,24 @@ import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Check from '@material-ui/icons/Check';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { StepIconProps } from '@material-ui/core/StepIcon';
 
-const ColorlibConnector = withStyles({
+const ColorlibConnector = withStyles((theme) => ({
   alternativeLabel: {
     top: 22
   },
   active: {
     '& $line': {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)'
+      backgroundImage: `linear-gradient( 95deg,${theme.palette.primary.light} 0%,${theme.palette.primary.main} 50%,${theme.palette.primary.dark} 100%)`
     }
   },
   completed: {
     '& $line': {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)'
+      backgroundImage: `linear-gradient( 95deg,${theme.palette.primary.light} 0%,${theme.palette.primary.main} 50%,${theme.palette.primary.dark} 100%)`
     }
   },
   line: {
@@ -40,9 +35,9 @@ const ColorlibConnector = withStyles({
     backgroundColor: '#eaeaf0',
     borderRadius: 1
   }
-})(StepConnector);
+}))(StepConnector);
 
-const useColorlibStepIconStyles = makeStyles({
+const useColorlibStepIconStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#ccc',
     zIndex: 1,
@@ -55,15 +50,13 @@ const useColorlibStepIconStyles = makeStyles({
     alignItems: 'center'
   },
   active: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    backgroundImage: `linear-gradient( 136deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 50%, ${theme.palette.primary.dark} 100%)`,
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)'
   },
   completed: {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)'
+    backgroundImage: `linear-gradient( 136deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 50%, ${theme.palette.primary.dark} 100%)`
   }
-});
+}));
 
 function ColorlibStepIcon(props: StepIconProps) {
   const classes = useColorlibStepIconStyles();

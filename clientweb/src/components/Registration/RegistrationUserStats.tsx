@@ -7,27 +7,28 @@ import {
   FormControlLabel,
   Radio,
   Slider,
-  FormControl,
-  FormLabel
+  Theme
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { UserStatsFormPost } from '../../models/user';
+import DatePicker from '../../common/DatePicker';
 
 interface Props {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleHeight: (height: number) => void;
+  handleWeight: (e: ChangeEvent<{}>, weight: number | number[]) => void;
   userStatsValues: UserStatsFormPost;
 }
-const PrettoSlider = withStyles({
+
+const PrettoSlider = withStyles((theme: Theme) => ({
   root: {
-    color: 'rgb(242,53,87)',
+    color: theme.palette.primary.main,
     height: 8
   },
   thumb: {
     height: 24,
     width: 24,
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    backgroundImage: `linear-gradient( 136deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 50%, ${theme.palette.primary.dark} 100%)`,
     border: '2px solid currentColor',
     marginTop: -8,
     marginLeft: -12,
@@ -47,108 +48,132 @@ const PrettoSlider = withStyles({
     height: 8,
     borderRadius: 4
   }
-})(Slider);
+}))(Slider);
 
 export default function RegistrationUserStats({
   handleChange,
   handleHeight,
+  handleWeight,
   userStatsValues
 }: Props): ReactElement {
-  const [height, setHeight] = useState<{ feets: number; inches: number }>({
+  const [height, setHeight] = useState<{
+    feets: number;
+    inches: number;
+    initial: boolean;
+  }>({
     feets: 0,
-    inches: 0
+    inches: 0,
+    initial: true
   });
   const changeHeight = (e: ChangeEvent<HTMLInputElement>): void => {
-    setHeight({ ...height, [e.target.name]: e.target.value });
+    setHeight({ ...height, [e.target.name]: e.target.value, initial: false });
   };
+
   useEffect(() => {
-    const totalHeight = height.feets * 12 + height.inches;
+    const totalHeight = +height.feets * 12 + +height.inches;
     handleHeight(totalHeight);
-  }, [height]);
+  }, [height, handleHeight]);
 
   return (
     <>
-      <Grid container xs={12}>
+      <Grid container xs={12} direction="column" spacing={2}>
         <Grid item xs={12}>
-          <FormControl>
-            <FormLabel>Gender: </FormLabel>
-            <RadioGroup
-              value={userStatsValues.genderId}
-              onChange={handleChange}
-              aria-label="gender"
-              name="genderId"
-              
-            >
-              <Grid xs={12} container justify="space-between">
-                <Grid item xs={6}>
-                  <FormControlLabel
-                    checked={userStatsValues.genderId == 1}
-                    label="Male"
-                    control={<Radio />}
-                    value={1}
-                    name="genderId"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <FormControlLabel
-                    checked={userStatsValues.genderId == 2}
-                    label="Female"
-                    control={<Radio />}
-                    value={2}
-                    name="genderId"
-                  />
-                </Grid>
-              </Grid>
-            </RadioGroup>
-          </FormControl>
+          <Typography component="h5" variant="button">
+            Gender:
+          </Typography>
+          <RadioGroup
+            value={userStatsValues.genderId}
+            onChange={handleChange}
+            aria-label="gender"
+            name="genderId"
+          >
+            <Grid xs={12} container justify="space-around">
+              <FormControlLabel
+                checked={userStatsValues.genderId === 1}
+                label="Male"
+                control={<Radio color="primary" />}
+                value={1}
+                name="genderId"
+              />
+              <FormControlLabel
+                checked={userStatsValues.genderId === 2}
+                label="Female"
+                control={<Radio color="primary" />}
+                value={2}
+                name="genderId"
+              />
+            </Grid>
+          </RadioGroup>
         </Grid>
-      </Grid>
+        <Grid item xs={12}>
+          <Typography component="h5" variant="button">
+            Weight (Pounds):
+          </Typography>
 
-      <Typography component="h5" variant="button">
-        Weight (Pounds):
-      </Typography>
-
-      <PrettoSlider
-        valueLabelDisplay="on"
-        aria-label="pretto slider"
-        defaultValue={175}
-        step={5}
-        min={50}
-        max={300}
-      />
-      <Grid xs={12}>
-        <Grid xs={12}>
-          <Grid xs={6}>
-            <Typography component="h5" variant="button">
-              Height:
-            </Typography>
+          <PrettoSlider
+            valueLabelDisplay="on"
+            aria-label="pretto slider"
+            defaultValue={userStatsValues.weight}
+            value={userStatsValues.weight}
+            onChange={handleWeight}
+            name="weight"
+            step={5}
+            min={50}
+            max={300}
+          />
+        </Grid>
+        <Grid item container xs={6} spacing={1} sm={12}>
+          <Grid item sm={6} xs={12} container>
+            <Grid item>
+              <Typography component="h5" variant="button">
+                Height:
+              </Typography>
+            </Grid>
+            <Grid item container xs={12} spacing={1}>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  placeholder="5"
+                  name="feets"
+                  label="Feets"
+                  type="number"
+                  id="feets"
+                  autoComplete="Feets"
+                  onChange={changeHeight}
+                  value={height.initial ? '' : height.feets}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  margin="normal"
+                  id="inches"
+                  placeholder="7"
+                  label="Inches"
+                  name="inches"
+                  autoComplete="Inches"
+                  autoFocus
+                  type="number"
+                  onChange={changeHeight}
+                  value={height.initial ? '' : height.inches}
+                />
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid xs={11}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              name="feets"
-              label="Feets"
-              type="number"
-              id="feets"
-              autoComplete="Feets"
-              onChange={handleChange}
-              value={height.inches}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              id="inches"
-              label="Inches"
-              name="inches"
-              autoComplete="Inches"
-              autoFocus
-              type="number"
-              onChange={handleChange}
-              value={height.feets}
-            />
+          <Grid item xs={6} container>
+            <Grid item>
+              <Typography component="h5" variant="button">
+                Birthday:
+              </Typography>
+            </Grid>
+            <Grid item container xs={12} spacing={1}>
+              <DatePicker />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

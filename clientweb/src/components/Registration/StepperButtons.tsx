@@ -1,18 +1,12 @@
 import React, { ReactElement } from 'react';
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  withStyles
-} from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Loader from 'react-loader-spinner';
 
 interface Props {
   steps: string[];
   activeStep: number;
   handleBack: () => void;
-  handleNext: () => void;
+  handleNext: () => Promise<void>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,6 +40,7 @@ export default function StepperButtons({
     <div>
       <div className={classes.container}>
         <Button
+          variant="outlined"
           disabled={activeStep === 0}
           onClick={handleBack}
           fullWidth
@@ -60,7 +55,7 @@ export default function StepperButtons({
           onClick={handleNext}
           className={classes.button}
         >
-          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+          {activeStep === steps.length - 1 ? 'Get Macros' : 'Next'}
         </Button>
       </div>
     </div>

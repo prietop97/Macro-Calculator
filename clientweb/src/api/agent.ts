@@ -1,4 +1,3 @@
-import { useHistory } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import {
   UserI,
@@ -9,18 +8,27 @@ import {
   UserStatsDropDowns
 } from '../models/user';
 import { toast } from 'react-toastify';
+import { history } from '../index';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
-
+axios.interceptors.request.use(
+  (config) => {
+    const token = window.localStorage.getItem('jwt');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 axios.interceptors.response.use(undefined, (error) => {
-  const { status, data, config } = error.response;
-  const history = useHistory();
-  console.log('ERROR', error);
   if (error.message === 'Network Error' && !error.response) {
     toast.error('Network error - make sure API is running!');
+    throw error;
   }
+  const { status, data, config } = error.response;
   if (status === 404) {
-    // history.push('/NotFound');
+    history.push('/notfound');
   }
   if (
     status === 400 &&
@@ -56,14 +64,18 @@ const User = {
   login: (user: UserFormValuesLogin): Promise<UserI> =>
     requests.post('/users/login', user),
   register: (user: UserFormValues): Promise<UserI> =>
-    requests.post('/users/login', user),
-  saveUserStats: (userStats: UserStatsFormPost): Promise<UserStats> =>
+    requests.post('/users/register', user)
+};
+
+const UserStat = {
+  current: (): Promise<UserStats> => requests.get('/userstats'),
+  post: (userStats: UserStatsFormPost): Promise<UserStats> =>
     requests.post('/userstats', userStats),
-  getUserStats: (): Promise<UserStats> => requests.get('/userstats'),
   dropDowns: (): Promise<UserStatsDropDowns> =>
     requests.get('/userstats/dropdowns')
 };
 
 export default {
-  User
+  User,
+  UserStat
 };
