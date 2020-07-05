@@ -1,11 +1,11 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import {
-  IUser,
-  IUserFormValues,
-  IUserFormValuesLogin,
-  IUserStats,
-  IUserStatsFormPost,
-  IUserStatsDropDowns
+  UserI,
+  UserFormValues,
+  UserFormValuesLogin,
+  UserStats,
+  UserStatsFormPost,
+  UserStatsDropDowns
 } from '../models/user';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
@@ -15,9 +15,9 @@ export default class UserStore {
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
   }
-  @observable user: IUser | null = null;
-  @observable userStats: IUserStats | null = null;
-  @observable dropdowns: IUserStatsDropDowns | null = null;
+  @observable user: UserI | null = null;
+  @observable userStats: UserStats | null = null;
+  @observable dropdowns: UserStatsDropDowns | null = null;
   @observable isLoading = false;
 
   @computed get isLoggedIn() {
@@ -27,7 +27,7 @@ export default class UserStore {
     return this.user?.registrationCompleted;
   }
 
-  @action login = async (values: IUserFormValuesLogin) => {
+  @action login = async (values: UserFormValuesLogin) => {
     try {
       this.isLoading = true;
       const user = await agent.User.login(values);
@@ -39,7 +39,7 @@ export default class UserStore {
       throw error;
     }
   };
-  @action register = async (values: IUserFormValues) => {
+  @action register = async (values: UserFormValues) => {
     try {
       this.isLoading = true;
       const user = await agent.User.register(values);
@@ -75,7 +75,7 @@ export default class UserStore {
       throw error;
     }
   };
-  @action postUserStats = async (values: IUserStatsFormPost) => {
+  @action postUserStats = async (values: UserStatsFormPost) => {
     try {
       this.isLoading = true;
       const userStats = await agent.User.saveUserStats(values);
