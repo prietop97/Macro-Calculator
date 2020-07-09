@@ -1,5 +1,4 @@
-import React, { ReactElement, ChangeEvent } from 'react';
-import { UserStatsFormPost } from '../../models/user';
+import React, { ReactElement, useContext } from 'react';
 import {
   Grid,
   Typography,
@@ -7,52 +6,50 @@ import {
   Radio,
   RadioGroup
 } from '@material-ui/core';
+import { observer } from 'mobx-react-lite';
+import { RootStoreContext } from '../../stores/rootStore';
 
-interface Props {
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  userStatsValues: UserStatsFormPost;
-}
-
-export default function RegistrationUserGoals({
-  handleChange,
-  userStatsValues
-}: Props): ReactElement {
-  console.log(userStatsValues);
+function RegistrationUserGoals(): ReactElement {
+  const rootStore = useContext(RootStoreContext);
+  const { goalId, changeGoal } = rootStore.userStatsFormStore;
   return (
-    <Grid container xs={12} spacing={1}>
-      <Grid item xs={6}>
-        <Typography component="h5" variant="button">
-          What Is Your Goal?
-        </Typography>
-        <RadioGroup
-          value={userStatsValues.goalId}
-          onChange={handleChange}
-          aria-label="Goal"
-          name="goalId"
-        >
-          <FormControlLabel
-            checked={userStatsValues.goalId === 1}
-            label="Loose Weight"
-            control={<Radio color="primary" />}
-            value={1}
+    <>
+      <Grid container xs={12} spacing={1}>
+        <Grid item xs={6}>
+          <Typography component="h5" variant="button">
+            What Is Your Goal?
+          </Typography>
+          <RadioGroup
+            value={goalId}
+            onChange={changeGoal}
+            aria-label="Goal"
             name="goalId"
-          />
-          <FormControlLabel
-            checked={userStatsValues.goalId === 2}
-            label="Maintain Weight"
-            control={<Radio color="primary" />}
-            value={2}
-            name="goalId"
-          />
-          <FormControlLabel
-            checked={userStatsValues.goalId === 3}
-            label="Gain Weight"
-            control={<Radio color="primary" />}
-            value={3}
-            name="goalId"
-          />
-        </RadioGroup>
+          >
+            <FormControlLabel
+              checked={goalId === 1}
+              label="Loose Weight"
+              control={<Radio color="primary" />}
+              value={1}
+              name="goalId"
+            />
+            <FormControlLabel
+              checked={goalId === 2}
+              label="Maintain Weight"
+              control={<Radio color="primary" />}
+              value={2}
+              name="goalId"
+            />
+            <FormControlLabel
+              checked={goalId === 3}
+              label="Gain Weight"
+              control={<Radio color="primary" />}
+              value={3}
+              name="goalId"
+            />
+          </RadioGroup>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
+export default observer(RegistrationUserGoals);

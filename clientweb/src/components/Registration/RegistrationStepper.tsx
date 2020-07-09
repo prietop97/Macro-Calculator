@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   makeStyles,
   Theme,
@@ -14,6 +14,8 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import { StepIconProps } from '@material-ui/core/StepIcon';
+import { observer } from 'mobx-react-lite';
+import { RootStoreContext } from '../../stores/rootStore';
 
 const ColorlibConnector = withStyles((theme) => ({
   alternativeLabel: {
@@ -80,11 +82,6 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-interface Props {
-  steps: string[];
-  activeStep: number;
-}
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -93,7 +90,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CustomizedSteppers({ steps, activeStep }: Props) {
+function CustomizedSteppers() {
+  const rootStore = useContext(RootStoreContext);
+  const { activeStep, steps } = rootStore.userStatsFormStore;
   const classes = useStyles();
 
   return (
@@ -112,3 +111,5 @@ export default function CustomizedSteppers({ steps, activeStep }: Props) {
     </div>
   );
 }
+
+export default observer(CustomizedSteppers);

@@ -1,13 +1,7 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
-interface Props {
-  steps: string[];
-  activeStep: number;
-  handleBack: () => void;
-  handleNext: () => Promise<void>;
-}
+import { RootStoreContext } from '../../stores/rootStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,12 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function StepperButtons({
-  steps,
-  activeStep,
-  handleBack,
-  handleNext
-}: Props): ReactElement {
+export default function StepperButtons(): ReactElement {
+  const rootStore = useContext(RootStoreContext);
+  const { activeStep, handleNext, handleBack } = rootStore.userStatsFormStore;
   const classes = useStyles();
   return (
     <div>
@@ -55,7 +46,7 @@ export default function StepperButtons({
           onClick={handleNext}
           className={classes.button}
         >
-          {activeStep === steps.length - 1 ? 'Get Macros' : 'Next'}
+          {activeStep === 2 ? 'Get Macros' : 'Next'}
         </Button>
       </div>
     </div>

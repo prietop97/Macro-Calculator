@@ -1,8 +1,5 @@
-import { observable, computed, action, runInAction } from 'mobx';
+import { observable, action, runInAction, computed } from 'mobx';
 import {
-  UserI,
-  UserFormValues,
-  UserFormValuesLogin,
   UserStats,
   UserStatsFormPost,
   UserStatsDropDowns
@@ -19,6 +16,16 @@ export default class UserStatsStore {
   @observable userStats: UserStats | null = null;
   @observable dropdowns: UserStatsDropDowns | null = null;
   @observable isLoading = false;
+
+  @computed get calories() {
+    if (this.userStats) {
+      return (
+        (this.userStats?.carbsGrams + this.userStats?.proteinGrams) * 4 +
+        this.userStats?.fatGrams * 9
+      );
+    }
+    return 0;
+  }
 
   @action getUserStats = async (): Promise<void> => {
     try {
