@@ -8,10 +8,12 @@ import RegisterPage from './pages/RegisterPage';
 import RegisterStatsPage from './pages/RegisterStatsPage';
 import { RootStoreContext } from './stores/rootStore';
 import PrivateRoute from './common/PrivateRoute';
+import Dashboard from './pages/Dashboard';
+import MainNavbar from './components/Navigation/MainNavbar';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
-  const { appLoaded, setAppLoaded, token } = rootStore.commonStore;
+  const { setAppLoaded, token } = rootStore.commonStore;
   const { getUserInfo } = rootStore.userStore;
 
   useEffect(() => {
@@ -31,6 +33,8 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <PrivateRoute path="/getmacros" component={RegisterStatsPage} />
+        {/* <MainNavbar /> */}
+        <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>

@@ -19,7 +19,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Copyright from '../common/Copyright';
 import { RootStoreContext } from '../stores/rootStore';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login(): ReactElement {
-  const history = useHistory();
   const rootStore = useContext(RootStoreContext);
   const { login } = rootStore.userStore;
   const [formState, setFormState] = useState({
@@ -68,10 +66,9 @@ export default function Login(): ReactElement {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    await login(formState);
-    history.push('/Dashboard');
+    login(formState);
   };
   const classes = useStyles();
 

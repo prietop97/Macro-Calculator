@@ -1,12 +1,5 @@
 import { observable, computed, action, runInAction } from 'mobx';
-import {
-  UserI,
-  UserFormValues,
-  UserFormValuesLogin,
-  UserStats,
-  UserStatsFormPost,
-  UserStatsDropDowns
-} from '../models/user';
+import { UserI, UserFormValues, UserFormValuesLogin } from '../models/user';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
 import { history } from '../index';
@@ -20,7 +13,7 @@ export default class UserStore {
   @observable isLoading = false;
 
   @computed get isLoggedIn() {
-    return !!this.user;
+    return this.rootStore.commonStore.token;
   }
 
   @action login = async (values: UserFormValuesLogin): Promise<void> => {

@@ -19,7 +19,6 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Copyright from '../common/Copyright';
 import { RootStoreContext } from '../stores/rootStore';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,12 +65,10 @@ export default function RegisterPage(): ReactElement {
     email: '',
     password: ''
   });
-  const history = useHistory();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    await register(formState);
-    history.push('/statsregistration');
+    register(formState);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {

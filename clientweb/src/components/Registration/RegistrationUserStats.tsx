@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, ChangeEvent } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import {
   Typography,
   RadioGroup,
@@ -10,15 +10,9 @@ import {
   Theme
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { UserStatsFormPost } from '../../models/user';
 import DatePicker from '../../common/DatePicker';
-
-interface Props {
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleHeight: (height: number) => void;
-  handleWeight: (e: ChangeEvent<{}>, weight: number | number[]) => void;
-  userStatsValues: UserStatsFormPost;
-}
+import { observer } from 'mobx-react-lite';
+import { RootStoreContext } from '../../stores/rootStore';
 
 const PrettoSlider = withStyles((theme: Theme) => ({
   root: {
@@ -50,29 +44,18 @@ const PrettoSlider = withStyles((theme: Theme) => ({
   }
 }))(Slider);
 
-export default function RegistrationUserStats({
-  handleChange,
-  handleHeight,
-  handleWeight,
-  userStatsValues
-}: Props): ReactElement {
-  const [height, setHeight] = useState<{
-    feets: number;
-    inches: number;
-    initial: boolean;
-  }>({
-    feets: 0,
-    inches: 0,
-    initial: true
-  });
-  const changeHeight = (e: ChangeEvent<HTMLInputElement>): void => {
-    setHeight({ ...height, [e.target.name]: e.target.value, initial: false });
-  };
-
-  useEffect(() => {
-    const totalHeight = +height.feets * 12 + +height.inches;
-    handleHeight(totalHeight);
-  }, [height, handleHeight]);
+function RegistrationUserStats(): ReactElement {
+  const rootStore = useContext(RootStoreContext);
+  const {
+    genderId,
+    changeGender,
+    weight,
+    changeWeight,
+    feets,
+    changeFeets,
+    inches,
+    changeInches
+  } = rootStore.userStatsFormStore;
 
   return (
     <>
@@ -82,21 +65,21 @@ export default function RegistrationUserStats({
             Gender:
           </Typography>
           <RadioGroup
-            value={userStatsValues.genderId}
-            onChange={handleChange}
+            value={genderId}
+            onChange={changeGender}
             aria-label="gender"
             name="genderId"
           >
             <Grid xs={12} container justify="space-around">
               <FormControlLabel
-                checked={userStatsValues.genderId === 1}
+                checked={genderId === 1}
                 label="Male"
                 control={<Radio color="primary" />}
                 value={1}
                 name="genderId"
               />
               <FormControlLabel
-                checked={userStatsValues.genderId === 2}
+                checked={genderId === 2}
                 label="Female"
                 control={<Radio color="primary" />}
                 value={2}
@@ -113,9 +96,9 @@ export default function RegistrationUserStats({
           <PrettoSlider
             valueLabelDisplay="on"
             aria-label="pretto slider"
-            defaultValue={userStatsValues.weight}
-            value={userStatsValues.weight}
-            onChange={handleWeight}
+            defaultValue={weight}
+            value={weight}
+            onChange={changeWeight}
             name="weight"
             step={5}
             min={50}
@@ -142,8 +125,8 @@ export default function RegistrationUserStats({
                   type="number"
                   id="feets"
                   autoComplete="Feets"
-                  onChange={changeHeight}
-                  value={height.initial ? '' : height.feets}
+                  onChange={changeFeets}
+                  value={feets}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -157,10 +140,9 @@ export default function RegistrationUserStats({
                   label="Inches"
                   name="inches"
                   autoComplete="Inches"
-                  autoFocus
                   type="number"
-                  onChange={changeHeight}
-                  value={height.initial ? '' : height.inches}
+                  onChange={changeInches}
+                  value={inches}
                 />
               </Grid>
             </Grid>
@@ -180,3 +162,5 @@ export default function RegistrationUserStats({
     </>
   );
 }
+
+export default observer(RegistrationUserStats);
