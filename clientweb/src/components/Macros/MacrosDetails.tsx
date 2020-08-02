@@ -44,9 +44,13 @@ export default function MacrosDetails({}: Props): ReactElement {
     <>
       <DashboardDate />
       <Paper className={classes.root}>
-        <IconButton className={classes.arrow} onClick={handleClick}>
-          {hidden ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
-        </IconButton>
+        {/* <IconButton
+          className={classes.arrow}
+          onClick={handleClick}
+          component={hidden ? KeyboardArrowDown : KeyboardArrowUp}
+        >
+          {/* {hidden ? <KeyboardArrowDown /> : <KeyboardArrowUp />} */}
+        {/* </IconButton> */}
         <Grid container xs={12} spacing={2}>
           <Grid item xs={12} md={6}>
             <MacrosRemaining />

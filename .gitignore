@@ -266,6 +266,5 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
-API/appsettings.json
 **/bin/
 **/obj/

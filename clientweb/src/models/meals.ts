@@ -26,3 +26,25 @@ export interface DailyMeals {
   mealPlanBreakDown: MealPlanBreakdown[];
   userMeals: UserMeal[];
 }
+
+export interface MealPreview {
+  id: number;
+  title: string;
+  image: string;
+  calories?: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+}
+
+export interface NutrientsQuery {
+  minCarbs: number;
+  minProtein: number;
+  maxProtein: number;
+  offset: number;
+  maxCalories?: number;
+  maxCarbs: number;
+  minCalories?: number;
+  maxFat: number;
+  minFat: number;
+}

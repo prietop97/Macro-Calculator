@@ -9,7 +9,7 @@ import RegisterStatsPage from './pages/RegisterStatsPage';
 import { RootStoreContext } from './stores/rootStore';
 import PrivateRoute from './common/PrivateRoute';
 import Dashboard from './pages/Dashboard';
-import MainNavbar from './components/Navigation/MainNavbar';
+import SearchMeals from './pages/SearchMeals';
 
 function App() {
   const rootStore = useContext(RootStoreContext);
@@ -33,8 +33,8 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <PrivateRoute path="/getmacros" component={RegisterStatsPage} />
-        {/* <MainNavbar /> */}
         <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/meals" component={SearchMeals} />
         <Route component={NotFound} />
       </Switch>
     </Fragment>
