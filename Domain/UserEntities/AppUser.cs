@@ -11,7 +11,7 @@ namespace Domain.UserEntities
         public UserStat UserStat { get; set; }
 
         // DAILY MACROS CONSUMED BY THE USER
-        public ICollection<UserMealPlan> UserMealPlans { get; set; }
+        public ICollection<DailyMealPlan> DailyMealPlans { get; set; }
         public ICollection<UserMeals> UserMeals { get; set; }
     }
 }
