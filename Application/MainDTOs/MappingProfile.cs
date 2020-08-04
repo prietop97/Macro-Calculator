@@ -16,12 +16,10 @@ namespace Application.MainDTOs
             CreateMap<Gender, GenderDto>();
             CreateMap<AppUser, UserInfoDto>().ForMember(u => u.Username, o => o.MapFrom(s => s.UserName));
             CreateMap<UserStat, UserStatsDto>();
-            CreateMap<UserMealPlan, UserMealPlanDto>();
-            CreateMap<MealPlanMeals, MealPlanMealsDto>();
+            CreateMap<DailyMealPlan, DailyMealPlanDto>();
+            CreateMap<UserMeals, UserMealsDto>();
             CreateMap<Meal, MealDto>();
             CreateMap<MealType, MealTypeDto>();
-            CreateMap<MealsIngredients, MealsIngredientsDto>();
-            CreateMap<Ingredient, IngredientDto>();
         }
     }
 }
