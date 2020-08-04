@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import { observable, action, computed } from 'mobx';
 import { RootStore } from './rootStore';
 import { UserStatsFormPost } from '../models/user';
+import { toast } from 'react-toastify';
 
 export default class UserStatsFormStore {
   rootStore: RootStore;
@@ -17,8 +18,19 @@ export default class UserStatsFormStore {
   @observable inches: number | string = '';
   @observable weight = 175;
   @observable activeStep = 0;
-  @observable steps = ['Credentials', 'Statistics', 'Goals'];
+  @observable steps = ['Activity', 'Info', 'Goals'];
   @observable isLoading = false;
+  @observable nextDisabled = true;
+  @observable errors = {
+    activityFactorId: '',
+    genderId: '',
+    goalId: '',
+    unitSystemId: '',
+    dateOfBirth: '',
+    feets: '',
+    inches: '',
+    weight: ''
+  };
 
   @computed get totalHeight() {
     let height = 0;
@@ -61,6 +73,25 @@ export default class UserStatsFormStore {
     }
   };
   @action handleNext = () => {
+    if (this.activeStep === 0 && !this.activityFactorId) {
+      toast.error('Make sure all fields are filled');
+      return;
+    }
+    if (
+      this.activeStep === 1 &&
+      (!this.genderId ||
+        !this.weight ||
+        !this.feets ||
+        typeof this.inches !== 'number' ||
+        !this.dateOfBirth)
+    ) {
+      toast.error('Make sure all fields are filled');
+      return;
+    }
+    if (this.activeStep === 2 && !this.goalId) {
+      toast.error('Make sure all fields are filled');
+      return;
+    }
     if (this.activeStep === 2) {
       this.rootStore.userStatsStore.postUserStats(this.finalFormValues);
       console.log(this.finalFormValues);

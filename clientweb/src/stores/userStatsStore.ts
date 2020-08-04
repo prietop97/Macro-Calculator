@@ -37,7 +37,7 @@ export default class UserStatsStore {
       });
       if (!userStats) history.push('/getmacros');
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   };
   @action postUserStats = async (values: UserStatsFormPost): Promise<void> => {

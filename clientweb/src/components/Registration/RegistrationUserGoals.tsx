@@ -15,7 +15,7 @@ function RegistrationUserGoals(): ReactElement {
   return (
     <>
       <Grid container xs={12} spacing={1}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Typography component="h5" variant="button">
             What Is Your Goal?
           </Typography>
