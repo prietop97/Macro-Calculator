@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200629220658_Initial")]
+    [Migration("20200804211947_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,24 +18,27 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
-            modelBuilder.Entity("Domain.MealEntities.Ingredient", b =>
+            modelBuilder.Entity("Domain.MealEntities.DailyMealPlan", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
-                    b.Property<double>("CarbsGrams");
+                    b.Property<string>("UserId");
 
-                    b.Property<string>("Description");
+                    b.Property<int>("Calories");
 
-                    b.Property<double>("FatGrams");
+                    b.Property<int>("CarbsGrams");
 
-                    b.Property<string>("Name");
+                    b.Property<DateTime>("Date");
 
-                    b.Property<double>("ProteinGrams");
+                    b.Property<int>("FatGrams");
 
-                    b.HasKey("Id");
+                    b.Property<int>("ProteinGrams");
 
-                    b.ToTable("Ingredients");
+                    b.HasKey("Id", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DailyMealPlan");
                 });
 
             modelBuilder.Entity("Domain.MealEntities.Meal", b =>
@@ -43,49 +46,19 @@ namespace Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("CarbsGrams");
+                    b.Property<int>("Calories");
 
-                    b.Property<string>("Description");
+                    b.Property<int>("CarbsGrams");
 
-                    b.Property<double>("FatGrams");
+                    b.Property<int>("FatGrams");
 
-                    b.Property<string>("Instructions");
-
-                    b.Property<double>("ProteinGrams");
+                    b.Property<int>("ProteinGrams");
 
                     b.Property<string>("Title");
 
-                    b.Property<double>("TotalServings");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Meals");
-                });
-
-            modelBuilder.Entity("Domain.MealEntities.MealPlanMeals", b =>
-                {
-                    b.Property<int>("Id");
-
-                    b.Property<int?>("MealId");
-
-                    b.Property<int?>("UserMealPlanId");
-
-                    b.Property<int?>("MealTypeId");
-
-                    b.Property<int>("Order");
-
-                    b.Property<double>("Servings");
-
-                    b.HasKey("Id", "MealId", "UserMealPlanId", "MealTypeId");
-
-                    b.HasIndex("MealId");
-
-                    b.HasIndex("MealTypeId")
-                        .IsUnique();
-
-                    b.HasIndex("UserMealPlanId");
-
-                    b.ToTable("MealPlanMeals");
+                    b.ToTable("Meal");
                 });
 
             modelBuilder.Entity("Domain.MealEntities.MealType", b =>
@@ -93,72 +66,30 @@ namespace Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
                     b.ToTable("MealType");
                 });
 
-            modelBuilder.Entity("Domain.MealEntities.MealTypes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("MealId");
-
-                    b.Property<int>("MealTypeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MealId");
-
-                    b.HasIndex("MealTypeId");
-
-                    b.ToTable("MealTypes");
-                });
-
-            modelBuilder.Entity("Domain.MealEntities.MealsIngredients", b =>
-                {
-                    b.Property<int>("IngredientId");
-
-                    b.Property<int>("MealId");
-
-                    b.Property<int>("Id");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("IngredientId", "MealId");
-
-                    b.HasIndex("MealId");
-
-                    b.ToTable("MealsIngredients");
-                });
-
-            modelBuilder.Entity("Domain.MealEntities.UserMealPlan", b =>
-                {
-                    b.Property<string>("AppUserId");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("Id");
-
-                    b.HasKey("AppUserId");
-
-                    b.ToTable("UserMealPlans");
-                });
-
             modelBuilder.Entity("Domain.MealEntities.UserMeals", b =>
                 {
                     b.Property<int>("MealId");
 
+                    b.Property<int>("MealPlanId");
+
+                    b.Property<int>("MealTypeId");
+
                     b.Property<string>("AppUserId");
 
-                    b.Property<int>("Id");
-
-                    b.HasKey("MealId", "AppUserId");
+                    b.HasKey("MealId", "MealPlanId", "MealTypeId");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("MealPlanId");
+
+                    b.HasIndex("MealTypeId");
 
                     b.ToTable("UsersMeals");
                 });
@@ -422,69 +353,34 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.MealEntities.MealPlanMeals", b =>
-                {
-                    b.HasOne("Domain.MealEntities.Meal", "Meal")
-                        .WithMany("MealPlansMeals")
-                        .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.MealEntities.MealType", "MealType")
-                        .WithOne("MealPlanMeals")
-                        .HasForeignKey("Domain.MealEntities.MealPlanMeals", "MealTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.MealEntities.UserMealPlan", "UserMealPlan")
-                        .WithMany("MealPlanMeals")
-                        .HasForeignKey("UserMealPlanId")
-                        .HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Domain.MealEntities.MealTypes", b =>
-                {
-                    b.HasOne("Domain.MealEntities.Meal", "Meal")
-                        .WithMany("MealTypes")
-                        .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.MealEntities.MealType", "MealType")
-                        .WithMany("MealTypes")
-                        .HasForeignKey("MealTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Domain.MealEntities.MealsIngredients", b =>
-                {
-                    b.HasOne("Domain.MealEntities.Ingredient", "Ingredient")
-                        .WithMany("MealIngredients")
-                        .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.MealEntities.Meal", "Meal")
-                        .WithMany("MealIngredients")
-                        .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Domain.MealEntities.UserMealPlan", b =>
+            modelBuilder.Entity("Domain.MealEntities.DailyMealPlan", b =>
                 {
                     b.HasOne("Domain.UserEntities.AppUser", "AppUser")
-                        .WithMany("UserMealPlans")
-                        .HasForeignKey("AppUserId")
+                        .WithMany("DailyMealPlans")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.MealEntities.UserMeals", b =>
                 {
-                    b.HasOne("Domain.UserEntities.AppUser", "AppUser")
+                    b.HasOne("Domain.UserEntities.AppUser")
                         .WithMany("UserMeals")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AppUserId");
 
                     b.HasOne("Domain.MealEntities.Meal", "Meal")
                         .WithMany("UserMeals")
                         .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.MealEntities.DailyMealPlan", "MealPlan")
+                        .WithMany("UserMeals")
+                        .HasForeignKey("MealPlanId")
+                        .HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.MealEntities.MealType", "MealType")
+                        .WithMany("Meals")
+                        .HasForeignKey("MealTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

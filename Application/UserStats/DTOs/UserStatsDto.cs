@@ -23,9 +23,6 @@ namespace Application.UserStats.DTOs
 
         // Rest
         public DateTime DateOfBirth { get; set; }
-        public double FatGrams { get; set; }
-        public double CarbsGrams { get; set; }
-        public double ProteinGrams { get; set; }
 
     }
 }

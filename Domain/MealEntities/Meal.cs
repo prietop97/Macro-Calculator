@@ -9,6 +9,7 @@ namespace Domain.MealEntities
         public string Title { get; set; }
 
         // FOREIGN KEYS
+        public string Image { get; set; }
 
         public int CarbsGrams { get; set; }
         public int ProteinGrams { get; set; }

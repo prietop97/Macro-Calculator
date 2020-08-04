@@ -37,12 +37,14 @@ namespace Application.Users
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
             private readonly IJwtGenerator _jwtGenerator;
+            private readonly DataContext _context;
 
-            public Handler(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IJwtGenerator jwtGenerator)
+            public Handler(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IJwtGenerator jwtGenerator, DataContext context)
             {
                 _userManager = userManager;
                 _signInManager = signInManager;
                 _jwtGenerator = jwtGenerator;
+                _context = context;
             }
 
             public async Task<UserInfoDto> Handle(Query request, CancellationToken cancellationToken)
@@ -55,16 +57,22 @@ namespace Application.Users
 
                 if (result.Succeeded)
                 {
+                    var userStats = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == user.Id);
                     // GENERATE TOKEN
-                    return new UserInfoDto
+                    var userInfoDto = new UserInfoDto
                     {
                         Username = user.UserName,
                         Token = _jwtGenerator.CreateToken(user),
                         Email = user.Email,
                         FirstName = user.FirstName,
-                        LastName = user.LastName
+                        LastName = user.LastName,
+                        RegistrationCompleted = false
                     };
-
+                    if (userStats != null)
+                    {
+                        userInfoDto.RegistrationCompleted = true;
+                    }
+                    return userInfoDto;
                 }
 
                 throw new RestException(HttpStatusCode.Unauthorized);
