@@ -45,7 +45,11 @@ axios.interceptors.response.use(undefined, (error) => {
 const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
-  get: (url: string) => axios.get(url).then(responseBody),
+  get: (url: string) =>
+    axios
+      .get(url)
+      .then(responseBody)
+      .catch((err) => err.message),
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
   delete: (url: string) => axios.delete(url).then(responseBody)
@@ -65,6 +69,11 @@ const UserStat = {
     requests.post('/userstats', userStats),
   dropDowns: (): Promise<UserStatsDropDowns> =>
     requests.get('/userstats/dropdowns')
+};
+
+const DailyMealPlan = {
+  current: (date: Date): Promise<UserStats> =>
+    requests.get(`/dailymealplan?date=${date}`)
 };
 
 export default {

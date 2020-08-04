@@ -105,7 +105,7 @@ function RegistrationUserStats(): ReactElement {
             max={300}
           />
         </Grid>
-        <Grid item container xs={6} spacing={1} sm={12}>
+        <Grid item container xs={12} spacing={1} sm={12}>
           <Grid item sm={6} xs={12} container>
             <Grid item>
               <Typography component="h5" variant="button">
@@ -147,7 +147,7 @@ function RegistrationUserStats(): ReactElement {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6} container>
+          <Grid item xs={12} sm={6} container>
             <Grid item>
               <Typography component="h5" variant="button">
                 Birthday:

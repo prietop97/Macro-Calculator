@@ -7,11 +7,14 @@ import StepperButtons from '../components/Registration/StepperButtons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh'
+    height: '100vh',
+    backgroundImage: `linear-gradient( 95deg,${theme.palette.primary.light} 0%,${theme.palette.primary.main} 50%,${theme.palette.primary.dark} 100%)`
   },
   paper: {
     padding: theme.spacing(5),
-    borderRadius: '40px 0 40px 0'
+    borderRadius: '40px 0 40px 0',
+    boxShadow:
+      '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
   }
 }));
 

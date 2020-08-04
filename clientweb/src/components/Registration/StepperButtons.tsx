@@ -2,6 +2,7 @@ import React, { ReactElement, useContext } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { RootStoreContext } from '../../stores/rootStore';
+import { observer } from 'mobx-react-lite';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,10 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function StepperButtons(): ReactElement {
+function StepperButtons(): ReactElement {
   const rootStore = useContext(RootStoreContext);
   const { activeStep, handleNext, handleBack } = rootStore.userStatsFormStore;
   const classes = useStyles();
+  console.log(activeStep);
   return (
     <div>
       <div className={classes.container}>
@@ -52,3 +54,5 @@ export default function StepperButtons(): ReactElement {
     </div>
   );
 }
+
+export default observer(StepperButtons);

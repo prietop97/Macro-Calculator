@@ -5,17 +5,18 @@ import DailyMealPlan from '../components/Dashboard/DailyMealPlan';
 import { Grid, Container, Box } from '@material-ui/core';
 import { RootStoreContext } from '../stores/rootStore';
 import { observer } from 'mobx-react-lite';
+import { history } from '../index';
 interface Props {}
 
 function Dashboard({}: Props): ReactElement {
   const rootStore = useContext(RootStoreContext);
   const { userStats, getUserStats } = rootStore.userStatsStore;
+  const { getUserInfo, user } = rootStore.userStore;
 
   React.useEffect((): void => {
     getUserStats();
   }, [getUserStats]);
 
-  console.log(userStats?.carbsGrams);
   return (
     <Grid>
       <MainNavbar />
