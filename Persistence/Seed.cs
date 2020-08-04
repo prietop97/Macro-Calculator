@@ -68,10 +68,11 @@ namespace Persistence
             {
                 var mealTypes = new List<MealType> {
 
-                    new MealType{ Id = 1, Description = "Breakfast" },
-                    new MealType{ Id = 2, Description = "Snack" },
-                    new MealType{ Id = 3, Description = "Lunch" },
-                    new MealType{ Id = 4, Description = "Dinner" }
+                    new MealType{ Id = 1, Title = "Breakfast" },
+                    new MealType{ Id = 2, Title = "Snack" },
+                    new MealType{ Id = 3, Title = "Lunch" },
+                    new MealType{ Id = 4, Title = "Snack2" },
+                    new MealType{ Id = 5, Title = "Dinner" }
 
                 };
                 context.MealType.AddRange(mealTypes);
@@ -162,69 +163,6 @@ namespace Persistence
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
             }
-
-            if (!context.Ingredients.Any())
-            {
-                var ingredients = new List<Ingredient> {
-
-                    new Ingredient{ Id = 1, Name="Egg",Description = "What can I say?",  FatGrams=5, ProteinGrams= 6, CarbsGrams=0 },
-                    new Ingredient{ Id = 2, Name="Corn Tortilla",Description = "Lets go", FatGrams=0.8, ProteinGrams= 1.6, CarbsGrams=13 },
-
-                };
-                context.Ingredients.AddRange(ingredients);
-            }
-
-            if (!context.Meals.Any())
-            {
-                var meals = new List<Meal> {
-
-                    new Meal{ Id = 1, Title="Corn Tortilla with Eggs",Description="Most basic yet, really good..",Instructions = "Fry the eggs and put them in a tortilla....", TotalServings=1, FatGrams=15.8, ProteinGrams= 19.6, CarbsGrams=13 },
-                    new Meal{ Id = 2, Title="Empty",Description="Choose a meal",Instructions = "Meals", TotalServings=0, FatGrams=0, ProteinGrams= 0, CarbsGrams=0 }
-
-                };
-                context.Meals.AddRange(meals);
-            }
-            if (!context.MealTypes.Any())
-            {
-                var mealTypes = new List<MealTypes> {
-
-                    new MealTypes{ Id = 1, MealId=1, MealTypeId=1 },
-                    new MealTypes{ Id = 2, MealId=1, MealTypeId=2 },
-
-                };
-                context.MealTypes.AddRange(mealTypes);
-            }
-            if (!context.MealsIngredients.Any())
-            {
-                var mealsIngredients = new List<MealsIngredients> {
-
-                    new MealsIngredients{ Id = 1, MealId=1, IngredientId=1,Quantity=3 },
-                    new MealsIngredients{ Id = 2, MealId=1, IngredientId=2,Quantity=1 }
-
-                };
-                context.MealsIngredients.AddRange(mealsIngredients);
-            }
-            if (!context.UsersMeals.Any())
-            {
-                var userMeals = new List<UserMeals> {
-
-                    new UserMeals{ Id = 1, AppUserId="a", MealId=1 },
-
-                };
-                context.UsersMeals.AddRange(userMeals);
-            }
-            if (!context.UserMealPlans.Any())
-            {
-                var userMealPlans = new List<UserMealPlan> {
-
-                    new UserMealPlan{ Id = 1, AppUserId="a", Date = DateTime.Today, MealPlanMeals = new List<MealPlanMeals> {
-                        new MealPlanMeals{ Id = 1,MealTypeId=1, MealId=1, Servings=1,UserMealPlanId = 1, Order=1 }
-                    }}
-
-                };
-                context.UserMealPlans.AddRange(userMealPlans);
-            }
-
 
             context.SaveChanges();
         }

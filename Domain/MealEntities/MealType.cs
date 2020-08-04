@@ -6,6 +6,7 @@ namespace Domain.MealEntities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public ICollection<Meal> Meals { get; set; }
+        public ICollection<UserMeals> Meals { get; set; }
+
     }
 }

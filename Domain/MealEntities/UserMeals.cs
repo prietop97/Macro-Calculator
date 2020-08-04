@@ -11,5 +11,9 @@ namespace Domain.MealEntities
         public int MealPlanId { get; set; }
         public DailyMealPlan MealPlan { get; set; }
 
+        public MealType MealType { get; set; }
+        public int MealTypeId { get; set; }
+
+
     }
 }

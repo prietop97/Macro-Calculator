@@ -14,8 +14,7 @@ namespace Domain.MealEntities
         public int ProteinGrams { get; set; }
         public int FatGrams { get; set; }
         public int Calories { get; set; }
-        public int MealTypeId { get; set; }
-        public MealType MealType { get; set; }
+
         public ICollection<UserMeals> UserMeals { get; set; }
     }
 }
