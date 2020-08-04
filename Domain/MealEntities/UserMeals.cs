@@ -5,13 +5,15 @@ namespace Domain.MealEntities
 {
     public class UserMeals
     {
-        public int Id { get; set; }
-
-        public string AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
-
         public int MealId { get; set; }
         public Meal Meal { get; set; }
+
+        public int MealPlanId { get; set; }
+        public DailyMealPlan MealPlan { get; set; }
+
+        public MealType MealType { get; set; }
+        public int MealTypeId { get; set; }
+
 
     }
 }

@@ -28,14 +28,7 @@ namespace Persistence
 
         // MEALS
         public DbSet<MealType> MealType { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Meal> Meals { get; set; }
-        public DbSet<MealTypes> MealTypes { get; set; }
         public DbSet<UserMeals> UsersMeals { get; set; }
-        public DbSet<MealPlanMeals> MealPlanMeals { get; set; }
-        public DbSet<MealsIngredients> MealsIngredients { get; set; }
-        public DbSet<UserMealPlan> UserMealPlans { get; set; }
-
 
 
 
@@ -53,32 +46,17 @@ namespace Persistence
             builder.Entity<UserStat>().HasOne(us => us.ActivityFactor).WithMany(af => af.UserStats).HasForeignKey(us => us.ActivityFactorId);
             builder.Entity<UserStat>().HasOne(us => us.UnitSystem).WithMany(hu => hu.UserStats).HasForeignKey(us => us.UnitSystemId);
 
-            // MEALS
-            builder.Entity<MealsIngredients>().HasKey(m => new { m.IngredientId, m.MealId });
-
-            builder.Entity<MealsIngredients>().HasOne(m => m.Meal).WithMany(au => au.MealIngredients).HasPrincipalKey(m => m.Id).HasForeignKey(m => m.MealId);
-            builder.Entity<MealsIngredients>().HasOne(m => m.Ingredient).WithMany(m => m.MealIngredients).HasPrincipalKey(m => m.Id).HasForeignKey(mt => mt.IngredientId);
-
-
-
             // MEALPLANMEALS
-            builder.Entity<MealPlanMeals>().HasKey(mpm => new { mpm.Id, mpm.MealId, mpm.UserMealPlanId, mpm.MealTypeId });
+            builder.Entity<DailyMealPlan>().HasKey(mpm => new { mpm.Id, mpm.UserId });
 
-            builder.Entity<MealPlanMeals>().HasOne(mpm => mpm.Meal).WithMany(m => m.MealPlansMeals).HasPrincipalKey(m => m.Id).HasForeignKey(mpm => mpm.MealId);
-            builder.Entity<MealPlanMeals>().HasOne(mpm => mpm.UserMealPlan).WithMany(mp => mp.MealPlanMeals).HasPrincipalKey(mp => mp.Id).HasForeignKey(mpm => mpm.UserMealPlanId);
-            builder.Entity<MealPlanMeals>().HasOne(mpm => mpm.MealType).WithOne(m => m.MealPlanMeals);
+            builder.Entity<DailyMealPlan>().HasOne(mpm => mpm.AppUser).WithMany(m => m.DailyMealPlans).HasPrincipalKey(m => m.Id).HasForeignKey(mpm => mpm.UserId);
 
             // USERMEALS
-            builder.Entity<UserMeals>().HasKey(um => new { um.MealId, um.AppUserId });
+            builder.Entity<UserMeals>().HasKey(um => new { um.MealId, um.MealPlanId, um.MealTypeId });
 
-            builder.Entity<UserMeals>().HasOne(um => um.AppUser).WithMany(au => au.UserMeals).HasPrincipalKey(au => au.Id).HasForeignKey(um => um.AppUserId);
+            builder.Entity<UserMeals>().HasOne(um => um.MealPlan).WithMany(au => au.UserMeals).HasPrincipalKey(au => au.Id).HasForeignKey(um => um.MealPlanId);
             builder.Entity<UserMeals>().HasOne(um => um.Meal).WithMany(m => m.UserMeals).HasPrincipalKey(m => m.Id).HasForeignKey(um => um.MealId);
-
-            // USERMEALPLANS
-            builder.Entity<UserMealPlan>().HasKey(um => new { um.AppUserId });
-            builder.Entity<UserMealPlan>().HasOne(ump => ump.AppUser).WithMany(au => au.UserMealPlans).HasPrincipalKey(au => au.Id).HasForeignKey(ump => ump.AppUserId);
-
-
+            builder.Entity<UserMeals>().HasOne(um => um.MealType).WithMany(m => m.Meals).HasPrincipalKey(m => m.Id).HasForeignKey(um => um.MealTypeId);
         }
 
 

@@ -90,8 +90,6 @@ namespace Application.UserStats
                 };
 
                 //var created = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
-                var calories = _macroCalculator.CalculateMacros(userStats);
-                // userStats.Calories = calories;
                 _context.UserStats.Add(userStats);
                 var success = await _context.SaveChangesAsync() > 0;
 

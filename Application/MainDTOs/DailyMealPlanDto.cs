@@ -1,18 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
-
 namespace Application.MainDTOs
 {
-    public class MealDto
+    public class DailyMealPlanDto
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Image { get; set; }
+        public ICollection<UserMealsDto> Meals { get; set; }
+        public DateTime Date { get; set; }
         public int CarbsGrams { get; set; }
         public int ProteinGrams { get; set; }
         public int FatGrams { get; set; }
         public int Calories { get; set; }
-
     }
 }
