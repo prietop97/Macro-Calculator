@@ -18,7 +18,7 @@ namespace Infrastructure.Calculator
         private const double HEIGHTMULTIPLIER = 6.25;
         private const int AGEMULTIPLIER = 5;
 
-        public int CalculateMacros(UserStat userStat)
+        public Macros CalculateMacros(UserStat userStat)
         {
             _userStat = userStat;
             var weight = GetWeight();
@@ -31,8 +31,20 @@ namespace Infrastructure.Calculator
             var REE = (weight * WEIGHTMULTIPLIER) + (height * HEIGHTMULTIPLIER) - (AGEMULTIPLIER * age) + genderAddition;
 
             var macros = (int)Math.Round((REE * activityMultiplier) / 10.0) * 10;
+            macros = macros + goalAddition;
+            var fatGrams = (int)Math.Round(macros * 0.03, 0);
+            var proteinGrams = (int)Math.Round(weight * 2 * 0.8, 0);
+            var carbs = macros - (fatGrams * 9 + proteinGrams * 4);
+            var carbsGrams = (int)Math.Round((double)carbs / 4.0, 0);
+            macros = fatGrams * 9 + ((proteinGrams + carbsGrams) * 4);
+            return new Macros
+            {
+                FatGrams = fatGrams,
+                CarbsGrams = carbsGrams,
+                ProteinGrams = proteinGrams,
+                Calories = macros
 
-            return macros + goalAddition;
+            };
         }
 
         private double GetWeight()
