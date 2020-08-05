@@ -8,6 +8,13 @@ namespace Application.Interfaces
 {
     public interface IMacroCalculator
     {
-        int CalculateMacros(UserStat userSat);
+        Macros CalculateMacros(UserStat userSat);
+    }
+    public class Macros
+    {
+        public int FatGrams { get; set; }
+        public int CarbsGrams { get; set; }
+        public int ProteinGrams { get; set; }
+        public int Calories { get; set; }
     }
 }

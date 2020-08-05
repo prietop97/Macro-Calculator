@@ -44,18 +44,18 @@ namespace Application.UserStats
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
-            private readonly IMacroCalculator _macroCalculator;
 
-            public Handler(DataContext context, IUserAccessor userAccessor, IMacroCalculator macroCalculator)
+            public Handler(DataContext context, IUserAccessor userAccessor)
             {
                 _context = context;
                 _userAccessor = userAccessor;
-                _macroCalculator = macroCalculator;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var userStatsOld = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
+
+
 
                 if (userStatsOld != null)
                 {
@@ -89,9 +89,9 @@ namespace Application.UserStats
                     AppUserId = _userAccessor.GetCurrentId(),
                 };
 
-                //var created = await _context.UserStats.FirstOrDefaultAsync(x => x.AppUserId == _userAccessor.GetCurrentId());
                 _context.UserStats.Add(userStats);
                 var success = await _context.SaveChangesAsync() > 0;
+
 
                 if (success) return Unit.Value;
 
