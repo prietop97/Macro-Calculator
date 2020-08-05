@@ -25,6 +25,8 @@ function MacrosRemaining({}: Props): ReactElement {
   const classes = useStyles();
   const rootStore = useContext(RootStoreContext);
   const { userStats, calories } = rootStore.userStatsStore;
+  const { dailyMealPlan } = rootStore.mealPlanStore;
+  console.log(dailyMealPlan);
 
   return (
     <Grid
@@ -42,7 +44,7 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.primary.main}
-            total={userStats?.carbsGrams}
+            total={dailyMealPlan?.carbsGrams}
             consumed={0}
           />
           <Typography component="h2" variant="button" align="center">
@@ -52,7 +54,7 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.secondary.main}
-            total={userStats?.proteinGrams}
+            total={dailyMealPlan?.proteinGrams}
             consumed={0}
           />
           <Typography component="h2" variant="button" align="center">
@@ -62,7 +64,7 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.warning.main}
-            total={userStats?.fatGrams}
+            total={dailyMealPlan?.fatGrams}
             consumed={0}
           />
           <Typography component="h2" variant="button" align="center">
@@ -72,7 +74,7 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.success.main}
-            total={calories}
+            total={dailyMealPlan?.calories}
             consumed={0}
           />
           <Typography component="h2" variant="button" align="center">

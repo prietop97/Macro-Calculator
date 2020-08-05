@@ -50,6 +50,8 @@ namespace Infrastructure.Calculator
         private double GetWeight()
         {
             double weight;
+            Console.WriteLine(_userStat.Weight);
+            Console.WriteLine(_userStat.UnitSystem.Description);
             weight = _userStat.Weight;
             if (_userStat.UnitSystem.Description == "US")
             {

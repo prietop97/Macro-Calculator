@@ -27,7 +27,9 @@ namespace Persistence
         public DbSet<UserStat> UserStats { get; set; }
 
         // MEALS
-        public DbSet<MealType> MealType { get; set; }
+        public DbSet<MealType> MealTypes { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<DailyMealPlan> DailyMealPlans { get; set; }
         public DbSet<UserMeals> UsersMeals { get; set; }
 
 
@@ -47,8 +49,7 @@ namespace Persistence
             builder.Entity<UserStat>().HasOne(us => us.UnitSystem).WithMany(hu => hu.UserStats).HasForeignKey(us => us.UnitSystemId);
 
             // MEALPLANMEALS
-            builder.Entity<DailyMealPlan>().HasKey(mpm => new { mpm.Id, mpm.UserId });
-
+            builder.Entity<DailyMealPlan>().HasKey(mpm => new { mpm.Id });
             builder.Entity<DailyMealPlan>().HasOne(mpm => mpm.AppUser).WithMany(m => m.DailyMealPlans).HasPrincipalKey(m => m.Id).HasForeignKey(mpm => mpm.UserId);
 
             // USERMEALS

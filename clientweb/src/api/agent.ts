@@ -9,6 +9,7 @@ import {
 } from '../models/user';
 import { toast } from 'react-toastify';
 import { history } from '../index';
+import { DailyMealPlan } from '../models/meals';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 axios.interceptors.request.use(
@@ -71,12 +72,13 @@ const UserStat = {
     requests.get('/userstats/dropdowns')
 };
 
-const DailyMealPlan = {
-  current: (date: Date): Promise<UserStats> =>
-    requests.get(`/dailymealplan?date=${date}`)
+const MealPlan = {
+  current: (date: string): Promise<DailyMealPlan> =>
+    requests.get(`/dailymealplan/${date}`)
 };
 
 export default {
   User,
-  UserStat
+  UserStat,
+  MealPlan
 };

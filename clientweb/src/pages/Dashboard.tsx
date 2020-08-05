@@ -10,11 +10,12 @@ interface Props {}
 
 function Dashboard({}: Props): ReactElement {
   const rootStore = useContext(RootStoreContext);
-  const { userStats, getUserStats } = rootStore.userStatsStore;
-  const { getUserInfo, user } = rootStore.userStore;
+  const { getUserStats } = rootStore.userStatsStore;
+  const { getDailyMealPlan, activeDate } = rootStore.mealPlanStore;
 
   React.useEffect((): void => {
     getUserStats();
+    getDailyMealPlan(activeDate);
   }, [getUserStats]);
 
   return (

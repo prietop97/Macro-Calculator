@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200804211947_Initial")]
+    [Migration("20200805173938_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,9 +20,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.MealEntities.DailyMealPlan", b =>
                 {
-                    b.Property<int>("Id");
-
-                    b.Property<string>("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Calories");
 
@@ -34,11 +33,13 @@ namespace Persistence.Migrations
 
                     b.Property<int>("ProteinGrams");
 
-                    b.HasKey("Id", "UserId");
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DailyMealPlan");
+                    b.ToTable("DailyMealPlans");
                 });
 
             modelBuilder.Entity("Domain.MealEntities.Meal", b =>
@@ -52,13 +53,15 @@ namespace Persistence.Migrations
 
                     b.Property<int>("FatGrams");
 
+                    b.Property<string>("Image");
+
                     b.Property<int>("ProteinGrams");
 
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Meal");
+                    b.ToTable("Meals");
                 });
 
             modelBuilder.Entity("Domain.MealEntities.MealType", b =>
@@ -70,7 +73,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MealType");
+                    b.ToTable("MealTypes");
                 });
 
             modelBuilder.Entity("Domain.MealEntities.UserMeals", b =>
@@ -357,8 +360,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.UserEntities.AppUser", "AppUser")
                         .WithMany("DailyMealPlans")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Domain.MealEntities.UserMeals", b =>
@@ -375,7 +377,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.MealEntities.DailyMealPlan", "MealPlan")
                         .WithMany("UserMeals")
                         .HasForeignKey("MealPlanId")
-                        .HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.MealEntities.MealType", "MealType")
