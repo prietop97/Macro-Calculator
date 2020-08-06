@@ -24,8 +24,7 @@ function MacrosRemaining({}: Props): ReactElement {
   const theme = useTheme();
   const classes = useStyles();
   const rootStore = useContext(RootStoreContext);
-  const { userStats, calories } = rootStore.userStatsStore;
-  const { dailyMealPlan } = rootStore.mealPlanStore;
+  const { dailyMealPlan, consumed } = rootStore.mealPlanStore;
   console.log(dailyMealPlan);
 
   return (
@@ -45,7 +44,7 @@ function MacrosRemaining({}: Props): ReactElement {
           <MacrosChart
             color={theme.palette.primary.main}
             total={dailyMealPlan?.carbsGrams}
-            consumed={0}
+            consumed={consumed.carbsGrams}
           />
           <Typography component="h2" variant="button" align="center">
             Carbs
@@ -55,7 +54,7 @@ function MacrosRemaining({}: Props): ReactElement {
           <MacrosChart
             color={theme.palette.secondary.main}
             total={dailyMealPlan?.proteinGrams}
-            consumed={0}
+            consumed={consumed.proteinGrams}
           />
           <Typography component="h2" variant="button" align="center">
             Protein
@@ -65,7 +64,7 @@ function MacrosRemaining({}: Props): ReactElement {
           <MacrosChart
             color={theme.palette.warning.main}
             total={dailyMealPlan?.fatGrams}
-            consumed={0}
+            consumed={consumed.fatGrams}
           />
           <Typography component="h2" variant="button" align="center">
             Fat
@@ -75,7 +74,7 @@ function MacrosRemaining({}: Props): ReactElement {
           <MacrosChart
             color={theme.palette.success.main}
             total={dailyMealPlan?.calories}
-            consumed={0}
+            consumed={consumed.calories}
           />
           <Typography component="h2" variant="button" align="center">
             Calories

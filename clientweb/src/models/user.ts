@@ -25,7 +25,7 @@ export interface UserStatsFormPost {
   unitSystemId: number | null;
   height: number;
   weight: number | number[];
-  dateOfBirth: Date | null;
+  dateOfBirth: string | null;
 }
 
 export interface UserStatsDropDowns {

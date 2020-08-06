@@ -65,9 +65,9 @@ namespace Infrastructure.Calculator
         {
             double height;
             height = _userStat.Height;
-            if (_userStat.UnitSystem.Description == "US")
+            if (_userStat.UnitSystem.Description != "US")
             {
-                height *= CENTIMITERSPERFOOT;
+                height = height / 12 * CENTIMITERSPERFOOT;
             }
             return height;
         }

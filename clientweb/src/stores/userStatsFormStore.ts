@@ -13,7 +13,7 @@ export default class UserStatsFormStore {
   @observable activityFactorId = 0;
   @observable goalId = 0;
   @observable unitSystemId = 1;
-  @observable dateOfBirth = new Date('2014-08-18T21:11:54');
+  @observable dateOfBirth = new Date('1997-09-05T21:11:54');
   @observable feets: number | string = '';
   @observable inches: number | string = '';
   @observable weight = 175;
@@ -44,7 +44,7 @@ export default class UserStatsFormStore {
       activityFactorId: this.activityFactorId,
       goalId: this.goalId,
       unitSystemId: this.unitSystemId,
-      dateOfBirth: this.dateOfBirth,
+      dateOfBirth: this.dateOfBirth.toISOString(),
       height: this.totalHeight,
       weight: this.weight
     };
@@ -93,6 +93,7 @@ export default class UserStatsFormStore {
       return;
     }
     if (this.activeStep === 2) {
+      console.log(this.finalFormValues);
       this.rootStore.userStatsStore.postUserStats(this.finalFormValues);
       console.log(this.finalFormValues);
       return;

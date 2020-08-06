@@ -6,6 +6,7 @@ import { Grid, Container, Box } from '@material-ui/core';
 import { RootStoreContext } from '../stores/rootStore';
 import { observer } from 'mobx-react-lite';
 import { history } from '../index';
+import SuggestedList from '../components/SuggestedMeals/SuggestedList';
 interface Props {}
 
 function Dashboard({}: Props): ReactElement {
@@ -23,8 +24,10 @@ function Dashboard({}: Props): ReactElement {
       <MainNavbar />
       <Container>
         <MacrosDetails />
+        {/* <Box m={2} />
+        <DailyMealPlan /> */}
         <Box m={2} />
-        <DailyMealPlan />
+        <SuggestedList />
       </Container>
     </Grid>
   );

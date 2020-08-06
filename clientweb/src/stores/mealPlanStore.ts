@@ -1,8 +1,8 @@
 import { observable, action, runInAction, computed } from 'mobx';
-import { DailyMealPlan } from '../models/meals';
+import { DailyMealPlan, MealPreview, NutrientsQuery } from '../models/meals';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
-import { history } from '../index';
+import spoonAgent from '../api/spoonacularAgent';
 
 export default class MealPlanStore {
   rootStore: RootStore;
@@ -10,7 +10,9 @@ export default class MealPlanStore {
     this.rootStore = rootStore;
   }
   @observable dailyMealPlan: DailyMealPlan | null = null;
-  @observable isLoading = false;
+  @observable suggestedMeals: MealPreview[] | null = null;
+  @observable isLoading = true;
+  @observable suggestedLoading = true;
   @observable activeDate = new Date('08/05/2020');
 
   @computed get consumed(): {
@@ -45,6 +47,36 @@ export default class MealPlanStore {
       runInAction('Get Daily Mealplan', () => {
         this.dailyMealPlan = dailyMealPlan;
         this.isLoading = false;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  @action getSuggestedMeals = async (
+    queries: NutrientsQuery
+  ): Promise<void> => {
+    try {
+      this.suggestedLoading = true;
+      const suggestedMeals = await spoonAgent.Recipes.search(queries);
+      runInAction('Get Daily Mealplan', () => {
+        const results = suggestedMeals.map((x) => {
+          return {
+            id: x.id,
+            title: x.title,
+            image: x.image,
+            protein: Math.round(x.nutrition[0].amount),
+            carbs: Math.round(x.nutrition[2].amount),
+            fat: Math.round(x.nutrition[1].amount),
+            calories: Math.round(
+              x.nutrition[0].amount * 4 +
+                x.nutrition[2].amount * 4 +
+                x.nutrition[1].amount * 9
+            )
+          };
+        });
+        this.suggestedMeals = results;
+        this.suggestedLoading = false;
       });
     } catch (error) {
       console.log(error);

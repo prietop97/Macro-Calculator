@@ -42,7 +42,7 @@ namespace Application.MealPlan
             public async Task<DailyMealPlanDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var Id = _userAccessor.GetCurrentId();
-                var dailyMealPlan = await _context.DailyMealPlans.FirstOrDefaultAsync(x => x.Date == request.Date);
+                var dailyMealPlan = await _context.DailyMealPlans.FirstOrDefaultAsync(x => x.Date == request.Date && x.UserId == Id);
                 if (dailyMealPlan == null)
                 {
                     var userStats = await _context.UserStats.Include(x => x.UnitSystem).Include(x => x.Gender).Include(x => x.ActivityFactor).Include(x => x.Goal).FirstOrDefaultAsync(x => x.AppUserId == Id);
@@ -59,7 +59,7 @@ namespace Application.MealPlan
 
                     _context.DailyMealPlans.Add(dailyMealPlan);
                     await _context.SaveChangesAsync();
-                    dailyMealPlan = await _context.DailyMealPlans.FirstOrDefaultAsync(x => x.Date == request.Date);
+                    dailyMealPlan = await _context.DailyMealPlans.FirstOrDefaultAsync(x => x.Date == request.Date && x.UserId == Id);
                 }
                 var mealPlanDto = _mapper.Map<DailyMealPlan, DailyMealPlanDto>(dailyMealPlan);
                 return mealPlanDto;
