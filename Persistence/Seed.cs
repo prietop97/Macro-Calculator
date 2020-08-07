@@ -64,7 +64,7 @@ namespace Persistence
                 context.UnitSystems.AddRange(units);
             }
 
-            if (!context.MealType.Any())
+            if (!context.MealTypes.Any())
             {
                 var mealTypes = new List<MealType> {
 
@@ -75,7 +75,7 @@ namespace Persistence
                     new MealType{ Id = 5, Title = "Dinner" }
 
                 };
-                context.MealType.AddRange(mealTypes);
+                context.MealTypes.AddRange(mealTypes);
             }
 
             if (!context.Users.Any())

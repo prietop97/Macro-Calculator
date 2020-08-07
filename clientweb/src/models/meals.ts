@@ -22,19 +22,24 @@ export interface UserMeal {
   mealPlanBreakdownId: number;
 }
 
-export interface DailyMeals {
-  mealPlanBreakDown: MealPlanBreakdown[];
-  userMeals: UserMeal[];
+export interface DailyMealPlan {
+  carbsGrams: number;
+  proteinGrams: number;
+  fatGrams: number;
+  calories: number;
+  meals: MealPreview[];
+  date: Date;
 }
 
 export interface MealPreview {
   id: number;
   title: string;
   image: string;
-  calories?: number;
+  calories: number;
   protein: number;
   fat: number;
   carbs: number;
+  mealType?: string;
 }
 
 export interface NutrientsQuery {

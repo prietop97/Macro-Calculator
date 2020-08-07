@@ -50,6 +50,8 @@ namespace Infrastructure.Calculator
         private double GetWeight()
         {
             double weight;
+            Console.WriteLine(_userStat.Weight);
+            Console.WriteLine(_userStat.UnitSystem.Description);
             weight = _userStat.Weight;
             if (_userStat.UnitSystem.Description == "US")
             {
@@ -63,9 +65,9 @@ namespace Infrastructure.Calculator
         {
             double height;
             height = _userStat.Height;
-            if (_userStat.UnitSystem.Description == "US")
+            if (_userStat.UnitSystem.Description != "US")
             {
-                height *= CENTIMITERSPERFOOT;
+                height = height / 12 * CENTIMITERSPERFOOT;
             }
             return height;
         }

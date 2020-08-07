@@ -24,7 +24,8 @@ function MacrosRemaining({}: Props): ReactElement {
   const theme = useTheme();
   const classes = useStyles();
   const rootStore = useContext(RootStoreContext);
-  const { userStats, calories } = rootStore.userStatsStore;
+  const { dailyMealPlan, consumed } = rootStore.mealPlanStore;
+  console.log(dailyMealPlan);
 
   return (
     <Grid
@@ -42,8 +43,8 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.primary.main}
-            total={userStats?.carbsGrams}
-            consumed={0}
+            total={dailyMealPlan?.carbsGrams}
+            consumed={consumed.carbsGrams}
           />
           <Typography component="h2" variant="button" align="center">
             Carbs
@@ -52,8 +53,8 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.secondary.main}
-            total={userStats?.proteinGrams}
-            consumed={0}
+            total={dailyMealPlan?.proteinGrams}
+            consumed={consumed.proteinGrams}
           />
           <Typography component="h2" variant="button" align="center">
             Protein
@@ -62,8 +63,8 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.warning.main}
-            total={userStats?.fatGrams}
-            consumed={0}
+            total={dailyMealPlan?.fatGrams}
+            consumed={consumed.fatGrams}
           />
           <Typography component="h2" variant="button" align="center">
             Fat
@@ -72,8 +73,8 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.success.main}
-            total={calories}
-            consumed={0}
+            total={dailyMealPlan?.calories}
+            consumed={consumed.calories}
           />
           <Typography component="h2" variant="button" align="center">
             Calories
