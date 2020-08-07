@@ -7,6 +7,7 @@ namespace Application.MainDTOs
     public class MealDto
     {
         public int Id { get; set; }
+        public int GoogleId { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
         public int CarbsGrams { get; set; }

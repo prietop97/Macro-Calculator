@@ -2,18 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
-using Domain;
-using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using AutoMapper;
-using System.Collections.Generic;
-using Domain.UserEntities;
-using Application.UserStats.DTOs;
 using Domain.MealEntities;
 using Application.MainDTOs;
+using System.Linq;
 
 namespace Application.MealPlan
 {
@@ -59,8 +54,8 @@ namespace Application.MealPlan
 
                     _context.DailyMealPlans.Add(dailyMealPlan);
                     await _context.SaveChangesAsync();
-                    dailyMealPlan = await _context.DailyMealPlans.FirstOrDefaultAsync(x => x.Date == request.Date && x.UserId == Id);
                 }
+                dailyMealPlan = await _context.DailyMealPlans.Include(x => x.UserMeals).ThenInclude(x => x.Meal).Include(x => x.UserMeals).ThenInclude(x => x.MealType).FirstOrDefaultAsync(x => x.Date == request.Date && x.UserId == Id);
                 var mealPlanDto = _mapper.Map<DailyMealPlan, DailyMealPlanDto>(dailyMealPlan);
                 return mealPlanDto;
             }

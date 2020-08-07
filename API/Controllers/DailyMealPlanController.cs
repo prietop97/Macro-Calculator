@@ -16,5 +16,11 @@ namespace API.Controllers
         {
             return await Mediator.Send(new Detail.Query { Date = date });
         }
+
+        [HttpPost("meals")]
+        public async Task<ActionResult<Unit>> AddFoodToMealPlan(AddFoodToMealPlan.Command command)
+        {
+            return await Mediator.Send(command);
+        }
     }
 }

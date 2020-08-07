@@ -53,9 +53,9 @@ namespace Persistence
             builder.Entity<DailyMealPlan>().HasOne(mpm => mpm.AppUser).WithMany(m => m.DailyMealPlans).HasPrincipalKey(m => m.Id).HasForeignKey(mpm => mpm.UserId);
 
             // USERMEALS
-            builder.Entity<UserMeals>().HasKey(um => new { um.MealId, um.MealPlanId, um.MealTypeId });
+            builder.Entity<UserMeals>().HasKey(um => new { um.MealId, um.DailyMealPlanId, um.MealTypeId });
 
-            builder.Entity<UserMeals>().HasOne(um => um.MealPlan).WithMany(au => au.UserMeals).HasPrincipalKey(au => au.Id).HasForeignKey(um => um.MealPlanId);
+            builder.Entity<UserMeals>().HasOne(um => um.DailyMealPlan).WithMany(au => au.UserMeals).HasPrincipalKey(au => au.Id).HasForeignKey(um => um.DailyMealPlanId);
             builder.Entity<UserMeals>().HasOne(um => um.Meal).WithMany(m => m.UserMeals).HasPrincipalKey(m => m.Id).HasForeignKey(um => um.MealId);
             builder.Entity<UserMeals>().HasOne(um => um.MealType).WithMany(m => m.Meals).HasPrincipalKey(m => m.Id).HasForeignKey(um => um.MealTypeId);
         }

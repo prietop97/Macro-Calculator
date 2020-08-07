@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200805173938_Initial")]
+    [Migration("20200807211852_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,15 +47,17 @@ namespace Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Calories");
+                    b.Property<double>("Calories");
 
-                    b.Property<int>("CarbsGrams");
+                    b.Property<double>("CarbsGrams");
 
-                    b.Property<int>("FatGrams");
+                    b.Property<double>("FatGrams");
+
+                    b.Property<int>("GoogleId");
 
                     b.Property<string>("Image");
 
-                    b.Property<int>("ProteinGrams");
+                    b.Property<double>("ProteinGrams");
 
                     b.Property<string>("Title");
 
@@ -80,17 +82,19 @@ namespace Persistence.Migrations
                 {
                     b.Property<int>("MealId");
 
-                    b.Property<int>("MealPlanId");
+                    b.Property<int>("DailyMealPlanId");
 
                     b.Property<int>("MealTypeId");
 
                     b.Property<string>("AppUserId");
 
-                    b.HasKey("MealId", "MealPlanId", "MealTypeId");
+                    b.Property<int>("quantity");
+
+                    b.HasKey("MealId", "DailyMealPlanId", "MealTypeId");
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("MealPlanId");
+                    b.HasIndex("DailyMealPlanId");
 
                     b.HasIndex("MealTypeId");
 
@@ -369,14 +373,14 @@ namespace Persistence.Migrations
                         .WithMany("UserMeals")
                         .HasForeignKey("AppUserId");
 
+                    b.HasOne("Domain.MealEntities.DailyMealPlan", "DailyMealPlan")
+                        .WithMany("UserMeals")
+                        .HasForeignKey("DailyMealPlanId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Domain.MealEntities.Meal", "Meal")
                         .WithMany("UserMeals")
                         .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.MealEntities.DailyMealPlan", "MealPlan")
-                        .WithMany("UserMeals")
-                        .HasForeignKey("MealPlanId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.MealEntities.MealType", "MealType")
