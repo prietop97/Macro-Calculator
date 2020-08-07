@@ -39,17 +39,17 @@ export default function MacrosChart({
     datasets: [
       {
         data: [consumed, total],
-        backgroundColor: ['lightgray', color],
-        hoverBackgroundColor: ['lightgray', 'color'],
-        hoverBorderWidth: [0, 0]
+        backgroundColor: ['lightgray', color]
+        // hoverBackgroundColor: ['lightgray', color],
+        // hoverBorderWidth: [0, 0]
       }
     ],
-    text: `${total! - consumed!}g`
+    text: color === '#4caf50' ? `${total!}` : `${total!}g`
   };
   return (
     <Doughnut
       data={data}
-      options={{ cutoutPercentage: 90, events: [], responsive: true }}
+      options={{ cutoutPercentage: 85, events: [], responsive: true }}
       height={250}
     />
   );

@@ -26,7 +26,10 @@ function MacrosRemaining({}: Props): ReactElement {
   const rootStore = useContext(RootStoreContext);
   const { dailyMealPlan, consumed } = rootStore.mealPlanStore;
   console.log(dailyMealPlan);
-
+  const checkForNegative = (num: number) => {
+    if (num > 0) return num;
+    return 0;
+  };
   return (
     <Grid
       container
@@ -43,7 +46,7 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.primary.main}
-            total={dailyMealPlan?.carbsGrams}
+            total={dailyMealPlan?.carbsGrams! - consumed.carbsGrams}
             consumed={consumed.carbsGrams}
           />
           <Typography component="h2" variant="button" align="center">
@@ -73,7 +76,9 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.success.main}
-            total={dailyMealPlan?.calories}
+            total={checkForNegative(
+              dailyMealPlan?.calories! - consumed.calories
+            )}
             consumed={consumed.calories}
           />
           <Typography component="h2" variant="button" align="center">

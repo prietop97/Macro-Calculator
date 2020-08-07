@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Grid, Typography, IconButton } from '@material-ui/core';
 import DateFnsUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
@@ -9,10 +9,13 @@ import {
   KeyboardArrowRight,
   Today
 } from '@material-ui/icons';
+import { RootStoreContext } from '../../stores/rootStore';
 
 interface Props {}
 
 export default function DashboardDate({}: Props): ReactElement {
+  const rootStore = useContext(RootStoreContext);
+  const { changeActiveDate } = rootStore.mealPlanStore;
   const datePicker = React.useRef(null);
   const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate>(
     () => {
@@ -34,6 +37,7 @@ export default function DashboardDate({}: Props): ReactElement {
   };
   React.useEffect(() => {
     const today = new Date();
+
     const difference = moment(
       `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`
     ).diff(selectedDate, 'days');
@@ -50,6 +54,7 @@ export default function DashboardDate({}: Props): ReactElement {
       default:
         setDate(selectedDate?.format('LLLL').split(',')[0]);
     }
+    changeActiveDate(selectedDate?.toDate());
   }, [selectedDate, setSelectedDate]);
   const substractDay = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     setSelectedDate(moment(selectedDate).subtract(1, 'day'));
@@ -69,7 +74,7 @@ export default function DashboardDate({}: Props): ReactElement {
       <Grid item container xs={12} alignItems="center" justify="center">
         <Grid item xs={6} container direction="row">
           <Grid item xs={12}>
-            <Typography variant="h3" component="h3">
+            <Typography variant="h4" component="h3">
               {date}
             </Typography>
           </Grid>
@@ -78,13 +83,13 @@ export default function DashboardDate({}: Props): ReactElement {
               <Typography onClick={openDatePicker} variant="h4" component="h3">
                 {selectedDate?.format('LL')}
               </Typography>
-              <DatePicker
+              {/* <DatePicker
                 open={open}
                 value={selectedDate}
                 onChange={changeDate}
                 onClose={() => setOpen(false)}
                 style={{ visibility: 'hidden' }}
-              />
+              /> */}
             </MuiPickersUtilsProvider>
           </Grid>
         </Grid>

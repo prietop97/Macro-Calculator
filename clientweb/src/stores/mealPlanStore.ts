@@ -13,7 +13,8 @@ export default class MealPlanStore {
   @observable suggestedMeals: MealPreview[] | null = null;
   @observable isLoading = true;
   @observable suggestedLoading = true;
-  @observable activeDate = new Date('08/05/2020');
+  @observable activeDate: Date = new Date('08/05/2020');
+  @observable addMealLoading = false;
 
   @computed get consumed(): {
     carbsGrams: number;
@@ -27,15 +28,13 @@ export default class MealPlanStore {
       proteinGrams: 0,
       calories: 0
     };
-    if (this.dailyMealPlan && this.dailyMealPlan.meals) {
-      this.dailyMealPlan.meals.forEach((x) => {
-        macros.carbsGrams += x.carbs;
-        macros.fatGrams += x.fat;
-        macros.proteinGrams += x.protein;
-        macros.calories += x.calories || 0;
+    if (this.dailyMealPlan) {
+      this.dailyMealPlan.userMeals.forEach((x) => {
+        macros.carbsGrams += x.meal.carbsGrams * x.quantity;
+        macros.fatGrams += x.meal.fatGrams * x.quantity;
+        macros.proteinGrams += x.meal.proteinGrams * x.quantity;
+        macros.calories += x.meal.calories * x.quantity;
       });
-      macros.calories =
-        macros.carbsGrams * 4 + macros.proteinGrams * 4 + macros.fatGrams * 9;
     }
     return macros;
   }
@@ -65,9 +64,9 @@ export default class MealPlanStore {
             id: x.id,
             title: x.title,
             image: x.image,
-            protein: Math.round(x.nutrition[0].amount),
-            carbs: Math.round(x.nutrition[2].amount),
-            fat: Math.round(x.nutrition[1].amount),
+            proteinGrams: Math.round(x.nutrition[0].amount),
+            carbsGrams: Math.round(x.nutrition[2].amount),
+            fatGrams: Math.round(x.nutrition[1].amount),
             calories: Math.round(
               x.nutrition[0].amount * 4 +
                 x.nutrition[2].amount * 4 +
@@ -77,10 +76,28 @@ export default class MealPlanStore {
         });
         this.suggestedMeals = results;
         this.suggestedLoading = false;
-        console.log(this.suggestedLoading);
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  @action addMeal = async (meal: MealPreview): Promise<void> => {
+    try {
+      this.addMealLoading = true;
+      await agent.MealPlan.add({
+        ...meal,
+        mealPlanId: this.dailyMealPlan ? this.dailyMealPlan.id : null
+      });
+      runInAction('Get Suggested Meals', () => {
+        this.getDailyMealPlan(this.activeDate);
+        this.addMealLoading = false;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  @action changeActiveDate = (date: Date | undefined) => {
+    if (date) this.activeDate = date;
   };
 }

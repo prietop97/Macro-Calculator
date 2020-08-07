@@ -24,10 +24,15 @@ function SuggestedList({}: Props): ReactElement {
           Daily Meals
         </Typography>
         <Grid container spacing={2} justify="space-around">
-          {dailyMealPlan && dailyMealPlan.meals ? (
-            dailyMealPlan.meals
+          {dailyMealPlan ? (
+            dailyMealPlan.userMeals
               .filter((x, i) => i < 3)
-              .map((meal) => <MealPreviewCard key={meal.id} meal={meal} />)
+              .map((meal) => (
+                <div>
+                  Meal: {meal.meal.title}
+                  Quantity: {meal.quantity}
+                </div>
+              ))
           ) : (
             <Typography
               variant="button"

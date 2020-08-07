@@ -23,22 +23,29 @@ export interface UserMeal {
 }
 
 export interface DailyMealPlan {
+  id: number | null;
   carbsGrams: number;
   proteinGrams: number;
   fatGrams: number;
   calories: number;
-  meals: MealPreview[];
+  userMeals: UserMeals[];
   date: Date;
 }
 
+interface UserMeals {
+  meal: MealPreview;
+  quantity: number;
+}
+
 export interface MealPreview {
+  mealPlanId?: number | null;
   id: number;
   title: string;
   image: string;
   calories: number;
-  protein: number;
-  fat: number;
-  carbs: number;
+  proteinGrams: number;
+  fatGrams: number;
+  carbsGrams: number;
   mealType?: string;
 }
 

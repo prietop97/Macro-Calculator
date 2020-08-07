@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import { MealPreview } from '../models/meals';
+import { observer } from 'mobx-react-lite';
+import { RootStoreContext } from '../stores/rootStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,9 +56,15 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   meal: MealPreview;
 }
-export default function MealPreviewCard({ meal }: Props) {
+function MealPreviewCard({ meal }: Props) {
+  console.log(meal.id);
   const classes = useStyles();
-
+  const rootStore = useContext(RootStoreContext);
+  const { addMeal } = rootStore.mealPlanStore;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    addMeal(meal);
+  };
   return (
     <Grid item xs={12} sm={6} md={4} container className={classes.veryRoot}>
       <Card className={classes.root}>
@@ -72,20 +80,25 @@ export default function MealPreviewCard({ meal }: Props) {
         />
         <CardContent>
           <Typography variant="body1" color="textSecondary" component="p">
-            Carbs: {meal.carbs}g
+            Carbs: {meal.carbsGrams}g
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            Fat: {meal.fat}g
+            Fat: {meal.fatGrams}g
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            Protein: {meal.protein}g
+            Protein: {meal.proteinGrams}g
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
             Total Calories: {meal.calories}
           </Typography>
         </CardContent>
         <CardActions disableSpacing className={classes.cta}>
-          <Button type="submit" fullWidth variant="outlined" color="primary">
+          <Button
+            onClick={handleClick}
+            fullWidth
+            variant="outlined"
+            color="primary"
+          >
             Add For Today
           </Button>
         </CardActions>
@@ -93,3 +106,5 @@ export default function MealPreviewCard({ meal }: Props) {
     </Grid>
   );
 }
+
+export default observer(MealPreviewCard);
