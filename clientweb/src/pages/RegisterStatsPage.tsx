@@ -8,7 +8,7 @@ import StepperButtons from '../components/Registration/StepperButtons';
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-    backgroundImage: `linear-gradient( 95deg,${theme.palette.primary.light} 0%,${theme.palette.primary.main} 50%,${theme.palette.primary.dark} 100%)`
+    backgroundImage: `linear-gradient( 95deg,${theme.palette.primary.dark} 0%,${theme.palette.primary.dark} 50%,${theme.palette.primary.dark} 100%)`
   },
   paper: {
     padding: theme.spacing(5),

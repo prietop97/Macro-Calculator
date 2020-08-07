@@ -59,7 +59,7 @@ export default class MealPlanStore {
     try {
       this.suggestedLoading = true;
       const suggestedMeals = await spoonAgent.Recipes.search(queries);
-      runInAction('Get Daily Mealplan', () => {
+      runInAction('Get Suggested Meals', () => {
         const results = suggestedMeals.map((x) => {
           return {
             id: x.id,
@@ -77,6 +77,7 @@ export default class MealPlanStore {
         });
         this.suggestedMeals = results;
         this.suggestedLoading = false;
+        console.log(this.suggestedLoading);
       });
     } catch (error) {
       console.log(error);

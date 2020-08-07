@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import { MealPreview } from '../../models/meals';
-import MealPreviewCard from './MealPreviewCard';
+import MealPreviewCard from '../../common/MealPreviewCard';
 interface Props {
   meals: MealPreview[];
 }
