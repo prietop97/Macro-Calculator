@@ -9,7 +9,8 @@ import {
 } from '../models/user';
 import { toast } from 'react-toastify';
 import { history } from '../index';
-import { DailyMealPlan } from '../models/meals';
+import { DailyMealPlan, MealPreview } from '../models/meals';
+import { request } from 'http';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 axios.interceptors.request.use(
@@ -74,7 +75,11 @@ const UserStat = {
 
 const MealPlan = {
   current: (date: string): Promise<DailyMealPlan> =>
-    requests.get(`/dailymealplan/${date}`)
+    requests.get(`/dailymealplan/${date}`),
+  add: (meal: MealPreview): Promise<null> =>
+    requests.post(`/dailymealplan/meals`, meal),
+  remove: (mealPlanId: number, mealId: number): Promise<null> =>
+    requests.delete(`dailymealplan/${mealPlanId}/meals/${mealId}`)
 };
 
 export default {

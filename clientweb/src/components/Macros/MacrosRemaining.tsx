@@ -25,8 +25,10 @@ function MacrosRemaining({}: Props): ReactElement {
   const classes = useStyles();
   const rootStore = useContext(RootStoreContext);
   const { dailyMealPlan, consumed } = rootStore.mealPlanStore;
-  console.log(dailyMealPlan);
-
+  const checkForNegative = (num: number) => {
+    if (num > 0) return num;
+    return 0;
+  };
   return (
     <Grid
       container
@@ -43,7 +45,10 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.primary.main}
-            total={dailyMealPlan?.carbsGrams}
+            totalFr={dailyMealPlan?.carbsGrams}
+            total={checkForNegative(
+              dailyMealPlan?.carbsGrams! - consumed.carbsGrams
+            )}
             consumed={consumed.carbsGrams}
           />
           <Typography component="h2" variant="button" align="center">
@@ -53,7 +58,10 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.secondary.main}
-            total={dailyMealPlan?.proteinGrams}
+            total={checkForNegative(
+              dailyMealPlan?.proteinGrams! - consumed.proteinGrams
+            )}
+            totalFr={dailyMealPlan?.proteinGrams}
             consumed={consumed.proteinGrams}
           />
           <Typography component="h2" variant="button" align="center">
@@ -63,7 +71,10 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.warning.main}
-            total={dailyMealPlan?.fatGrams}
+            total={checkForNegative(
+              dailyMealPlan?.fatGrams! - consumed.fatGrams
+            )}
+            totalFr={dailyMealPlan?.fatGrams}
             consumed={consumed.fatGrams}
           />
           <Typography component="h2" variant="button" align="center">
@@ -73,7 +84,10 @@ function MacrosRemaining({}: Props): ReactElement {
         <Grid item xs={3}>
           <MacrosChart
             color={theme.palette.success.main}
-            total={dailyMealPlan?.calories}
+            total={checkForNegative(
+              dailyMealPlan?.calories! - consumed.calories
+            )}
+            totalFr={dailyMealPlan?.calories}
             consumed={consumed.calories}
           />
           <Typography component="h2" variant="button" align="center">

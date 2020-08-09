@@ -97,12 +97,13 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    GoogleId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    CarbsGrams = table.Column<int>(nullable: false),
-                    ProteinGrams = table.Column<int>(nullable: false),
-                    FatGrams = table.Column<int>(nullable: false),
-                    Calories = table.Column<int>(nullable: false)
+                    CarbsGrams = table.Column<double>(nullable: false),
+                    ProteinGrams = table.Column<double>(nullable: false),
+                    FatGrams = table.Column<double>(nullable: false),
+                    Calories = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -322,13 +323,14 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     MealId = table.Column<int>(nullable: false),
-                    MealPlanId = table.Column<int>(nullable: false),
+                    DailyMealPlanId = table.Column<int>(nullable: false),
                     MealTypeId = table.Column<int>(nullable: false),
+                    quantity = table.Column<int>(nullable: false),
                     AppUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersMeals", x => new { x.MealId, x.MealPlanId, x.MealTypeId });
+                    table.PrimaryKey("PK_UsersMeals", x => new { x.MealId, x.DailyMealPlanId, x.MealTypeId });
                     table.ForeignKey(
                         name: "FK_UsersMeals_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
@@ -336,15 +338,15 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UsersMeals_Meals_MealId",
-                        column: x => x.MealId,
-                        principalTable: "Meals",
+                        name: "FK_UsersMeals_DailyMealPlans_DailyMealPlanId",
+                        column: x => x.DailyMealPlanId,
+                        principalTable: "DailyMealPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersMeals_DailyMealPlans_MealPlanId",
-                        column: x => x.MealPlanId,
-                        principalTable: "DailyMealPlans",
+                        name: "FK_UsersMeals_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -403,9 +405,9 @@ namespace Persistence.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersMeals_MealPlanId",
+                name: "IX_UsersMeals_DailyMealPlanId",
                 table: "UsersMeals",
-                column: "MealPlanId");
+                column: "DailyMealPlanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersMeals_MealTypeId",
@@ -466,10 +468,10 @@ namespace Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Meals");
+                name: "DailyMealPlans");
 
             migrationBuilder.DropTable(
-                name: "DailyMealPlans");
+                name: "Meals");
 
             migrationBuilder.DropTable(
                 name: "MealTypes");

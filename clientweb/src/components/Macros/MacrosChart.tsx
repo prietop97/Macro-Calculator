@@ -29,27 +29,28 @@ interface Props {
   color: string;
   total: number | undefined;
   consumed: number | null;
+  totalFr: number | undefined;
 }
 export default function MacrosChart({
   color,
   total,
-  consumed
+  consumed,
+  totalFr
 }: Props): ReactElement {
+  const displayTotal = total! > 0 ? total : totalFr! - consumed!;
   const data = {
     datasets: [
       {
         data: [consumed, total],
-        backgroundColor: ['lightgray', color],
-        hoverBackgroundColor: ['lightgray', 'color'],
-        hoverBorderWidth: [0, 0]
+        backgroundColor: ['lightgray', color]
       }
     ],
-    text: `${total! - consumed!}g`
+    text: color === '#4caf50' ? `${displayTotal!}` : `${displayTotal!}g`
   };
   return (
     <Doughnut
       data={data}
-      options={{ cutoutPercentage: 90, events: [], responsive: true }}
+      options={{ cutoutPercentage: 85, events: [], responsive: true }}
       height={250}
     />
   );

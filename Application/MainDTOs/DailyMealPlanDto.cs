@@ -4,7 +4,8 @@ namespace Application.MainDTOs
 {
     public class DailyMealPlanDto
     {
-        public ICollection<UserMealsDto> Meals { get; set; }
+        public int Id { get; set; }
+        public ICollection<UserMealsDto> UserMeals { get; set; }
         public DateTime Date { get; set; }
         public int CarbsGrams { get; set; }
         public int ProteinGrams { get; set; }

@@ -3,6 +3,7 @@ import { DailyMealPlan, MealPreview, NutrientsQuery } from '../models/meals';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
 import spoonAgent from '../api/spoonacularAgent';
+import { toJS } from 'mobx';
 
 export default class MealPlanStore {
   rootStore: RootStore;
@@ -13,7 +14,9 @@ export default class MealPlanStore {
   @observable suggestedMeals: MealPreview[] | null = null;
   @observable isLoading = true;
   @observable suggestedLoading = true;
-  @observable activeDate = new Date('08/05/2020');
+  @observable activeDate: Date = new Date('08/05/2020');
+  @observable addMealLoading = false;
+  @observable removeMealLoading = false;
 
   @computed get consumed(): {
     carbsGrams: number;
@@ -27,22 +30,19 @@ export default class MealPlanStore {
       proteinGrams: 0,
       calories: 0
     };
-    if (this.dailyMealPlan && this.dailyMealPlan.meals) {
-      this.dailyMealPlan.meals.forEach((x) => {
-        macros.carbsGrams += x.carbs;
-        macros.fatGrams += x.fat;
-        macros.proteinGrams += x.protein;
-        macros.calories += x.calories || 0;
+    if (this.dailyMealPlan) {
+      this.dailyMealPlan.userMeals.forEach((x) => {
+        macros.carbsGrams += x.meal.carbsGrams * x.quantity;
+        macros.fatGrams += x.meal.fatGrams * x.quantity;
+        macros.proteinGrams += x.meal.proteinGrams * x.quantity;
+        macros.calories += x.meal.calories * x.quantity;
       });
-      macros.calories =
-        macros.carbsGrams * 4 + macros.proteinGrams * 4 + macros.fatGrams * 9;
     }
     return macros;
   }
   @action getDailyMealPlan = async (date: Date): Promise<void> => {
     try {
       this.isLoading = true;
-      console.log(date);
       const dailyMealPlan = await agent.MealPlan.current(date.toISOString());
       runInAction('Get Daily Mealplan', () => {
         this.dailyMealPlan = dailyMealPlan;
@@ -59,28 +59,52 @@ export default class MealPlanStore {
     try {
       this.suggestedLoading = true;
       const suggestedMeals = await spoonAgent.Recipes.search(queries);
+      console.log(suggestedMeals);
       runInAction('Get Suggested Meals', () => {
         const results = suggestedMeals.map((x) => {
           return {
             id: x.id,
             title: x.title,
             image: x.image,
-            protein: Math.round(x.nutrition[0].amount),
-            carbs: Math.round(x.nutrition[2].amount),
-            fat: Math.round(x.nutrition[1].amount),
-            calories: Math.round(
-              x.nutrition[0].amount * 4 +
-                x.nutrition[2].amount * 4 +
-                x.nutrition[1].amount * 9
-            )
+            proteinGrams: Number(x.fat.split('g')[0]),
+            carbsGrams: Number(x.carbs.split('g')[0]),
+            fatGrams: Number(x.fat.split('g')[0]),
+            calories: x.calories
           };
         });
         this.suggestedMeals = results;
         this.suggestedLoading = false;
-        console.log(this.suggestedLoading);
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  @action addMeal = async (meal: MealPreview): Promise<void> => {
+    try {
+      this.addMealLoading = true;
+      await agent.MealPlan.add({
+        ...meal,
+        mealPlanId: this.dailyMealPlan ? this.dailyMealPlan.id : null
+      });
+      runInAction('Get Suggested Meals', () => {
+        this.getDailyMealPlan(this.activeDate);
+        this.addMealLoading = false;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  @action changeActiveDate = (date: Date | undefined) => {
+    if (date) this.activeDate = date;
+  };
+
+  @action removeMeal = async (mealId: number): Promise<void> => {
+    this.removeMealLoading = true;
+    await agent.MealPlan.remove(this.dailyMealPlan?.id!, mealId);
+    runInAction('Remove meal', () => {
+      this.getDailyMealPlan(this.activeDate);
+      this.removeMealLoading = false;
+    });
   };
 }

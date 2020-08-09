@@ -22,7 +22,7 @@ function MacrosConsumed({}: Props): ReactElement {
   const classes = useStyles();
   const theme = useTheme();
   const rootStore = React.useContext(RootStoreContext);
-  const { dailyMealPlan } = rootStore.mealPlanStore;
+  const { dailyMealPlan, consumed } = rootStore.mealPlanStore;
   return (
     <Grid
       container
@@ -57,11 +57,12 @@ function MacrosConsumed({}: Props): ReactElement {
           </Grid>
           <Grid item>
             <Typography variant="button" component="p">
-              {`0g / ${dailyMealPlan?.carbsGrams!}g`}
+              {`${consumed.carbsGrams}g / ${dailyMealPlan?.carbsGrams!}g`}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <MacrosProgressBar
+              valueBuffer={consumed.carbsGrams}
               color={theme.palette.primary.main}
               value={dailyMealPlan?.carbsGrams}
             />
@@ -79,11 +80,12 @@ function MacrosConsumed({}: Props): ReactElement {
           </Grid>
           <Grid item>
             <Typography variant="button" component="p">
-              {`0g / ${dailyMealPlan?.proteinGrams!}g`}
+              {`${consumed.proteinGrams}g / ${dailyMealPlan?.proteinGrams!}g`}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <MacrosProgressBar
+              valueBuffer={consumed.proteinGrams}
               color={theme.palette.secondary.main}
               value={dailyMealPlan?.proteinGrams}
             />
@@ -101,11 +103,12 @@ function MacrosConsumed({}: Props): ReactElement {
           </Grid>
           <Grid item>
             <Typography variant="button" component="p">
-              {`0g / ${dailyMealPlan?.fatGrams!}g`}
+              {`${consumed.fatGrams}g / ${dailyMealPlan?.fatGrams!}g`}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <MacrosProgressBar
+              valueBuffer={consumed.fatGrams}
               color={theme.palette.warning.main}
               value={dailyMealPlan?.fatGrams}
             />
@@ -123,11 +126,12 @@ function MacrosConsumed({}: Props): ReactElement {
           </Grid>
           <Grid item>
             <Typography variant="button" component="p">
-              {`0 / ${dailyMealPlan?.calories!}`}
+              {`${consumed.calories} / ${dailyMealPlan?.calories!}`}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <MacrosProgressBar
+              valueBuffer={consumed.calories}
               color={theme.palette.success.main}
               value={dailyMealPlan?.calories}
             />

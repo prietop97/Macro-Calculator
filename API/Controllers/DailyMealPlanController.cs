@@ -16,5 +16,16 @@ namespace API.Controllers
         {
             return await Mediator.Send(new Detail.Query { Date = date });
         }
+
+        [HttpPost("meals")]
+        public async Task<ActionResult<Unit>> AddFoodToMealPlan(AddFoodToMealPlan.Command command)
+        {
+            return await Mediator.Send(command);
+        }
+        [HttpDelete("{MealPlanId}/meals/{mealId}")]
+        public async Task<ActionResult<Unit>> RemoveFoodFromMealPlan(int MealPlanId, int mealId)
+        {
+            return await Mediator.Send(new RemoveFoodFromMealPlan.Command { MealId = mealId, DailyMealPlanId = MealPlanId });
+        }
     }
 }

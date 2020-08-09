@@ -6,5 +6,6 @@ namespace Application.MainDTOs
     {
         public MealDto Meal { get; set; }
         public MealTypeDto MealType { get; set; }
+        public int Quantity { get; set; }
     }
 }

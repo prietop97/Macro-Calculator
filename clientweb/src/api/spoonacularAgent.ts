@@ -16,7 +16,7 @@ const recipesAxios = () => {
   });
 };
 
-const responseBody = (response: AxiosResponse) => response.data.results;
+const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
   get: (url: string) => recipesAxios().get(url).then(responseBody)
@@ -40,21 +40,19 @@ interface MealPreviewRes {
   id: number;
   image: string;
   title: string;
-  nutrition: Nutrition[];
-}
-
-interface Nutrition {
-  title: string;
-  amount: number;
-  unit: string;
+  calories: number;
+  carbs: string;
+  protein: string;
+  fat: string;
 }
 
 const Recipes = {
   search: (queries: NutrientsQuery): Promise<MealPreviewRes[]> => {
-    let url = `/recipes/complexSearch?offset=${queries.offset}&number=${24}`;
+    console.log(queries);
+    let url = `/recipes/findByNutrients?random=${true}`;
     Object.keys(queries).forEach((x) => {
       const value = _getKeyValue_(x)(queries);
-      if (x !== 'offset' && availableQueries.has(x) && value) {
+      if (x !== 'random' && availableQueries.has(x) && value) {
         url = url + `&${x}=${value}`;
       }
     });

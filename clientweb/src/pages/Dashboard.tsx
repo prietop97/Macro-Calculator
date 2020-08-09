@@ -20,17 +20,38 @@ function Dashboard({}: Props): ReactElement {
     suggestedLoading,
     getSuggestedMeals,
     dailyMealPlan,
-    isLoading
+    isLoading,
+    consumed
   } = rootStore.mealPlanStore;
 
   const [queries, setQueries] = useState({
-    minFat: dailyMealPlan ? dailyMealPlan.fatGrams - 10 : 0,
-    maxFat: dailyMealPlan ? dailyMealPlan.fatGrams + 10 : 50,
-    minProtein: dailyMealPlan ? dailyMealPlan.proteinGrams - 20 : 0,
-    maxProtein: dailyMealPlan ? dailyMealPlan.proteinGrams + 20 : 100,
-    minCarbs: dailyMealPlan ? dailyMealPlan.carbsGrams - 20 : 0,
-    maxCarbs: dailyMealPlan ? dailyMealPlan.carbsGrams + 20 : 100,
-    offset: 0
+    minFat:
+      dailyMealPlan && dailyMealPlan.fatGrams - consumed.fatGrams - 10 >= 0
+        ? dailyMealPlan.fatGrams - consumed.fatGrams - 10
+        : 0,
+    maxFat:
+      dailyMealPlan && dailyMealPlan.fatGrams - consumed.fatGrams + 10
+        ? dailyMealPlan.fatGrams - consumed.fatGrams + 10
+        : 50,
+    minProtein:
+      dailyMealPlan &&
+      dailyMealPlan.proteinGrams - consumed.proteinGrams - 20 >= 0
+        ? dailyMealPlan.proteinGrams - consumed.proteinGrams - 20
+        : 0,
+    maxProtein:
+      dailyMealPlan &&
+      dailyMealPlan.proteinGrams - consumed.proteinGrams + 20 >= 0
+        ? dailyMealPlan.proteinGrams - consumed.proteinGrams + 20
+        : 100,
+    minCarbs:
+      dailyMealPlan && dailyMealPlan.carbsGrams - consumed.carbsGrams - 20 >= 0
+        ? dailyMealPlan.carbsGrams - consumed.carbsGrams - 20
+        : 0,
+    maxCarbs:
+      dailyMealPlan && dailyMealPlan.carbsGrams - consumed.carbsGrams + 20 >= 0
+        ? dailyMealPlan.carbsGrams - consumed.carbsGrams + 20
+        : 100,
+    random: true
   });
 
   React.useEffect((): void => {
@@ -43,11 +64,13 @@ function Dashboard({}: Props): ReactElement {
     <Grid>
       <MainNavbar />
       <Container>
+        <Box m={2} />
         <MacrosDetails />
         <Box m={2} />
         {!isLoading && <TodayMeals />}
         <Box m={2} />
         {!suggestedLoading && <SuggestedList />}
+        <Box m={2} />
       </Container>
       <Footer />
     </Grid>
