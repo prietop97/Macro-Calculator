@@ -22,15 +22,19 @@ export default function MainNavbar({}: Props): ReactElement {
       <Toolbar>
         <Grid container md={12} justify="space-around" alignItems="center">
           <Grid item md={4}>
-            <Typography variant="button" component="h2">
+            <Typography
+              variant="button"
+              component="h2"
+              style={{ fontSize: '1.3rem', verticalAlign: 'center' }}
+            >
               MACRO CALCULATOR
             </Typography>
           </Grid>
-          <Grid container item md={6} justify="flex-end">
-            <Button color="inherit">Dashboard</Button>
+          <Grid container item md={'auto'} xs={false} justify="flex-end">
+            {/* <Button color="inherit">Dashboard</Button>
             <Button color="inherit">Progression</Button>
             <Button color="inherit">Meals</Button>
-            <Button color="inherit">Meal Plans</Button>
+            <Button color="inherit">Meal Plans</Button> */}
             <IconButton
               edge="end"
               aria-label="account of current user"

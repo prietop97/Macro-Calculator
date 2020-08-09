@@ -93,9 +93,7 @@ export default class UserStatsFormStore {
       return;
     }
     if (this.activeStep === 2) {
-      console.log(this.finalFormValues);
       this.rootStore.userStatsStore.postUserStats(this.finalFormValues);
-      console.log(this.finalFormValues);
       return;
     }
     this.activeStep += 1;

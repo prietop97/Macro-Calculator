@@ -15,7 +15,6 @@ interface Props extends RouteProps {
 function PrivateRoute({ component: Component, ...rest }: Props): ReactElement {
   const rootStore = useContext(RootStoreContext);
   const { isLoggedIn } = rootStore.userStore;
-  console.log(isLoggedIn);
   return (
     <Route
       {...rest}

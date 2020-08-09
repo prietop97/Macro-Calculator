@@ -5,15 +5,15 @@ import {
   Button,
   Card,
   CardHeader,
-  CardMedia,
   CardContent,
   CardActions,
+  CardMedia,
   Typography
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
-import { MealPreview } from '../models/meals';
 import { observer } from 'mobx-react-lite';
-import { RootStoreContext } from '../stores/rootStore';
+import { UserMeals } from '../../models/meals';
+import { RootStoreContext } from '../../stores/rootStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,51 +54,50 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 interface Props {
-  meal: MealPreview;
+  meal: UserMeals;
 }
-function MealPreviewCard({ meal }: Props) {
+function TodayMeal({ meal }: Props) {
   const classes = useStyles();
-  const rootStore = useContext(RootStoreContext);
-  const { addMeal } = rootStore.mealPlanStore;
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    addMeal(meal);
-  };
+  const rootStore = React.useContext(RootStoreContext);
+  const { removeMeal } = rootStore.mealPlanStore;
   return (
     <Grid item xs={12} sm={6} md={4} container className={classes.veryRoot}>
       <Card className={classes.root}>
         <CardHeader
-          title={meal.title}
+          title={meal.meal.title}
           titleTypographyProps={{ variant: 'button', font: '1.2rem' }}
           className={classes.heading}
         />
         <CardMedia
           className={classes.media}
-          image={meal.image}
-          title={meal.title}
+          image={meal.meal.image}
+          title={meal.meal.title}
         />
         <CardContent>
           <Typography variant="body1" color="textSecondary" component="p">
-            Carbs: {meal.carbsGrams}g
+            Carbs: {meal.meal.carbsGrams}g
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            Fat: {meal.fatGrams}g
+            Fat: {meal.meal.fatGrams}g
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            Protein: {meal.proteinGrams}g
+            Protein: {meal.meal.proteinGrams}g
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            Total Calories: {meal.calories}
+            Total Calories: {meal.meal.calories}
+          </Typography>
+          <Typography variant="body1" color="textSecondary" component="p">
+            Quantity: {meal.quantity}
           </Typography>
         </CardContent>
         <CardActions disableSpacing className={classes.cta}>
           <Button
-            onClick={handleClick}
             fullWidth
             variant="outlined"
             color="primary"
+            onClick={() => removeMeal(meal.meal.id)}
           >
-            Add For Today
+            Remove
           </Button>
         </CardActions>
       </Card>
@@ -106,4 +105,4 @@ function MealPreviewCard({ meal }: Props) {
   );
 }
 
-export default observer(MealPreviewCard);
+export default observer(TodayMeal);

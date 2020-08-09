@@ -3,6 +3,7 @@ import { DailyMealPlan, MealPreview, NutrientsQuery } from '../models/meals';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
 import spoonAgent from '../api/spoonacularAgent';
+import { toJS } from 'mobx';
 
 export default class MealPlanStore {
   rootStore: RootStore;
@@ -15,6 +16,7 @@ export default class MealPlanStore {
   @observable suggestedLoading = true;
   @observable activeDate: Date = new Date('08/05/2020');
   @observable addMealLoading = false;
+  @observable removeMealLoading = false;
 
   @computed get consumed(): {
     carbsGrams: number;
@@ -41,7 +43,6 @@ export default class MealPlanStore {
   @action getDailyMealPlan = async (date: Date): Promise<void> => {
     try {
       this.isLoading = true;
-      console.log(date);
       const dailyMealPlan = await agent.MealPlan.current(date.toISOString());
       runInAction('Get Daily Mealplan', () => {
         this.dailyMealPlan = dailyMealPlan;
@@ -58,20 +59,17 @@ export default class MealPlanStore {
     try {
       this.suggestedLoading = true;
       const suggestedMeals = await spoonAgent.Recipes.search(queries);
+      console.log(suggestedMeals);
       runInAction('Get Suggested Meals', () => {
         const results = suggestedMeals.map((x) => {
           return {
             id: x.id,
             title: x.title,
             image: x.image,
-            proteinGrams: Math.round(x.nutrition[0].amount),
-            carbsGrams: Math.round(x.nutrition[2].amount),
-            fatGrams: Math.round(x.nutrition[1].amount),
-            calories: Math.round(
-              x.nutrition[0].amount * 4 +
-                x.nutrition[2].amount * 4 +
-                x.nutrition[1].amount * 9
-            )
+            proteinGrams: Number(x.fat.split('g')[0]),
+            carbsGrams: Number(x.carbs.split('g')[0]),
+            fatGrams: Number(x.fat.split('g')[0]),
+            calories: x.calories
           };
         });
         this.suggestedMeals = results;
@@ -99,5 +97,14 @@ export default class MealPlanStore {
   };
   @action changeActiveDate = (date: Date | undefined) => {
     if (date) this.activeDate = date;
+  };
+
+  @action removeMeal = async (mealId: number): Promise<void> => {
+    this.removeMealLoading = true;
+    await agent.MealPlan.remove(this.dailyMealPlan?.id!, mealId);
+    runInAction('Remove meal', () => {
+      this.getDailyMealPlan(this.activeDate);
+      this.removeMealLoading = false;
+    });
   };
 }

@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useContext, useState } from 'react';
 import { Grid, Typography, Button, Paper } from '@material-ui/core';
 import { RootStoreContext } from '../../stores/rootStore';
-import MealPreviewCard from '../../common/MealPreviewCard';
+import TodayMeal from './TodayMeal';
 import { observer } from 'mobx-react-lite';
 interface Props {}
 
@@ -24,15 +24,8 @@ function SuggestedList({}: Props): ReactElement {
           Daily Meals
         </Typography>
         <Grid container spacing={2} justify="space-around">
-          {dailyMealPlan ? (
-            dailyMealPlan.userMeals
-              .filter((x, i) => i < 3)
-              .map((meal) => (
-                <div>
-                  Meal: {meal.meal.title}
-                  Quantity: {meal.quantity}
-                </div>
-              ))
+          {dailyMealPlan && dailyMealPlan.userMeals.length ? (
+            dailyMealPlan.userMeals.map((meal) => <TodayMeal meal={meal} />)
           ) : (
             <Typography
               variant="button"

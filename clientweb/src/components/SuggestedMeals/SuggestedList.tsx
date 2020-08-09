@@ -37,7 +37,7 @@ function SuggestedList({}: Props): ReactElement {
         <Grid container spacing={2} justify="space-around">
           {suggestedMeals &&
             suggestedMeals
-              .filter((x, i) => i < 3)
+              .filter((x, i) => i < 6)
               .map((meal) => <MealPreviewCard key={meal.id} meal={meal} />)}
         </Grid>
         <Button

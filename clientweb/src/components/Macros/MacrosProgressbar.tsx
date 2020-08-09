@@ -9,9 +9,11 @@ import CircularProgress, {
   CircularProgressProps
 } from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
+
 interface Props {
   color: string;
   value: number | undefined;
+  valueBuffer: number | undefined;
 }
 
 const BorderLinearProgress = withStyles((theme: Theme) =>
@@ -31,6 +33,20 @@ const BorderLinearProgress = withStyles((theme: Theme) =>
   })
 )(LinearProgress);
 
-export default function CustomizedProgressBars({ color, value }: Props) {
-  return <BorderLinearProgress variant="determinate" value={0} color={color} />;
+export default function CustomizedProgressBars({
+  color,
+  value,
+  valueBuffer
+}: Props) {
+  const multiplier = 100 / value!;
+  const realValue =
+    valueBuffer! * multiplier <= 100 ? valueBuffer! * multiplier : 100;
+  return (
+    <BorderLinearProgress
+      variant="determinate"
+      value={realValue}
+      valueBuffer={100}
+      color={color}
+    />
+  );
 }

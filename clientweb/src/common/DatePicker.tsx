@@ -13,7 +13,6 @@ export default function DatePicker(): ReactElement {
   ] = useState<MaterialUiPickersDate | null>(null);
 
   const handleDateChange = (date: MaterialUiPickersDate | null): void => {
-    console.log(selectedDate?.toDate());
     setSelectedDate(date);
   };
 

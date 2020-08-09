@@ -32,7 +32,7 @@ export interface DailyMealPlan {
   date: Date;
 }
 
-interface UserMeals {
+export interface UserMeals {
   meal: MealPreview;
   quantity: number;
 }
@@ -53,7 +53,7 @@ export interface NutrientsQuery {
   minCarbs: number;
   minProtein: number;
   maxProtein: number;
-  offset: number;
+  offset?: number;
   maxCalories?: number;
   maxCarbs: number;
   minCalories?: number;
