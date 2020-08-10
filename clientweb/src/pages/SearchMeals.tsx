@@ -5,28 +5,24 @@ import Recipes from '../api/spoonacularAgent';
 import { MealPreview } from '../models/meals';
 import MealPreviews from '../components/SearchMeals/MealPreviews';
 import { RootStoreContext } from '../stores/rootStore';
+import { observer } from 'mobx-react-lite';
 interface Props {}
 
-export default function SearchMeals({}: Props): ReactElement {
+function SearchMeals({}: Props): ReactElement {
   const rootStore = useContext(RootStoreContext);
-  const {
-    dailyMealPlan,
-    getSuggestedMeals,
-    suggestedMeals,
-    suggestedLoading
-  } = rootStore.mealPlanStore;
+  const { search, searchMeals, suggestedLoading } = rootStore.mealPlanStore;
   const [queries, setQueries] = useState({
-    minFat: dailyMealPlan ? dailyMealPlan.fatGrams - 10 : 0,
-    maxFat: dailyMealPlan ? dailyMealPlan.fatGrams + 10 : 50,
-    minProtein: dailyMealPlan ? dailyMealPlan.proteinGrams - 20 : 0,
-    maxProtein: dailyMealPlan ? dailyMealPlan.proteinGrams + 20 : 100,
-    minCarbs: dailyMealPlan ? dailyMealPlan.carbsGrams - 20 : 0,
-    maxCarbs: dailyMealPlan ? dailyMealPlan.carbsGrams + 20 : 100,
-    offset: 0
+    minFat: 0,
+    maxFat: 30,
+    minProtein: 0,
+    maxProtein: 50,
+    minCarbs: 0,
+    maxCarbs: 50,
+    offset: 1
   });
 
   useEffect(() => {
-    getSuggestedMeals(queries);
+    search(queries);
   }, []);
 
   if (suggestedLoading) return <div>Loading...</div>;
@@ -34,8 +30,10 @@ export default function SearchMeals({}: Props): ReactElement {
     <Grid>
       <MainNavbar />
       <Container>
-        <MealPreviews meals={suggestedMeals || []} />
+        <MealPreviews meals={searchMeals || []} />
       </Container>
     </Grid>
   );
 }
+
+export default observer(SearchMeals);

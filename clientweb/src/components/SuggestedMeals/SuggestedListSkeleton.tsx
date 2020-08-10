@@ -2,11 +2,11 @@ import React, { ReactElement, useEffect, useContext, useState } from 'react';
 import { Grid, Typography, Button, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { RootStoreContext } from '../../stores/rootStore';
-import MealPreviewCard from '../../common/MealPreviewCard';
+import MealPreviewCardSkeleton from '../../common/MealPreviewCardSkeleton';
 import { observer } from 'mobx-react-lite';
 interface Props {}
 
-function SuggestedList({}: Props): ReactElement {
+function SuggestedListSkeleton({}: Props): ReactElement {
   const rootStore = useContext(RootStoreContext);
   const { suggestedMeals } = rootStore.mealPlanStore;
   const useStyles = makeStyles((theme) => ({
@@ -35,10 +35,11 @@ function SuggestedList({}: Props): ReactElement {
           Suggested Meals
         </Typography>
         <Grid container spacing={2} justify="space-around">
-          {suggestedMeals &&
-            suggestedMeals
-              .filter((x, i) => i < 6)
-              .map((meal) => <MealPreviewCard key={meal.id} meal={meal} />)}
+          {Array(6)
+            .fill(0)
+            .map((_) => {
+              return <MealPreviewCardSkeleton />;
+            })}
         </Grid>
         {/* <Button
           type="submit"
@@ -54,4 +55,4 @@ function SuggestedList({}: Props): ReactElement {
   );
 }
 
-export default observer(SuggestedList);
+export default observer(SuggestedListSkeleton);

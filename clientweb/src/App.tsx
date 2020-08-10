@@ -34,7 +34,7 @@ function App() {
         <Route path="/register" component={RegisterPage} />
         <PrivateRoute path="/getmacros" component={RegisterStatsPage} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/meals" component={SearchMeals} />
+        {/* <PrivateRoute path="/meals" component={SearchMeals} /> */}
         <Route component={NotFound} />
       </Switch>
     </Fragment>

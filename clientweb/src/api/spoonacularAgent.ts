@@ -46,6 +46,11 @@ interface MealPreviewRes {
   fat: string;
 }
 
+interface MealPreviewResComplex {
+  results: MealPreviewRes[];
+  offset: number;
+}
+
 const Recipes = {
   search: (queries: NutrientsQuery): Promise<MealPreviewRes[]> => {
     console.log(queries);
@@ -56,6 +61,20 @@ const Recipes = {
         url = url + `&${x}=${value}`;
       }
     });
+    return requests.get(url);
+  },
+  searchComplex: (queries: NutrientsQuery): Promise<MealPreviewResComplex> => {
+    console.log(queries);
+    let url = `/recipes/searchComplex?number=${20}&offset=${
+      queries.offset
+    }&limitLicense=${false}`;
+    Object.keys(queries).forEach((x) => {
+      const value = _getKeyValue_(x)(queries);
+      if (x !== 'random' && availableQueries.has(x) && value !== null) {
+        url = url + `&${x}=${value}`;
+      }
+    });
+    console.log(url);
     return requests.get(url);
   }
 };

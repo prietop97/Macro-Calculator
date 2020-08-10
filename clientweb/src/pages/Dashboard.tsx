@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { history } from '../index';
 import SuggestedList from '../components/SuggestedMeals/SuggestedList';
 import TodayMeals from '../components/Today Meals/TodayMeals';
+import SuggestedListSkeleton from '../components/SuggestedMeals/SuggestedListSkeleton';
 interface Props {}
 
 function Dashboard({}: Props): ReactElement {
@@ -56,8 +57,8 @@ function Dashboard({}: Props): ReactElement {
 
   React.useEffect((): void => {
     getUserStats();
-    getDailyMealPlan(activeDate);
-    getSuggestedMeals(queries);
+    getDailyMealPlan().then((res) => getSuggestedMeals(queries));
+    // getSuggestedMeals(queries);
   }, [getUserStats, getDailyMealPlan, getSuggestedMeals, queries, activeDate]);
 
   return (
@@ -67,9 +68,9 @@ function Dashboard({}: Props): ReactElement {
         <Box m={2} />
         <MacrosDetails />
         <Box m={2} />
-        {!isLoading && <TodayMeals />}
+        {!isLoading ? <TodayMeals /> : <SuggestedListSkeleton />}
         <Box m={2} />
-        {!suggestedLoading && <SuggestedList />}
+        {!suggestedLoading ? <SuggestedList /> : <SuggestedListSkeleton />}
         <Box m={2} />
       </Container>
       <Footer />

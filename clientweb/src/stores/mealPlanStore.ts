@@ -12,6 +12,7 @@ export default class MealPlanStore {
   }
   @observable dailyMealPlan: DailyMealPlan | null = null;
   @observable suggestedMeals: MealPreview[] | null = null;
+  @observable searchMeals: MealPreview[] | null = null;
   @observable isLoading = true;
   @observable suggestedLoading = true;
   @observable activeDate: Date = new Date('08/05/2020');
@@ -40,10 +41,12 @@ export default class MealPlanStore {
     }
     return macros;
   }
-  @action getDailyMealPlan = async (date: Date): Promise<void> => {
+  @action getDailyMealPlan = async (): Promise<void> => {
     try {
       this.isLoading = true;
-      const dailyMealPlan = await agent.MealPlan.current(date.toISOString());
+      const dailyMealPlan = await agent.MealPlan.current(
+        this.activeDate.toISOString()
+      );
       runInAction('Get Daily Mealplan', () => {
         this.dailyMealPlan = dailyMealPlan;
         this.isLoading = false;
@@ -80,6 +83,31 @@ export default class MealPlanStore {
     }
   };
 
+  @action search = async (queries: NutrientsQuery): Promise<void> => {
+    try {
+      this.suggestedLoading = true;
+      const suggestedMeals = await spoonAgent.Recipes.searchComplex(queries);
+      console.log(suggestedMeals);
+      runInAction('Get Search Meals', () => {
+        const results = suggestedMeals.results.map((x) => {
+          return {
+            id: x.id,
+            title: x.title,
+            image: x.image,
+            proteinGrams: Number(x.fat.split('g')[0]),
+            carbsGrams: Number(x.carbs.split('g')[0]),
+            fatGrams: Number(x.fat.split('g')[0]),
+            calories: x.calories
+          };
+        });
+        this.searchMeals = results;
+        this.suggestedLoading = false;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   @action addMeal = async (meal: MealPreview): Promise<void> => {
     try {
       this.addMealLoading = true;
@@ -88,7 +116,7 @@ export default class MealPlanStore {
         mealPlanId: this.dailyMealPlan ? this.dailyMealPlan.id : null
       });
       runInAction('Get Suggested Meals', () => {
-        this.getDailyMealPlan(this.activeDate);
+        this.getDailyMealPlan();
         this.addMealLoading = false;
       });
     } catch (error) {
@@ -103,7 +131,7 @@ export default class MealPlanStore {
     this.removeMealLoading = true;
     await agent.MealPlan.remove(this.dailyMealPlan?.id!, mealId);
     runInAction('Remove meal', () => {
-      this.getDailyMealPlan(this.activeDate);
+      this.getDailyMealPlan();
       this.removeMealLoading = false;
     });
   };
